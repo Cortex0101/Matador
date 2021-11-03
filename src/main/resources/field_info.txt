@@ -1,0 +1,5 @@
+{
+    title:"GO!",
+    subtext:"Collect 2$ when passed"
+    image:""
+}
