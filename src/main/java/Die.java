@@ -18,6 +18,8 @@ public class Die {
 
     @Override
     public String toString() {
-        return Integer.toString(value);
+        return "Die{" +
+                "value='" + value + '\'' +
+                '}';
     }
 }
