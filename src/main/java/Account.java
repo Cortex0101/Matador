@@ -9,7 +9,7 @@ public class Account {
      * Transaction will not succeed if a negative amount is entered
      *
      * @param amount to deposit
-     * @return true if transaction was succesfull, false otherwise
+     * @return true if transaction was successful, false otherwise
      */
     public boolean deposit(int amount) {
         if (amountIsNegative(amount)) {
@@ -25,7 +25,7 @@ public class Account {
      * Additionally money will not be withdrawn if the balance is too small
      *
      * @param amount to withdraw
-     * @return true if transaction was succesfull, false otherwise
+     * @return true if transaction was successful, false otherwise
      */
     public boolean withdraw(int amount) {
         if (amountIsNegative(amount)) {
