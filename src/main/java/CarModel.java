@@ -16,12 +16,14 @@ public class CarModel {
         return position;
     }
 
-    public void move(int count) {
+    public boolean move(int count) { // Returns true if car wrapped around the board
         if (this.position + count <= MAX_POSITION) {
             this.position += count;
+            return false;
         }
         else {
             this.position = (this.position + count) % MAX_POSITION - 1;
+            return true;
         }
     }
 }

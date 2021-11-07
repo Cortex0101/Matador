@@ -8,8 +8,7 @@ public class GameBoard {
     private GUI_Car[] playerCars;
     private GUI gui;
 
-    public GameBoard(GUI_Car[] cars) {
-        playerCars = cars;
+    public GameBoard() {
         fields = new GUI_Field[24];
 
         int i = 0;
@@ -39,6 +38,11 @@ public class GameBoard {
         fields[i] = new GUI_Start("BOARDWALK", "4$", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
 
         gui = new GUI(fields);
+
+        GUI_Player player = new GUI_Player("John", 20);
+        CarController carController = new CarController(gui.getFields(),player);
+        carController.moveCar(2);
+        carController.moveCar(3);
     }
 
     @Override
