@@ -1,3 +1,4 @@
+import gui_fields.GUI_Field;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ class PlayerJUnitTest {
 
     @BeforeEach
     void setUp() {
-        player = new Player("Bob", 20);
+        player = new Player("Bob", 20, new GUI_Field[3]);
     }
 
     @DisplayName("Player can roll dice")
