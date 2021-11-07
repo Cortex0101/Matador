@@ -14,7 +14,7 @@ public class GameBoard {
 
         int i = 0;
         fields[i++] = new GUI_Start("GO", "2$", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
-        fields[i++] = new GUI_("BURGER JOINT", "1$", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
+        fields[i++] = new GUI_Start("BURGER JOINT", "1$", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
         fields[i++] = new GUI_Start("PIZZA HOUSE", "1$", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
         fields[i++] = new GUI_Chance("CHANCE", "", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
         fields[i++] = new GUI_Start("CANDY STORE", "1$", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
@@ -36,7 +36,7 @@ public class GameBoard {
         fields[i++] = new GUI_Start("THE ZOO", "4$", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
         fields[i++] = new GUI_Chance("CHANCE", "", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
         fields[i++] = new GUI_Start("PARK PLACE", "4$", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
-        fields[i++] = new GUI_Start("BOARDWALK", "4$", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
+        fields[i] = new GUI_Start("BOARDWALK", "4$", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
 
         gui = new GUI(fields);
     }
