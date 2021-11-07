@@ -39,10 +39,11 @@ public class GameBoard {
 
         gui = new GUI(fields);
 
-        GUI_Player player = new GUI_Player("John", 20);
-        CarController carController = new CarController(gui.getFields(),player);
-        carController.moveCar(2);
-        carController.moveCar(3);
+        Player player = new Player("John", 20, fields);
+        player.getCar().moveCar(25);
+        System.out.println(player.getCar().hasPassedStart());
+        player.getCar().moveCar(1);
+        System.out.println(player.getCar().hasPassedStart());
     }
 
     @Override
