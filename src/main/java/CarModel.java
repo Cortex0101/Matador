@@ -20,5 +20,8 @@ public class CarModel {
         if (this.position + count <= MAX_POSITION) {
             this.position += count;
         }
+        else {
+            this.position = (this.position + count) % MAX_POSITION - 1;
+        }
     }
 }
