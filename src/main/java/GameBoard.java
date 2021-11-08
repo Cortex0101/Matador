@@ -38,8 +38,12 @@ public class GameBoard {
         fields[i] = new GUI_Start("BOARDWALK", "4$", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
 
         gui = new GUI(fields);
+        PlayerCreator players = new PlayerCreator(gui);
+        System.out.println(players.getPlayercount());
+        System.out.println(players.getPlayernames()[0]);
+        System.out.println(players.getPlayernames()[1]);
 
-        Player player = new Player("John", 20, fields);
+        Player player = players.getPlayers()[0];
         player.getCar().moveCar(25);
         System.out.println(player.getCar().hasPassedStart());
         player.getCar().moveCar(1);
