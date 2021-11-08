@@ -39,9 +39,9 @@ public class GameBoard {
 
         gui = new GUI(fields);
         PlayerCreator players = new PlayerCreator(gui);
-        System.out.println(players.getPlayercount());
-        System.out.println(players.getPlayernames()[0]);
-        System.out.println(players.getPlayernames()[1]);
+        System.out.println(players.getPlayerCount());
+        System.out.println(players.getPlayerNames()[0]);
+        System.out.println(players.getPlayerNames()[1]);
 
         Player player = players.getPlayers()[0];
         player.getCar().moveCar(25);

@@ -5,26 +5,27 @@ public class PlayerCreator {
     private String[] playernames;
     private Player[] players;
     public PlayerCreator(GUI gui){
-        playercount = gui.getUserInteger("Input the amount of players",2,4);
+        playercount = gui.getUserInteger("How many players are present",2,4);
+
         playernames = new String[playercount];
+        for (int i = 0; i < playercount; i++) {
+            playernames[i] = gui.getUserString("What shall player " + (i + 1) + " be called?");
+        }
+
         players = new Player[playercount];
         for (int i = 0; i < playercount; i++) {
-            playernames[i] = gui.getUserString("..");
-        }
-        for (int i = 0; i < playercount; i++) {
             players[i] = new Player(playernames[i], 20, gui.getFields());
-
         }
     }
     public Player[] getPlayers(){
         return players;
     }
 
-    public int getPlayercount() {
+    public int getPlayerCount() {
         return playercount;
     }
 
-    public String[] getPlayernames() {
+    public String[] getPlayerNames() {
         return playernames;
     }
 }
