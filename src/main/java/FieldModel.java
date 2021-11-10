@@ -5,7 +5,6 @@ import java.awt.*;
 
 public class FieldModel {
     private GUI_Field[] fields;
-    private GUI gui;
 
     public FieldModel(){
         fields = new GUI_Field[24];

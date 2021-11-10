@@ -1,15 +1,15 @@
-import gui_fields.GUI_Field;
-import gui_fields.GUI_Ownable;
 import gui_fields.GUI_Street;
 
 public class FieldController {
-    private Player player;
     private FieldModel fieldModel;
 
 
-    public FieldController(Player player, FieldModel fieldModel){
-        this.player = player;
+    public FieldController(FieldModel fieldModel){
         this.fieldModel = fieldModel;
+    }
+
+    public void landOnField(){
+
     }
     public void landOnOwnable(int position){
 
