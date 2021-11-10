@@ -8,11 +8,10 @@ public class GameBoard {
     private GUI_Field[] fields;
     private GUI_Car[] playerCars;
     private GUI gui;
-    private FieldModel field;
+    private FieldController field;
 
     public GameBoard() {
-        this.field = new FieldModel();
-        gui = new GUI(field.FieldInfo());
+        this.field = new FieldController();
         PlayerCreator players = new PlayerCreator(gui);
         System.out.println(players.getPlayerCount());
         System.out.println(players.getPlayerNames()[0]);

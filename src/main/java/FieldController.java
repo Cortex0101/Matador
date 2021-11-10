@@ -4,8 +4,8 @@ public class FieldController {
     private FieldModel fieldModel;
 
 
-    public FieldController(FieldModel fieldModel){
-        this.fieldModel = fieldModel;
+    public FieldController(){
+        this.fieldModel = new FieldModel();
     }
 
     public void landOnField(){
