@@ -40,4 +40,8 @@ public class CarController {
         passedStart = this.carModel.move(count);
         this.gui_fields[this.carModel.getPosition()].setCar(this.gui_player, true);
     }
+
+    public int getCarPosition() {
+        return carModel.getPosition();
+    }
 }
