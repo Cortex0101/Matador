@@ -23,6 +23,10 @@ public class CarController {
         this.carView = new GUI_Car();
     }
 
+    public GUI_Player getGui_player() {
+        return gui_player;
+    }
+
     public boolean isInJail() {
         return inJail;
     }
@@ -39,5 +43,9 @@ public class CarController {
         this.gui_fields[this.carModel.getPosition()].setCar(this.gui_player, false);
         passedStart = this.carModel.move(count);
         this.gui_fields[this.carModel.getPosition()].setCar(this.gui_player, true);
+    }
+
+    public int getCarPosition() {
+        return carModel.getPosition();
     }
 }

@@ -16,6 +16,10 @@ public class PlayerCreator {
         for (int i = 0; i < playercount; i++) {
             players[i] = new Player(playernames[i], 20, gui.getFields());
         }
+
+        for (Player player : players) {
+            gui.addPlayer(player.getCar().getGui_player());
+        }
     }
     public Player[] getPlayers(){
         return players;
