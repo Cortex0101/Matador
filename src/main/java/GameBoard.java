@@ -25,6 +25,8 @@ public class GameBoard {
         while(gameRunning) {
             gameBoardCreator.getGUI().getUserButtonPressed("","Roll dice");
             int roll = playerController.getActivePlayer().getDie().roll();
+            gameBoardCreator.getGUI().setDie(roll);
+
             playerController.getActivePlayer().getCar().moveCar(roll);
             fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(), fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()]);
             playerController.nextPlayerTurn();
