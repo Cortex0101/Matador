@@ -1,6 +1,8 @@
 import gui_fields.GUI_Field;
 import gui_main.GUI;
 
+import java.util.Arrays;
+
 public class FieldSelector {
      GUI gui;
 
@@ -19,7 +21,8 @@ public class FieldSelector {
      }
 
      public void getUserSelection() {
-          gui.getUserSelection("Which field would you like to move to?", fieldTitles);
+          String userSelection = gui.getUserSelection("Which field would you like to move to?", fieldTitles);
+          fieldSelected = fieldOptions[Arrays.asList(fieldTitles).indexOf(userSelection)];
      }
 
      /**

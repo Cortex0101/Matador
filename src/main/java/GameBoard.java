@@ -22,10 +22,15 @@ public class GameBoard {
         this.gameRunning = true;
         playerController = new PlayerController(players);
 
+        FieldSelector fs = new FieldSelector(fieldModel.FieldInfo(), gameBoardCreator.getGUI());
+
         while(gameRunning) {
             gameBoardCreator.getGUI().getUserButtonPressed("","Roll dice");
             int roll = playerController.getActivePlayer().getDie().roll();
             gameBoardCreator.getGUI().setDie(roll);
+
+            fs.getUserSelection();
+            System.out.println(fs.getSelected().getTitle());
 
             playerController.getActivePlayer().getCar().moveCar(roll);
             fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(), fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()]);
