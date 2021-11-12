@@ -23,6 +23,10 @@ public class CarController {
         this.carView = new GUI_Car();
     }
 
+    public GUI_Player getGui_player() {
+        return gui_player;
+    }
+
     public boolean isInJail() {
         return inJail;
     }
