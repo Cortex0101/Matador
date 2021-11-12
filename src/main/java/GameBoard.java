@@ -10,6 +10,7 @@ public class GameBoard {
     private Die die;
     private Player[] players;
     private GameBoardCreator gameBoardCreator;
+    private PlayerController playerController;
     private int activePlayer;
     private boolean gameRunning;
 
@@ -19,14 +20,14 @@ public class GameBoard {
         this.fieldModel = new FieldModel();
         this.fieldController = new FieldController();
         this.gameRunning = true;
-        Scanner scan = new Scanner(System.in);
-        gameBoardCreator.getGUI().getUserButtonPressed("","Roll dice");
+        playerController = new PlayerController(players);
 
         while(gameRunning) {
-            int roll = players[activePlayer].getDie().roll();
-            players[activePlayer].getCar().moveCar(roll);
-            fieldController.landOnField(players[activePlayer].getCar().getCarPosition(), fieldModel.FieldInfo()[activePlayer]);
-            scan.next("");
+            gameBoardCreator.getGUI().getUserButtonPressed("","Roll dice");
+            int roll = playerController.getActivePlayer().getDie().roll();
+            playerController.getActivePlayer().getCar().moveCar(roll);
+            fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(), fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()]);
+            playerController.nextPlayerTurn();
         }
     }
 
