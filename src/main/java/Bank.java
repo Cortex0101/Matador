@@ -1,12 +1,16 @@
 public class Bank {
-    public static boolean transferMoney(Account from, Account to, int amount) {
-        if (!from.withdraw(amount)) {
-            return false;
+    public static void transferMoney(Player from, Player to, int amount) {
+        if (!from.getAccount().withdraw(amount)) {
+            System.out.println("Player " + from.getName() + " ran out of money!");
         }
-        return to.deposit(amount);
+        to.getAccount().deposit(amount);
+        from.updateAccountGUI();
     }
 
-    public static boolean payBank(Account account, int amount) {
-        return account.withdraw(amount);
+    public static void payBank(Player from, int amount) {
+        if (!from.getAccount().withdraw(amount)) {
+            System.out.println("Player " + from.getName() + " ran out of money!");
+        }
+        from.updateAccountGUI();
     }
 }

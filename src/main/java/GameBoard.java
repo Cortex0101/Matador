@@ -29,9 +29,7 @@ public class GameBoard {
 
         while(gameRunning) {
             if (playerController.getActivePlayer().getCar().isInJail()) {
-                if (!this.playerController.getActivePlayer().getAccount().withdraw(1)) {
-                    System.out.println("Player " + playerController.getActivePlayer().getName() + " ran out of money!");
-                }
+                Bank.payBank(playerController.getActivePlayer(), 1);
                 playerController.getActivePlayer().getCar().setInJail(false);
             }
 

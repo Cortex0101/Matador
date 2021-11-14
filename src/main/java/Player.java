@@ -6,13 +6,15 @@ public class Player {
     private final Die die;
     private final Account account;
     private final CarController carController;
+    protected GUI_Player gui_player;
     private CarModel carModel;
 
     public Player(String name, int initialCapital, GUI_Field[] fields) {
         this.name = name;
         this.die = new Die();
         this.account = new Account(initialCapital);
-        this.carController = new CarController(fields, new GUI_Player(this.name, this.account.getBalance()));
+        this.gui_player = new GUI_Player(this.name, this.account.getBalance());
+        this.carController = new CarController(fields, this.gui_player);
     }
 
     public Die getDie() {
@@ -31,9 +33,11 @@ public class Player {
         return account;
     }
 
-    //Called after player lands on any field (even fields like chance and free parking)
-    public void SubtractFieldValueFromAccount(){
-        account.withdraw(FieldModel.getFieldValue(carModel.getPosition()));
+    /*
+        Needed because the GUI does not update the balance automatically. It is called by the Bank class, so dont worry about it.
+     */
+    public void updateAccountGUI() {
+        this.gui_player.setBalance(this.getAccount().getBalance());
     }
 
     @Override
