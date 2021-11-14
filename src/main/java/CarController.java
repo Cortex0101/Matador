@@ -35,8 +35,10 @@ public class CarController {
         return passedStart;
     }
 
-    public void setCarPosition(int position) {
-        // TODO: Implement, make sure that passedStart and inJail is set appropiately
+    public void setCarPosition(int position) { // Need to check if player passed start, does not do it currently
+        this.gui_fields[this.carModel.getPosition()].setCar(this.gui_player, false);
+        this.carModel.setPosition(position);
+        this.gui_fields[this.carModel.getPosition()].setCar(this.gui_player, true);
     }
 
     public void moveCar(int count) {
