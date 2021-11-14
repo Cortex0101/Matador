@@ -38,8 +38,11 @@ public class FieldController {
     private void landOnOwnedOwnable(){}
 
     public void landOnChance(ChanceCardsPileController chanceCardsPileController, Player player){
-        FreeFieldChanceCardController chanceCard = (FreeFieldChanceCardController) chanceCardsPileController.drawCard();
-        chanceCard.action(player);
+        ChanceCardController chanceCardController = chanceCardsPileController.drawCard();
+        if (chanceCardController.model.getText().startsWith("Move to one of ")) {
+            FreeFieldChanceCardController chanceCard = (FreeFieldChanceCardController) chanceCardsPileController.drawCard();
+            chanceCard.action(player);
+        }
         System.out.println("Chance");
     }
 
