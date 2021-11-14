@@ -2,6 +2,8 @@ import gui_fields.GUI_Car;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
 
+import java.awt.*;
+
 public class CarController {
     private boolean inJail;
     private boolean passedStart;
@@ -12,6 +14,8 @@ public class CarController {
     private CarModel carModel;
     private GUI_Car carView;
 
+    static int carCount = 0;
+
     public CarController(GUI_Field[] fields, GUI_Player player) {
         this.inJail = false;
         this.passedStart = false;
@@ -20,7 +24,14 @@ public class CarController {
         this.gui_player = player;
 
         this.carModel = new CarModel();
-        this.carView = new GUI_Car();
+
+        this.carView = new GUI_Car(getColor(carCount), getColor(carCount), GUI_Car.Type.CAR, GUI_Car.Pattern.FILL);
+        carCount++;
+    }
+
+    private static Color getColor(int i) {
+        Color[] colors = new Color[]{Color.blue, Color.red, Color.yellow, Color.green};
+        return colors[i];
     }
 
     public GUI_Player getGui_player() {
