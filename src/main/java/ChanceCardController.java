@@ -1,8 +1,8 @@
 import gui_main.GUI;
 
 public class ChanceCardController {
-    private ChanceCardModel model;
-    private ChanceCardView view;
+    protected ChanceCardModel model;
+    protected ChanceCardView view;
     private GUI gui;
 
     public ChanceCardController(ChanceCardModel model, GUI gui) {

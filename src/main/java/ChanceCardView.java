@@ -10,4 +10,6 @@ public class ChanceCardView {
     public void display(GUI gui) {
         gui.displayChanceCard(this.text);
     }
+
+    public void setText(String text) {this.text = text;}
 }

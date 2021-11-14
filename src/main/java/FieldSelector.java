@@ -25,6 +25,10 @@ public class FieldSelector {
           fieldSelected = fieldOptions[Arrays.asList(fieldTitles).indexOf(userSelection)];
      }
 
+     public String[] getFieldTitles() {
+          return this.fieldTitles;
+     }
+
      /**
       * Utility function to convert an array of fields to an array of string with the fields titles
       */
