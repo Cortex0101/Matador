@@ -26,6 +26,7 @@ public class CarController {
         this.carModel = new CarModel();
 
         this.carView = new GUI_Car(getColor(carCount), getColor(carCount), GUI_Car.Type.CAR, GUI_Car.Pattern.FILL);
+        player.getCar().setPrimaryColor(getColor(carCount));
         carCount++;
     }
 

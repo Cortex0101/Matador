@@ -23,18 +23,16 @@ public class GameBoard {
         playerController = new PlayerController(players);
 
         FreeFieldChanceCardCreator freeFieldCards = new FreeFieldChanceCardCreator(this.gameBoardCreator.getGUI());
-        int i = 0;
+        ChanceCardsPileController chanceCardsPile = new ChanceCardsPileController(freeFieldCards.getFreeFieldChanceCardControllers());
 
         while(gameRunning) {
             gameBoardCreator.getGUI().getUserButtonPressed("","Roll dice");
             int roll = playerController.getActivePlayer().getDie().roll();
             gameBoardCreator.getGUI().setDie(roll);
 
-            freeFieldCards.getFreeFieldChanceCardControllers()[i].action(playerController.getActivePlayer());
-            if (i == 7)
-                i = 0;
-            else
-                i++;
+
+            FreeFieldChanceCardController chanceCard = (FreeFieldChanceCardController) chanceCardsPile.drawCard();
+            chanceCard.action(playerController.getActivePlayer());
 
             //playerController.getActivePlayer().getCar().moveCar(roll);
             fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(), fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()]);
