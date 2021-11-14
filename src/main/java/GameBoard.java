@@ -22,14 +22,19 @@ public class GameBoard {
         this.gameRunning = true;
         playerController = new PlayerController(players);
 
-        FreeFieldChanceCardController ffccc = new FreeFieldChanceCardController(this.gameBoardCreator.getGUI(), this.fieldModel.FieldInfo(), new int[]{5, 8});
+        FreeFieldChanceCardCreator freeFieldCards = new FreeFieldChanceCardCreator(this.gameBoardCreator.getGUI());
+        int i = 0;
 
         while(gameRunning) {
             gameBoardCreator.getGUI().getUserButtonPressed("","Roll dice");
             int roll = playerController.getActivePlayer().getDie().roll();
             gameBoardCreator.getGUI().setDie(roll);
 
-            ffccc.action(playerController.getActivePlayer());
+            freeFieldCards.getFreeFieldChanceCardControllers()[i].action(playerController.getActivePlayer());
+            if (i == 7)
+                i = 0;
+            else
+                i++;
 
             //playerController.getActivePlayer().getCar().moveCar(roll);
             fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(), fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()]);
