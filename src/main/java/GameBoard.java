@@ -23,6 +23,7 @@ public class GameBoard {
         playerController = new PlayerController(players);
 
         FieldSelector fs = new FieldSelector(fieldModel.FieldInfo(), gameBoardCreator.getGUI());
+        ChanceCardController ccc = new ChanceCardController(new ChanceCardModel("This is a chance card"), this.gameBoardCreator.getGUI());
 
         while(gameRunning) {
             gameBoardCreator.getGUI().getUserButtonPressed("","Roll dice");
@@ -31,6 +32,8 @@ public class GameBoard {
 
             fs.getUserSelection();
             System.out.println(fs.getSelected().getTitle());
+
+            ccc.onDraw();
 
             playerController.getActivePlayer().getCar().moveCar(roll);
             fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(), fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()]);
