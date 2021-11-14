@@ -13,6 +13,8 @@ public class GameBoard {
     private PlayerController playerController;
     private int activePlayer;
     private boolean gameRunning;
+    private FreeFieldChanceCardCreator freeFieldCards;
+    ChanceCardsPileController chanceCardsPile;
 
     public GameBoard() {
         this.gameBoardCreator = new GameBoardCreator();
@@ -22,20 +24,15 @@ public class GameBoard {
         this.gameRunning = true;
         playerController = new PlayerController(players);
 
-        FreeFieldChanceCardCreator freeFieldCards = new FreeFieldChanceCardCreator(this.gameBoardCreator.getGUI());
-        ChanceCardsPileController chanceCardsPile = new ChanceCardsPileController(freeFieldCards.getFreeFieldChanceCardControllers());
+        freeFieldCards = new FreeFieldChanceCardCreator(this.gameBoardCreator.getGUI());
+        chanceCardsPile = new ChanceCardsPileController(freeFieldCards.getFreeFieldChanceCardControllers());
 
         while(gameRunning) {
             gameBoardCreator.getGUI().getUserButtonPressed("","Roll dice");
             int roll = playerController.getActivePlayer().getDie().roll();
             gameBoardCreator.getGUI().setDie(roll);
-
-
-            FreeFieldChanceCardController chanceCard = (FreeFieldChanceCardController) chanceCardsPile.drawCard();
-            chanceCard.action(playerController.getActivePlayer());
-
-            //playerController.getActivePlayer().getCar().moveCar(roll);
-            fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(), fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()]);
+            playerController.getActivePlayer().getCar().moveCar(roll);
+            fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(), fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()], chanceCardsPile, playerController.getActivePlayer());
             playerController.nextPlayerTurn();
         }
     }
