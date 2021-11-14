@@ -28,11 +28,20 @@ public class GameBoard {
         chanceCardsPile = new ChanceCardsPileController(freeFieldCards.getFreeFieldChanceCardControllers());
 
         while(gameRunning) {
+            if (playerController.getActivePlayer().getCar().isInJail()) {
+                if (!this.playerController.getActivePlayer().getAccount().withdraw(1)) {
+                    System.out.println("Player " + playerController.getActivePlayer().getName() + " ran out of money!");
+                }
+                playerController.getActivePlayer().getCar().setInJail(false);
+            }
+
             gameBoardCreator.getGUI().getUserButtonPressed("","Roll dice");
             int roll = playerController.getActivePlayer().getDie().roll();
             gameBoardCreator.getGUI().setDie(roll);
+
             playerController.getActivePlayer().getCar().moveCar(roll);
             fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(), fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()], chanceCardsPile, playerController.getActivePlayer());
+
             playerController.nextPlayerTurn();
         }
     }

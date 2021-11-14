@@ -13,7 +13,7 @@ public class FieldController {
             case 1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23 -> landOnOwnable(position,field);
             case 3, 9, 15, 21 -> landOnChance(chanceCardsPileController, player);
             case 0, 6, 12 -> landOnFreeSpot();
-            case 18 -> landOnGoToJail();
+            case 18 -> landOnGoToJail(player);
             default -> landOnFreeSpot();
         }
 
@@ -46,7 +46,10 @@ public class FieldController {
     public void landOnFreeSpot(){
         System.out.println("FreeSpot");
     }
-    public void landOnGoToJail(){
+
+    public void landOnGoToJail(Player player){
+        player.getCar().setCarPosition(6);
+        player.getCar().setInJail(true);
         System.out.println("Jail");
     }
 }

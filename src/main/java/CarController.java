@@ -43,6 +43,10 @@ public class CarController {
         return inJail;
     }
 
+    public void setInJail(boolean inJail) {
+        this.inJail = inJail;
+    }
+
     public boolean hasPassedStart() {
         return passedStart;
     }
