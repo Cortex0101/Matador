@@ -36,6 +36,7 @@ public class FreeFieldChanceCardController extends ChanceCardController {
         if (field.getOwnerName() == null) {
             player.getCar().setCarPosition(Arrays.asList(this.fields).indexOf(this.fieldSelector.getSelected()));
             field.setOwnerName(player.getName());
+            // Set field color here
         } else {
             player.getCar().setCarPosition(Arrays.asList(this.fields).indexOf(this.fieldSelector.getSelected()));
             // PAY OWNER

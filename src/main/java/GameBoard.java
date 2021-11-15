@@ -26,10 +26,15 @@ public class GameBoard {
 
         freeFieldCards = new FreeFieldChanceCardCreator(this.gameBoardCreator.getGUI());
         chanceCardsPile = new ChanceCardsPileController(freeFieldCards.getFreeFieldChanceCardControllers());
+        chanceCardsPile.addCard(new OutOfJailChanceCardController(this.gameBoardCreator.getGUI()));
 
         while(gameRunning) {
-            if (playerController.getActivePlayer().getCar().isInJail()) {
+            if (playerController.getActivePlayer().getCar().isInJail() && !playerController.getActivePlayer().hasGetOutOfJailCard()) {
                 Bank.payBank(playerController.getActivePlayer(), 1);
+                playerController.getActivePlayer().getCar().setInJail(false);
+            }
+            else if (playerController.getActivePlayer().getCar().isInJail() && playerController.getActivePlayer().hasGetOutOfJailCard()){
+                playerController.getActivePlayer().setHasGetOutOfJailCard(false);
                 playerController.getActivePlayer().getCar().setInJail(false);
             }
 

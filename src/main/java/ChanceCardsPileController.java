@@ -17,4 +17,8 @@ public class ChanceCardsPileController {
     public static void shufflePile(ChanceCardController[] chanceCardControllers) {
         Collections.shuffle(Arrays.asList(chanceCardControllers));
     }
+
+    public void addCard(ChanceCardController chanceCardController) {
+        this.chanceCards.addFirst(chanceCardController);
+    }
 }

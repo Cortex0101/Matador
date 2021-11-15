@@ -8,6 +8,7 @@ public class Player {
     private final CarController carController;
     protected GUI_Player gui_player;
     private CarModel carModel;
+    private boolean getOutOfJailCard;
 
     public Player(String name, int initialCapital, GUI_Field[] fields) {
         this.name = name;
@@ -15,6 +16,7 @@ public class Player {
         this.account = new Account(initialCapital);
         this.gui_player = new GUI_Player(this.name, this.account.getBalance());
         this.carController = new CarController(fields, this.gui_player);
+        this.getOutOfJailCard = false;
     }
 
     public Die getDie() {
@@ -38,6 +40,14 @@ public class Player {
      */
     public void updateAccountGUI() {
         this.gui_player.setBalance(this.getAccount().getBalance());
+    }
+
+    public boolean hasGetOutOfJailCard() {
+        return this.getOutOfJailCard;
+    }
+
+    public void setHasGetOutOfJailCard(boolean bool) {
+        this.getOutOfJailCard = bool;
     }
 
     @Override

@@ -40,7 +40,11 @@ public class FieldController {
     public void landOnChance(ChanceCardsPileController chanceCardsPileController, Player player){
         ChanceCardController chanceCardController = chanceCardsPileController.drawCard();
         if (chanceCardController.model.getText().startsWith("Move to one of ")) {
-            FreeFieldChanceCardController chanceCard = (FreeFieldChanceCardController) chanceCardsPileController.drawCard();
+            FreeFieldChanceCardController chanceCard = (FreeFieldChanceCardController) chanceCardController;
+            chanceCard.action(player);
+        }
+        else if (chanceCardController.model.getText().startsWith("Get out of ")) {
+            OutOfJailChanceCardController chanceCard = (OutOfJailChanceCardController) chanceCardController;
             chanceCard.action(player);
         }
         System.out.println("Chance");
