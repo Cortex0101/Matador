@@ -10,8 +10,8 @@ public class FieldModel {
 
         int i = 0;
         fields[i++] = new GUI_Start("GO", "2$", "Modtag kr. 200,-\nnår de passerer start", Color.WHITE, Color.BLACK);
-        fields[i++] = new GUI_Street("BURGER JOINT",FieldModel.getFieldValue(i-1)+"$", "Modtag kr. 200,-\nnår de passerer start", FieldModel.getFieldValue(i - 1) + "$",Color.PINK, Color.BLACK);
-        fields[i++] = new GUI_Street("PIZZA HOUSE",FieldModel.getFieldValue(i-1)+"$", "Modtag kr. 200,-\nnår de passerer start", FieldModel.getFieldValue(i - 1) + "$",Color.PINK, Color.BLACK);
+        fields[i++] = new GUI_Street("BURGER JOINT",FieldModel.getFieldValue(i-1)+"$", "Modtag kr. 200,-\nnår de passerer start", FieldModel.getFieldValue(i - 1) + "$", new Color(160,82,45), Color.BLACK);
+        fields[i++] = new GUI_Street("PIZZA HOUSE",FieldModel.getFieldValue(i-1)+"$", "Modtag kr. 200,-\nnår de passerer start", FieldModel.getFieldValue(i - 1) + "$", new Color(160,82,45), Color.BLACK);
         fields[i++] = new GUI_Chance("?", "Chance", "Modtag kr. 200,-\nnår de passerer start", Color.WHITE, Color.BLACK);
         fields[i++] = new GUI_Street("CANDY STORE",FieldModel.getFieldValue(i-1)+"$", "Modtag kr. 200,-\nnår de passerer start", FieldModel.getFieldValue(i - 1) + "$",Color.CYAN, Color.BLACK);
         fields[i++] = new GUI_Street("ICE CREAM PARLOR",FieldModel.getFieldValue(i-1)+"$", "Modtag kr. 200,-\nnår de passerer start", FieldModel.getFieldValue(i - 1) + "$",Color.CYAN, Color.BLACK);
@@ -21,7 +21,7 @@ public class FieldModel {
         fields[i++] = new GUI_Chance("?", "Chance", "Modtag kr. 200,-\nnår de passerer start", Color.WHITE, Color.BLACK);
         fields[i++] = new GUI_Street("SKATE PARK",FieldModel.getFieldValue(i-1)+"$", "Modtag kr. 200,-\nnår de passerer start", FieldModel.getFieldValue(i - 1) + "$",Color.ORANGE, Color.BLACK);
         fields[i++] = new GUI_Street("SWIMMING POOL",FieldModel.getFieldValue(i-1)+"$", "Modtag kr. 200,-\nnår de passerer start", FieldModel.getFieldValue(i - 1) + "$",Color.ORANGE, Color.BLACK);
-        fields[i++] = new GUI_Tax("PARKING", "", "Modtag kr. 200,-\nnår de passerer start", Color.WHITE, Color.BLACK);
+        fields[i++] = new GUI_Refuge("default","PARKING", "", "Modtag kr. 200,-\nnår de passerer start", Color.WHITE, Color.BLACK);
         fields[i++] = new GUI_Street("GAME ARCADE",FieldModel.getFieldValue(i-1)+"$", "Modtag kr. 200,-\nnår de passerer start", FieldModel.getFieldValue(i - 1) + "$",Color.RED, Color.BLACK);
         fields[i++] = new GUI_Street("MOVIE THEATRE",FieldModel.getFieldValue(i-1)+"$", "Modtag kr. 200,-\nnår de passerer start", FieldModel.getFieldValue(i - 1) + "$",Color.RED, Color.BLACK);
         fields[i++] = new GUI_Chance("?", "Chance", "Modtag kr. 200,-\nnår de passerer start", Color.WHITE, Color.BLACK);
