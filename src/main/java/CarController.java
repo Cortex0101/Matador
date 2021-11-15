@@ -53,6 +53,7 @@ public class CarController {
 
     public void setCarPosition(int position) { // Need to check if player passed start, does not do it currently
         this.gui_fields[this.carModel.getPosition()].setCar(this.gui_player, false);
+        passedStart = this.getCarPosition() > position;
         this.carModel.setPosition(position);
         this.gui_fields[this.carModel.getPosition()].setCar(this.gui_player, true);
     }

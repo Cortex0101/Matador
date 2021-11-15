@@ -38,6 +38,9 @@ public class GameBoard {
             gameBoardCreator.getGUI().setDie(roll);
 
             playerController.getActivePlayer().getCar().moveCar(roll);
+            if (playerController.getActivePlayer().getCar().hasPassedStart()) {
+                Bank.payPlayer(playerController.getActivePlayer(), 2);
+            }
             fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(), fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()], chanceCardsPile, playerController.getActivePlayer());
 
             playerController.nextPlayerTurn();
