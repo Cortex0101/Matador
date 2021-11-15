@@ -19,13 +19,13 @@ public class FreeFieldChanceCardController extends ChanceCardController {
             options[i] = fields[positions[i]];
         }
         fieldSelector = new FieldSelector(options, gui);
-        String str = "Move to one of ";
+        StringBuilder str = new StringBuilder("Move to one of ");
         for (String title : fieldSelector.getFieldTitles()) {
-            str += title + ", ";
+            str.append(title).append(", ");
         }
-        str += "\nIf the field is unowned, you will get it for free. Otherwise you will have to pay the owner.";
-        this.model.setText(str);
-        this.view.setText(str);
+        str.append("\nIf the field is unowned, you will get it for free. Otherwise you will have to pay the owner.");
+        this.model.setText(str.toString());
+        this.view.setText(str.toString());
     }
 
     public void action(Player player) {
@@ -35,10 +35,16 @@ public class FreeFieldChanceCardController extends ChanceCardController {
         GUI_Ownable field = (GUI_Ownable) this.fieldSelector.getSelected();
         if (field.getOwnerName() == null) {
             player.getCar().setCarPosition(Arrays.asList(this.fields).indexOf(this.fieldSelector.getSelected()));
+            if (player.getCar().hasPassedStart()) {
+                Bank.payPlayer(player, 2);
+            }
             field.setOwnerName(player.getName());
             // Set field color here
         } else {
             player.getCar().setCarPosition(Arrays.asList(this.fields).indexOf(this.fieldSelector.getSelected()));
+            if (player.getCar().hasPassedStart()) {
+                Bank.payPlayer(player, 2);
+            }
             // PAY OWNER
         }
     }
