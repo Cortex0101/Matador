@@ -47,6 +47,8 @@ public class CarController {
         this.inJail = inJail;
     }
 
+    public Color getCarColor(){return carView.getPrimaryColor();}
+
     public boolean hasPassedStart() {
         return passedStart;
     }
