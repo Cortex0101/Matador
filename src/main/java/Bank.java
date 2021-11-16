@@ -4,6 +4,7 @@ public class Bank {
             System.out.println("Player " + from.getName() + " ran out of money!");
         }
         to.getAccount().deposit(amount);
+        to.updateAccountGUI();
         from.updateAccountGUI();
     }
 
