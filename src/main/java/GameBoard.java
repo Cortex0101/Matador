@@ -41,13 +41,11 @@ public class GameBoard {
             gameBoardCreator.getGUI().getUserButtonPressed("","Roll dice");
             int roll = playerController.getActivePlayer().getDie().roll();
             gameBoardCreator.getGUI().setDie(roll);
-
             playerController.getActivePlayer().getCar().moveCar(roll);
             if (playerController.getActivePlayer().getCar().hasPassedStart()) {
                 Bank.payPlayer(playerController.getActivePlayer(), 2);
             }
-            fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(), fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()], chanceCardsPile, playerController.getActivePlayer());
-
+            fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(), fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()], chanceCardsPile, playerController.getActivePlayer(), players, gameBoardCreator);
             playerController.nextPlayerTurn();
         }
     }
