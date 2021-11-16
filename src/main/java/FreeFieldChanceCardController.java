@@ -28,7 +28,7 @@ public class FreeFieldChanceCardController extends ChanceCardController {
         this.view.setText(str.toString());
     }
 
-    public void action(Player player) {
+    public void action(Player[] players, Player player) {
         this.onDraw();
         this.fieldSelector.getUserSelection();
 
@@ -45,7 +45,14 @@ public class FreeFieldChanceCardController extends ChanceCardController {
             if (player.getCar().hasPassedStart()) {
                 Bank.payPlayer(player, 2);
             }
-            // PAY OWNER
+            Player to = null;
+            for (Player owner : players) {
+                if (owner.getName().equals(field.getOwnerName())) {
+                    to = owner;
+                    break;
+                }
+            }
+            Bank.transferMoney(player, to, Character.getNumericValue(field.getRent().charAt(0)));
         }
     }
 }

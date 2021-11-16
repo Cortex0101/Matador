@@ -12,7 +12,7 @@ public class FieldController {
     public void landOnField(int position,GUI_Field field, ChanceCardsPileController chanceCardsPileController, Player player, Player[] players, GameBoardCreator gameBoardCreator){
         switch (position) {
             case 1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23 -> landOnOwnable(position,field, player, players, gameBoardCreator);
-            case 3, 9, 15, 21 -> landOnChance(chanceCardsPileController, player);
+            case 3, 9, 15, 21 -> landOnChance(chanceCardsPileController, players, player);
             case 0, 6, 12 -> landOnFreeSpot();
             case 18 -> landOnGoToJail(player);
             default -> landOnFreeSpot();
@@ -37,6 +37,7 @@ public class FieldController {
         Bank.payBank(player, FieldModel.getFieldValue(position));
         street.setOwnerName(player.getName());
         GUI_Ownable gui_ownable = (GUI_Ownable) gameBoardCreator.getGUI().getFields()[position];
+        gui_ownable.setOwnerName(player.getName());
         gui_ownable.setBorder(player.getCar().getCarColor());
         System.out.println("Unowned Space: " + player.getAccount().getBalance());
         if(!player.getAccount().withdraw(0)){
@@ -57,11 +58,11 @@ public class FieldController {
         }
     }
 
-    public void landOnChance(ChanceCardsPileController chanceCardsPileController, Player player){
+    public void landOnChance(ChanceCardsPileController chanceCardsPileController, Player[] players, Player player){
         ChanceCardController chanceCardController = chanceCardsPileController.drawCard();
         if (chanceCardController.model.getText().startsWith("Move to one of ")) {
             FreeFieldChanceCardController chanceCard = (FreeFieldChanceCardController) chanceCardController;
-            chanceCard.action(player);
+            chanceCard.action(players, player);
         }
         else if (chanceCardController.model.getText().startsWith("Get out of ")) {
             OutOfJailChanceCardController chanceCard = (OutOfJailChanceCardController) chanceCardController;
