@@ -60,7 +60,7 @@ public class WinnerController {
         return playersWithEqualBalance.toArray(new Player[0]);
     }
 
-    private int getTotalPropertyValue(Player player) {
+    public int getTotalPropertyValue(Player player) {
         int totalValue = 0;
         for (GUI_Field field : this.fieldModel.FieldInfo()) {
             try {
