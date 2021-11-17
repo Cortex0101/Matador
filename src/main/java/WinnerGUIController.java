@@ -18,5 +18,7 @@ public class WinnerGUIController {
         sb.append("Player " + "\"").append(winnerController.getWinner().getName()).append("\"").append(" won!");
 
         gui.showMessage(sb.toString());
+        gui.getUserButtonPressed("", "Close game");
+        gui.close();
     }
 }
