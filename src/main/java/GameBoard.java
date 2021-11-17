@@ -23,6 +23,7 @@ public class GameBoard {
         this.fieldController = new FieldController();
         this.gameRunning = true;
         playerController = new PlayerController(players);
+        Bank.winnerController = new WinnerController(players, fieldModel);
 
         freeFieldCards = new FreeFieldChanceCardCreator(this.gameBoardCreator.getGUI());
         chanceCardsPile = new ChanceCardsPileController(freeFieldCards.getFreeFieldChanceCardControllers());
