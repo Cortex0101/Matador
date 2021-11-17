@@ -39,7 +39,7 @@ public class GameBoard {
                 playerController.getActivePlayer().getCar().setInJail(false);
             }
 
-            gameBoardCreator.getGUI().getUserButtonPressed("","Roll dice");
+            gameBoardCreator.getGUI().getUserButtonPressed(playerController.getActivePlayer().getName() + ", it is your turn.","Roll dice");
             int roll = playerController.getActivePlayer().getDie().roll();
             gameBoardCreator.getGUI().setDie(roll);
             playerController.getActivePlayer().getCar().moveCar(roll);
