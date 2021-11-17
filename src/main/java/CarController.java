@@ -14,7 +14,7 @@ public class CarController {
     private CarModel carModel;
     private GUI_Car carView;
 
-    static int carCount = 0;
+    public static int carCount = 0;
 
     public CarController(GUI_Field[] fields, GUI_Player player) {
         this.inJail = false;

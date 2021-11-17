@@ -14,6 +14,7 @@ class WinnerControllerJUnitTest {
     @BeforeEach
     void setUp() {
         fieldModel = new FieldModel();
+        CarController.carCount = 0; // Cheap workaround...
         players = new Player[]{
                 new Player("A",6, fieldModel.FieldInfo()),
                 new Player("B",8, fieldModel.FieldInfo()),
