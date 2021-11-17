@@ -23,6 +23,8 @@ public class GameBoard {
         this.fieldController = new FieldController();
         this.gameRunning = true;
         playerController = new PlayerController(players);
+        Bank.winnerController = new WinnerGUIController(new WinnerController(players, fieldModel), this.gameBoardCreator.getGUI());
+
 
         freeFieldCards = new FreeFieldChanceCardCreator(this.gameBoardCreator.getGUI());
         chanceCardsPile = new ChanceCardsPileController(freeFieldCards.getFreeFieldChanceCardControllers());
@@ -38,7 +40,7 @@ public class GameBoard {
                 playerController.getActivePlayer().getCar().setInJail(false);
             }
 
-            gameBoardCreator.getGUI().getUserButtonPressed("","Roll dice");
+            gameBoardCreator.getGUI().getUserButtonPressed(playerController.getActivePlayer().getName() + ", it is your turn.","Roll dice");
             int roll = playerController.getActivePlayer().getDie().roll();
             gameBoardCreator.getGUI().setDie(roll);
             playerController.getActivePlayer().getCar().moveCar(roll);
