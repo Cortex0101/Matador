@@ -18,6 +18,5 @@ public class Bank {
     public static void payPlayer(Player to, int amount) {
         to.getAccount().deposit(amount);
         to.updateAccountGUI();
-
     }
 }
