@@ -41,6 +41,10 @@ public class WinnerController {
         return highestValuePlayer;
     }
 
+    public Player[] getPlayers() {
+        return players;
+    }
+
     private boolean multiplePlayersWithBalanceOf(int balance) {
         for (Player player : players) {
             if (player.getAccount().getBalance() == balance) {
