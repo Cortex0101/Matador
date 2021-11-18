@@ -1,6 +1,6 @@
-title {
-    subtext
-    description
-    rent // -1 if not ownable
-    color
-}
+Title: GO
+Subtext:
+Description: Get 2$ when you pass or land on GO
+Rent: 2
+Color: WHITE
+
