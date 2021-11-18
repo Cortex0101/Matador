@@ -7,9 +7,10 @@ public class FieldModel {
 
     public FieldModel(){
         fields = new GUI_Field[24];
-
+        FileReader fileReader = new FileReader();
         int i = 0;
-        fields[i++] = new GUI_Start("GO", "2$", "Modtag kr. 200,-\nnår de passerer start", Color.WHITE, Color.BLACK);
+        String[] fieldText = fileReader.ReadFileText();
+        fields[i++] = new GUI_Start(fieldText[0], fieldText[1], fieldText[2],Color.decode(fieldText[4]), Color.BLACK);
         fields[i++] = new GUI_Street("BURGER JOINT",FieldModel.getFieldValue(i-1)+"$", "Modtag kr. 200,-\nnår de passerer start", FieldModel.getFieldValue(i - 1) + "$", new Color(160,82,45), Color.BLACK);
         fields[i++] = new GUI_Street("PIZZA HOUSE",FieldModel.getFieldValue(i-1)+"$", "Modtag kr. 200,-\nnår de passerer start", FieldModel.getFieldValue(i - 1) + "$", new Color(160,82,45), Color.BLACK);
         fields[i++] = new GUI_Chance("?", "Chance", "Modtag kr. 200,-\nnår de passerer start", Color.WHITE, Color.BLACK);
