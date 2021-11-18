@@ -16,4 +16,11 @@ public class FileReader {
         }
 
     }
+    public String[] ReadFileText(){
+        String[] string = new String[5];
+        for (int i = 0; i < string.length; i++) {
+            string[i] = scan.nextLine();
+        }
+        return string;
+    }
 }
