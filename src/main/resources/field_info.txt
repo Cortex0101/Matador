@@ -1,6 +1,143 @@
-title {
-    subtext
-    description
-    rent // -1 if not ownable
-    color
-}
+"Title:" "Go"
+"subtext:" "2$"
+"description:" "Welcome to the starting Zone, you receive 2$"
+"rent:" "-1"
+"color:" "White"
+
+"Title:" "Burger Joint"
+"subtext:" "1$"
+"description:" "Big Mac on sale"
+"rent:" "1"
+"color:" "Brown"
+
+"Title:" "Pizza House"
+"subtext:" "1$"
+"description:" "All you can eat pizza for the small price of 1 dollar"
+"rent:" "1"
+"color:" "Brown"
+
+"Title:" "?"
+"subtext:" "Chance"
+"description:" ""
+"rent:" ""
+"color:" "White"
+
+"Title:" "Candy Store"
+"subtext:" "1$"
+"description:" "No amount of candy is enough"
+"rent:" "1"
+"color:" "light Blue"
+
+"Title:" "Ice Cream Parlor"
+"subtext:" "1$"
+"description:" "Soo much Ice Cream, yet no time to enjoy it all"
+"rent:" "1"
+"color:" "Light Blue"
+
+"Title:" ""
+"subtext:" "Jail"
+"description:" "Here you can visit the naughty boys, grills and all the other genders"
+"rent:" ""
+"color:" "White"
+
+"Title:" "Museum"
+"subtext:" "2$"
+"description:" "What the F word are you doing here"
+"rent:" "2"
+"color:" "Light Purple"
+
+"Title:" "Library"
+"subtext:" "2$"
+"description:" "PSSSTTTT, YOU ARE TOO LOUD. THIS IS A FKN LIBRARY"
+"rent:" "2"
+"color:" "light Purple"
+
+"Title:" "?"
+"subtext:" "Chance"
+"description:" ""
+"rent:" ""
+"color:" "White"
+
+"Title:" "Skate Park"
+"subtext:" "2$"
+"description:" "Safety first, Helmet and kneecaps. Now do a backflip"
+"rent:" "2"
+"color:" "Orange"
+
+"Title:" "Swimming pool"
+"subtext:" "2$"
+"description:" "CAREFUL the floor is wet but do remember to try our fries."
+"rent:" "2"
+"color:" "Orange"
+
+"Title:" "Parking spot"
+"subtext:" ""
+"description:" ""
+"rent:" ""
+"color:" "White"
+
+"Title:" "Game Arcade"
+"subtext:" "3$"
+"description:" "Welcome to the game arcade, we got every game under the sun. If you can beat the our pacman record you get a free hotdog."
+"rent:" "3"
+"color:" "Light Red"
+
+"Title:" "Movie Theatre"
+"subtext:" "3$"
+"description:" "Sorry you have to be this tall to see this moive."
+"rent:" "3"
+"color:" "Light Red"
+
+"Title:" "?"
+"subtext:" "Chance"
+"description:" ""
+"rent:" ""
+"color:" "White"
+
+"Title:" "Toy Store"
+"subtext:" "3$"
+"description:" "Yes we have we restocked on pokemon boosters."
+"rent:" "3"
+"color:" "Grey"
+
+"Title:" "Pet Store"
+"subtext:" "3$"
+"description:" "Yes you can try to have a snake around you'r neck, but you have to Calm down."
+"rent:" "3"
+"color:" "Grey"
+
+"Title:" ""
+"subtext:" ""
+"description:" "Go to jail"
+"rent:" ""
+"color:" "White"
+
+"Title:" "Bowling Alley"
+"subtext:" "4$"
+"description:" "Boom and thats how you get a strike"
+"rent:" "4"
+"color:" "Green"
+
+"Title:" "The Zoo"
+"subtext:" "4$"
+"description:" "Attention Attention, We are closing the zoo in 1hour."
+"rent:" "4"
+"color:" "Green"
+
+"Title:" "?"
+"subtext:" "Chance"
+"description:" ""
+"rent:" ""
+"color:" "White"
+
+"Title:" "Park Place"
+"subtext:" "5$"
+"description:" "Sorry, no children allowed"
+"rent:" "5"
+"color:" "Dark Blue"
+
+"Title:" "Boardwalk"
+"subtext:" "5$"
+"description:" "The Red Dragon roller coaster is finaly done, come and try if you dare!"
+"rent:" "5"
+"color:" "Dark Blue"
