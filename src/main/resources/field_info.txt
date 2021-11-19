@@ -1,143 +1,145 @@
-"Title:" "Go"
-"subtext:" "2$"
-"description:" "Welcome to the starting Zone, you receive 2$"
-"rent:" "-1"
-"color:" "#ffffff"
+Title: GO
+Subtext: 2$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: -1
+Color: #ffffff
 
-"Title:" "Burger Joint"
-"subtext:" "1$"
-"description:" "Big Mac on sale"
-"rent:" "1"
-"color:" "#7f5822"
+Title: BURGER JOINT
+Subtext: 1$
+Description: Big Mac on sale
+Rent: 1
+Color: #7f5822
 
-"Title:" "Pizza House"
-"subtext:" "1$"
-"description:" "All you can eat pizza for the small price of 1 dollar"
-"rent:" "1"
-"color:" "#7f5822"
+Title: PIZZA HOUSE
+Subtext: 1$
+Description: All you can eat pizza for the small price of 1 dollar
+Rent: 1
+Color: #7f5822
 
-"Title:" "?"
-"subtext:" "Chance"
-"description:" ""
-"rent:" ""
-"color:" "#ffffff"
+Title: ?
+Subtext: Chance
+Description: Chance
+Rent: -1
+Color: #ffffff
 
-"Title:" "Candy Store"
-"subtext:" "1$"
-"description:" "No amount of candy is enough"
-"rent:" "1"
-"color:" "#2acaea"
+Title: CANDY STORE
+Subtext: 1$
+Description: No amount of candy is enough
+Rent: 1
+Color: #2acaea
 
-"Title:" "Ice Cream Parlor"
-"subtext:" "1$"
-"description:" "Soo much Ice Cream, yet no time to enjoy it all"
-"rent:" "1"
-"color:" "#2acaea"
+Title: ICE CREAM PARLOR
+Subtext: 1$
+Description: So much Ice Cream, yet no time to enjoy it all
+Rent: 1
+Color: #2acaea
 
-"Title:" ""
-"subtext:" "Jail"
-"description:" "Here you can visit the naughty boys, grills and all the other genders"
-"rent:" ""
-"color:" "#ffffff"
+Title: Jail
+Subtext: JAIL
+Description: Here you can visit the naughty boys and girls
+Rent: -1
+Color: #ffffff
 
-"Title:" "Museum"
-"subtext:" "2$"
-"description:" "What the F word are you doing here"
-"rent:" "2"
-"color:" "#ffb6ff"
+Title: MUSEUM
+Subtext: 2$
+Description: Learn some stuff, or take a nap
+Rent: 2
+Color: #ffb6ff
 
-"Title:" "Library"
-"subtext:" "2$"
-"description:" "PSSSTTTT, YOU ARE TOO LOUD. THIS IS A FKN LIBRARY"
-"rent:" "2"
-"color:" "#ffb6ff"
+Title: LIBRARY
+Subtext: 2$
+Description: Quiet! This is a public library not a concert!
+Rent: 2
+Color: #ffb6ff
 
-"Title:" "?"
-"subtext:" "Chance"
-"description:" ""
-"rent:" ""
-"color:" "#ffffff"
+Title: ?
+Subtext: Chance
+Description: Chance
+Rent: -1
+Color: #ffffff
 
-"Title:" "Skate Park"
-"subtext:" "2$"
-"description:" "Safety first, Helmet and kneecaps. Now do a backflip"
-"rent:" "2"
-"color:" "#d26742"
+Title: SKATE PARK
+Subtext: 2$
+Description: Safety first, Helmet and kneecaps. Now do a backflip
+Rent: 2
+Color: #d26742
 
-"Title:" "Swimming pool"
-"subtext:" "2$"
-"description:" "CAREFUL the floor is wet but do remember to try our fries."
-"rent:" "2"
-"color:" "#d26742"
+Title: SWIMMING POOL
+Subtext: 2$
+Description: CAREFUL! the floor is wet but do remember to try our fries.
+Rent: 2
+Color: #d26742
 
-"Title:" "Parking spot"
-"subtext:" ""
-"description:" ""
-"rent:" ""
-"color:" "#ffffff"
+Title: PARKING SPOT
+Subtext: Parking
+Description: Free Parking
+Rent: -1
+Color: #ffffff
 
-"Title:" "Game Arcade"
-"subtext:" "3$"
-"description:" "Welcome to the game arcade, we got every game under the sun. If you can beat the our pacman record you get a free hotdog."
-"rent:" "3"
-"color:" "#f6546a"
+Title: GAME ARCADE
+Subtext: 3$
+Description: Welcome to the game arcade, we got every game under the sun. If you can beat our pacman record you get a free hotdog.
+Rent: 3
+Color: #f6546a
 
-"Title:" "Movie Theatre"
-"subtext:" "3$"
-"description:" "Sorry you have to be this tall to see this moive."
-"rent:" "3"
-"color:" "#f6546a"
+Title: MOVIE THEATER
+Subtext: 3$
+Description: Sorry you have to be this tall to see this movie.
+Rent: 3
+Color: #f6546a
 
-"Title:" "?"
-"subtext:" "Chance"
-"description:" ""
-"rent:" ""
-"color:" "#ffffff"
+Title: ?
+Subtext: Chance
+Description: Chance
+Rent: -1
+Color: #ffffff
 
-"Title:" "Toy Store"
-"subtext:" "3$"
-"description:" "Yes we have we restocked on pokemon boosters."
-"rent:" "3"
-"color:" "#d8d8e6"
+Title: TOY STORE
+Subtext: 3$
+Description: We have recently restocked on pokemon boosters.
+Rent: 3
+Color: #d8d8e6
 
-"Title:" "Pet Store"
-"subtext:" "3$"
-"description:" "Yes you can try to have a snake around you'r neck, but you have to Calm down."
-"rent:" "3"
-"color:" "#d8d8e6"
+Title: PET STORE
+Subtext: 3$
+Description: You can try to have a snake around your neck, but you have to calm down.
+Rent: 3
+Color: #d8d8e6
 
-"Title:" ""
-"subtext:" ""
-"description:" "Go to jail"
-"rent:" ""
-"color:" "#ffffff"
+Title: GO TO JAIL
+Subtext: GO TO JAIL
+Description: Go to jail
+Rent: -1
+Color: #ffffff
 
-"Title:" "Bowling Alley"
-"subtext:" "4$"
-"description:" "Boom and thats how you get a strike"
-"rent:" "4"
-"color:" "#97c783"
+Title: BOWLING ALLEY
+Subtext: 4$
+Description: Right in the gutter, every single time...
+Rent: 4
+Color: #97c783
 
-"Title:" "The Zoo"
-"subtext:" "4$"
-"description:" "Attention Attention, We are closing the zoo in 1hour."
-"rent:" "4"
-"color:" "#97c783"
+Title: THE ZOO
+Subtext: 4$
+Description: Attention Attention, We are closing the zoo in 1 hour.
+Rent: 4
+Color: #97c783
 
-"Title:" "?"
-"subtext:" "Chance"
-"description:" ""
-"rent:" ""
-"color:" "#ffffff"
+Title: ?
+Subtext: Chance
+Description: Chance
+Rent: -1
+Color: #ffffff
 
-"Title:" "Park Place"
-"subtext:" "5$"
-"description:" "Sorry, no children allowed"
-"rent:" "5"
-"color:" "#011f4b"
+Title: PARK PLACE
+Subtext: 5$
+Description: Sorry, no children allowed
+Rent: 5
+Color: #3481ED
 
-"Title:" "Boardwalk"
-"subtext:" "5$"
-"description:" "The Red Dragon roller coaster is finaly done, come and try if you dare!"
-"rent:" "5"
-"color:" "#011f4b"
+Title: BOARDWALK
+Subtext: 5$
+Description: The Red Dragon roller coaster is finally done, come and try if you dare!
+Rent: 5
+Color: #3481ED
+
+END OF DOCUMENT
