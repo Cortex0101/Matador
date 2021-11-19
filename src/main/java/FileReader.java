@@ -7,7 +7,7 @@ public class FileReader {
     private final String[] textTypeChecker;
 
     public FileReader() {
-        this.textTypeChecker = new String[]{"Title: ","Subtext:","Description: ","Rent: ","Color: "};
+        this.textTypeChecker = new String[]{"Title: ","Subtext: ","Description: ","Rent: ","Color: "};
         try{
             File file = new File("C:\\Users\\augus\\IdeaProjects\\03_part3\\src\\main\\resources\\field_info.txt");
             this.scan = new Scanner(file);
