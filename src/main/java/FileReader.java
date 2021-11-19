@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 
@@ -9,13 +10,14 @@ public class FileReader {
     public FileReader() {
         this.textTypeChecker = new String[]{"Title: ","Subtext: ","Description: ","Rent: ","Color: "};
         try{
-            File file = new File("C:\\Users\\augus\\IdeaProjects\\03_part3\\src\\main\\resources\\field_info.txt");
+            File file = new File(new File("./").getCanonicalPath() + "\\src\\main\\resources\\field_info.txt");
             this.scan = new Scanner(file);
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
     }
     public String[] ReadFileText(){
         String[] string = new String[5];
