@@ -1,6 +1,145 @@
 Title: GO
-Subtext:
-Description: Get 2$ when you pass or land on GO
-Rent: 2
-Color: WHITE
+Subtext: 2$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: -1
+Color: #ffffff
 
+Title: BURGER JOINT
+Subtext: 1$
+Description: Big Mac on sale
+Rent: 1
+Color: #7f5822
+
+Title: PIZZA HOUSE
+Subtext: 1$
+Description: All you can eat pizza for the small price of 1 dollar
+Rent: 1
+Color: #7f5822
+
+Title: ?
+Subtext: Chance
+Description: Chance
+Rent: -1
+Color: #ffffff
+
+Title: CANDY STORE
+Subtext: 1$
+Description: No amount of candy is enough
+Rent: 1
+Color: #2acaea
+
+Title: ICE CREAM PARLOR
+Subtext: 1$
+Description: So much Ice Cream, yet no time to enjoy it all
+Rent: 1
+Color: #2acaea
+
+Title: Jail
+Subtext: JAIL
+Description: Here you can visit the naughty boys and girls
+Rent: -1
+Color: #ffffff
+
+Title: MUSEUM
+Subtext: 2$
+Description: Learn some stuff, or take a nap
+Rent: 2
+Color: #ffb6ff
+
+Title: LIBRARY
+Subtext: 2$
+Description: Quiet! This is a public library not a concert!
+Rent: 2
+Color: #ffb6ff
+
+Title: ?
+Subtext: Chance
+Description: Chance
+Rent: -1
+Color: #ffffff
+
+Title: SKATE PARK
+Subtext: 2$
+Description: Safety first, Helmet and kneecaps. Now do a backflip
+Rent: 2
+Color: #d26742
+
+Title: SWIMMING POOL
+Subtext: 2$
+Description: CAREFUL! the floor is wet but do remember to try our fries.
+Rent: 2
+Color: #d26742
+
+Title: PARKING SPOT
+Subtext: Parking
+Description: Free Parking
+Rent: -1
+Color: #ffffff
+
+Title: GAME ARCADE
+Subtext: 3$
+Description: Welcome to the game arcade, we got every game under the sun. If you can beat our pacman record you get a free hotdog.
+Rent: 3
+Color: #f6546a
+
+Title: MOVIE THEATER
+Subtext: 3$
+Description: Sorry you have to be this tall to see this movie.
+Rent: 3
+Color: #f6546a
+
+Title: ?
+Subtext: Chance
+Description: Chance
+Rent: -1
+Color: #ffffff
+
+Title: TOY STORE
+Subtext: 3$
+Description: We have recently restocked on pokemon boosters.
+Rent: 3
+Color: #d8d8e6
+
+Title: PET STORE
+Subtext: 3$
+Description: You can try to have a snake around your neck, but you have to calm down.
+Rent: 3
+Color: #d8d8e6
+
+Title: GO TO JAIL
+Subtext: GO TO JAIL
+Description: Go to jail
+Rent: -1
+Color: #ffffff
+
+Title: BOWLING ALLEY
+Subtext: 4$
+Description: Right in the gutter, every single time...
+Rent: 4
+Color: #97c783
+
+Title: THE ZOO
+Subtext: 4$
+Description: Attention Attention, We are closing the zoo in 1 hour.
+Rent: 4
+Color: #97c783
+
+Title: ?
+Subtext: Chance
+Description: Chance
+Rent: -1
+Color: #ffffff
+
+Title: PARK PLACE
+Subtext: 5$
+Description: Sorry, no children allowed
+Rent: 5
+Color: #3481ED
+
+Title: BOARDWALK
+Subtext: 5$
+Description: The Red Dragon roller coaster is finally done, come and try if you dare!
+Rent: 5
+Color: #3481ED
+
+END OF DOCUMENT
