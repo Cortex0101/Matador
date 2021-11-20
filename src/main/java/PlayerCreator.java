@@ -4,12 +4,12 @@ public class PlayerCreator {
     private int playercount;
     private String[] playernames;
     private Player[] players;
-    public PlayerCreator(GUI gui){
-        playercount = gui.getUserInteger("How many players are present",2,4);
+    public PlayerCreator(){
+        playercount = GUIInstance.getInstance().getUserInteger("How many players are present",2,4);
 
         playernames = new String[playercount];
         for (int i = 0; i < playercount; i++) {
-            playernames[i] = gui.getUserString("What shall player " + (i + 1) + " be called?");
+            playernames[i] = GUIInstance.getInstance().getUserString("What shall player " + (i + 1) + " be called?");
         }
 
         players = new Player[playercount];
@@ -18,7 +18,7 @@ public class PlayerCreator {
         }
 
         for (Player player : players) {
-            gui.addPlayer(player.getCar().getGui_player());
+            GUIInstance.getInstance().addPlayer(player.getCar().getGui_player());
         }
     }
     public Player[] getPlayers(){
@@ -27,9 +27,5 @@ public class PlayerCreator {
 
     public int getPlayerCount() {
         return playercount;
-    }
-
-    public String[] getPlayerNames() {
-        return playernames;
     }
 }

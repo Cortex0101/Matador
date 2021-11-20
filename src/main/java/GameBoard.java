@@ -10,7 +10,7 @@ public class GameBoard {
     ChanceCardsPileController chanceCardsPile;
 
     public GameBoard() {
-        this.players = new PlayerCreator(GUIInstance.getInstance()).getPlayers();
+        this.players = new PlayerCreator().getPlayers();
         this.fieldModel = new FieldModel();
         this.fieldController = new FieldController();
         this.gameRunning = true;

@@ -20,7 +20,7 @@ class PlayerCreatorTest {
         GUI_Player player = new GUI_Player("testName",0,car);
         gui.addPlayer(player);
         gui.addPlayer(player);
-        this.playerCreator = new PlayerCreator(gui);
+        this.playerCreator = new PlayerCreator();
         assertEquals(2,playerCreator.getPlayerCount());
     }
 
