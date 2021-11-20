@@ -15,7 +15,7 @@ public class GameBoard {
         this.fieldController = new FieldController();
         this.gameRunning = true;
         playerController = new PlayerController(players);
-        Bank.winnerController = new WinnerGUIController(new WinnerController(players), GUIInstance.getInstance());
+        Bank.winnerController = new WinnerGUIController(new WinnerController(players));
 
 
         freeFieldCards = new FreeFieldChanceCardCreator();
