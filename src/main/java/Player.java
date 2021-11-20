@@ -7,7 +7,6 @@ public class Player {
     private final Account account;
     private final CarController carController;
     protected GUI_Player gui_player;
-    private CarModel carModel;
     private boolean getOutOfJailCard;
 
     public Player(String name, int initialCapital) {
