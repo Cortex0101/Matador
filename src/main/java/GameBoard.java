@@ -20,7 +20,7 @@ public class GameBoard {
 
         freeFieldCards = new FreeFieldChanceCardCreator();
         chanceCardsPile = new ChanceCardsPileController(freeFieldCards.getFreeFieldChanceCardControllers());
-        chanceCardsPile.addCard(new OutOfJailChanceCardController(GUIInstance.getInstance()));
+        chanceCardsPile.addCard(new OutOfJailChanceCardController());
 
         while(gameRunning) {
             if (playerController.getActivePlayer().getCar().isInJail() && !playerController.getActivePlayer().hasGetOutOfJailCard()) {
