@@ -3,11 +3,8 @@ import gui_fields.*;
 public class GameBoard {
     private final FieldController fieldController;
     private final FieldModel fieldModel;
-    private GUI_Car[] playerCars;
-    private Die die;
     private final Player[] players;
     private final PlayerController playerController;
-    private int activePlayer;
     private final boolean gameRunning;
     private final FreeFieldChanceCardCreator freeFieldCards;
     ChanceCardsPileController chanceCardsPile;
