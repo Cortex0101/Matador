@@ -2,16 +2,19 @@ import gui_main.GUI;
 
 import java.security.Guard;
 
-public class GUIInstance {
-    private FieldModel fieldModel;
-    private GUI gui;
+public final class GUIInstance {
+    private static GUIInstance instance;
 
-    public GUIInstance(){
-        this.fieldModel = new FieldModel();
-        gui = new GUI(fieldModel.FieldInfo());
+    private static GUI gui;
+
+    private GUIInstance(){
+        gui = new GUI(new FieldModel().FieldInfo());
     }
 
-    public GUI getGUI(){
-        return gui;
+    public static GUI getInstance() {
+        if (instance == null) {
+            instance = new GUIInstance();
+        }
+        return instance.gui;
     }
 }
