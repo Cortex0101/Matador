@@ -1,7 +1,4 @@
 import gui_fields.*;
-import gui_main.GUI;
-
-import java.util.Scanner;
 
 public class GameBoard {
     private FieldController fieldController;
@@ -9,7 +6,7 @@ public class GameBoard {
     private GUI_Car[] playerCars;
     private Die die;
     private Player[] players;
-    private GameBoardCreator gameBoardCreator;
+    private GUIInstance GUIInstance;
     private PlayerController playerController;
     private int activePlayer;
     private boolean gameRunning;
@@ -17,18 +14,18 @@ public class GameBoard {
     ChanceCardsPileController chanceCardsPile;
 
     public GameBoard() {
-        this.gameBoardCreator = new GameBoardCreator();
-        this.players = gameBoardCreator.getPlayers();
+        this.GUIInstance = new GUIInstance();
+        this.players = new PlayerCreator(GUIInstance.getGUI()).getPlayers();
         this.fieldModel = new FieldModel();
         this.fieldController = new FieldController();
         this.gameRunning = true;
         playerController = new PlayerController(players);
-        Bank.winnerController = new WinnerGUIController(new WinnerController(players, fieldModel), this.gameBoardCreator.getGUI());
+        Bank.winnerController = new WinnerGUIController(new WinnerController(players, fieldModel), this.GUIInstance.getGUI());
 
 
-        freeFieldCards = new FreeFieldChanceCardCreator(this.gameBoardCreator.getGUI());
+        freeFieldCards = new FreeFieldChanceCardCreator(this.GUIInstance.getGUI());
         chanceCardsPile = new ChanceCardsPileController(freeFieldCards.getFreeFieldChanceCardControllers());
-        chanceCardsPile.addCard(new OutOfJailChanceCardController(this.gameBoardCreator.getGUI()));
+        chanceCardsPile.addCard(new OutOfJailChanceCardController(this.GUIInstance.getGUI()));
 
         while(gameRunning) {
             if (playerController.getActivePlayer().getCar().isInJail() && !playerController.getActivePlayer().hasGetOutOfJailCard()) {
@@ -40,14 +37,14 @@ public class GameBoard {
                 playerController.getActivePlayer().getCar().setInJail(false);
             }
 
-            gameBoardCreator.getGUI().getUserButtonPressed(playerController.getActivePlayer().getName() + ", it is your turn.","Roll dice");
+            GUIInstance.getGUI().getUserButtonPressed(playerController.getActivePlayer().getName() + ", it is your turn.","Roll dice");
             int roll = playerController.getActivePlayer().getDie().roll();
-            gameBoardCreator.getGUI().setDie(roll);
+            GUIInstance.getGUI().setDie(roll);
             playerController.getActivePlayer().getCar().moveCar(roll);
             if (playerController.getActivePlayer().getCar().hasPassedStart()) {
                 Bank.payPlayer(playerController.getActivePlayer(), 2);
             }
-            fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(), fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()], chanceCardsPile, playerController.getActivePlayer(), players, gameBoardCreator);
+            fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(), fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()], chanceCardsPile, playerController.getActivePlayer(), players, GUIInstance);
             playerController.nextPlayerTurn();
         }
     }
