@@ -21,7 +21,7 @@ class WinnerControllerJUnitTest {
                 new Player("C",7),
                 new Player("D",4)
         };
-        winnerController = new WinnerController(players, fieldModel);
+        winnerController = new WinnerController(players);
     }
 
     @Test
