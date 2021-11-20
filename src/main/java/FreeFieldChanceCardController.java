@@ -18,7 +18,7 @@ public class FreeFieldChanceCardController extends ChanceCardController {
         for (int i = 0; i < positions.length; i++) {
             options[i] = fields[positions[i]];
         }
-        fieldSelector = new FieldSelector(options, gui);
+        fieldSelector = new FieldSelector(options);
         StringBuilder str = new StringBuilder("Move to one of ");
         for (String title : fieldSelector.getFieldTitles()) {
             str.append(title).append(", ");

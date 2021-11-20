@@ -4,14 +4,11 @@ import gui_main.GUI;
 import java.util.Arrays;
 
 public class FieldSelector {
-     GUI gui;
-
      GUI_Field[] fieldOptions;
      GUI_Field fieldSelected;
      String[] fieldTitles;
 
-     public FieldSelector(GUI_Field[] options, GUI gui) { // Needs a reference to gui in order to get user selection
-          this.gui = gui;
+     public FieldSelector(GUI_Field[] options) {
           this.fieldOptions = options;
           this.fieldTitles = getFieldTitlesArray(options);
      }
@@ -21,7 +18,7 @@ public class FieldSelector {
      }
 
      public void getUserSelection() {
-          String userSelection = gui.getUserSelection("Which field would you like to move to?", fieldTitles);
+          String userSelection = GUIInstance.getInstance().getUserSelection("Which field would you like to move to?", fieldTitles);
           fieldSelected = fieldOptions[Arrays.asList(fieldTitles).indexOf(userSelection)];
      }
 
