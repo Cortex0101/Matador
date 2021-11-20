@@ -10,12 +10,12 @@ public class Player {
     private CarModel carModel;
     private boolean getOutOfJailCard;
 
-    public Player(String name, int initialCapital, GUI_Field[] fields) {
+    public Player(String name, int initialCapital) {
         this.name = name;
         this.die = new Die();
         this.account = new Account(initialCapital);
         this.gui_player = new GUI_Player(this.name, this.account.getBalance());
-        this.carController = new CarController(fields, this.gui_player);
+        this.carController = new CarController(this.gui_player);
         this.getOutOfJailCard = false;
     }
 

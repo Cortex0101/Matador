@@ -16,10 +16,10 @@ class WinnerControllerJUnitTest {
         fieldModel = new FieldModel();
         CarController.carCount = 0; // Cheap workaround...
         players = new Player[]{
-                new Player("A",6, fieldModel.FieldInfo()),
-                new Player("B",8, fieldModel.FieldInfo()),
-                new Player("C",7, fieldModel.FieldInfo()),
-                new Player("D",4, fieldModel.FieldInfo())
+                new Player("A",6),
+                new Player("B",8),
+                new Player("C",7),
+                new Player("D",4)
         };
         winnerController = new WinnerController(players, fieldModel);
     }

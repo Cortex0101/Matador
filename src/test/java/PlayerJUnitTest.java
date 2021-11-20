@@ -10,7 +10,7 @@ class PlayerJUnitTest {
 
     @BeforeEach
     void setUp() {
-        player = new Player("Bob", 20, new GUI_Field[3]);
+        player = new Player("Bob", 20);
     }
 
     @DisplayName("Player can roll dice")

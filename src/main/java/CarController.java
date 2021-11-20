@@ -8,7 +8,6 @@ public class CarController {
     private boolean inJail;
     private boolean passedStart;
 
-    private GUI_Field[] gui_fields;
     private GUI_Player gui_player;
 
     private CarModel carModel;
@@ -16,11 +15,10 @@ public class CarController {
 
     public static int carCount = 0;
 
-    public CarController(GUI_Field[] fields, GUI_Player player) {
+    public CarController(GUI_Player player) {
         this.inJail = false;
         this.passedStart = false;
 
-        this.gui_fields = fields;
         this.gui_player = player;
 
         this.carModel = new CarModel();
@@ -54,16 +52,16 @@ public class CarController {
     }
 
     public void setCarPosition(int position) { // Need to check if player passed start, does not do it currently
-        this.gui_fields[this.carModel.getPosition()].setCar(this.gui_player, false);
+        GUIInstance.getInstance().getFields()[this.carModel.getPosition()].setCar(this.gui_player, false);
         passedStart = this.getCarPosition() > position;
         this.carModel.setPosition(position);
-        this.gui_fields[this.carModel.getPosition()].setCar(this.gui_player, true);
+        GUIInstance.getInstance().getFields()[this.carModel.getPosition()].setCar(this.gui_player, true);
     }
 
     public void moveCar(int count) {
-        this.gui_fields[this.carModel.getPosition()].setCar(this.gui_player, false);
+        GUIInstance.getInstance().getFields()[this.carModel.getPosition()].setCar(this.gui_player, false);
         passedStart = this.carModel.move(count);
-        this.gui_fields[this.carModel.getPosition()].setCar(this.gui_player, true);
+        GUIInstance.getInstance().getFields()[this.carModel.getPosition()].setCar(this.gui_player, true);
     }
 
     public int getCarPosition() {

@@ -14,7 +14,7 @@ public class PlayerCreator {
 
         players = new Player[playercount];
         for (int i = 0; i < playercount; i++) {
-            players[i] = new Player(playernames[i], 20, gui.getFields());
+            players[i] = new Player(playernames[i], 20);
         }
 
         for (Player player : players) {
