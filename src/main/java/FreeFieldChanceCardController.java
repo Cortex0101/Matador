@@ -10,8 +10,8 @@ public class FreeFieldChanceCardController extends ChanceCardController {
     GUI_Field[] fields;
     private int[] positions;
 
-    public FreeFieldChanceCardController(GUI gui, GUI_Field[] fields, int[] positions) {
-        super(new ChanceCardModel("asdfasdf"), gui);
+    public FreeFieldChanceCardController(GUI_Field[] fields, int[] positions) {
+        super(new ChanceCardModel("asdfasdf"));
         this.fields = fields;
         this.positions = positions;
         GUI_Field[] options = new GUI_Field[positions.length];

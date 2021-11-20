@@ -16,11 +16,11 @@ class ChanceCardsPileControllerJUnitTest {
         pileSize = 5;
 
         ChanceCardController[] cardControllers = new ChanceCardController[]{
-                new ChanceCardController(new ChanceCardModel("A"), gui),
-                new ChanceCardController(new ChanceCardModel("B"), gui),
-                new ChanceCardController(new ChanceCardModel("C"), gui),
-                new ChanceCardController(new ChanceCardModel("D"), gui),
-                new ChanceCardController(new ChanceCardModel("E"), gui)
+                new ChanceCardController(new ChanceCardModel("A")),
+                new ChanceCardController(new ChanceCardModel("B")),
+                new ChanceCardController(new ChanceCardModel("C")),
+                new ChanceCardController(new ChanceCardModel("D")),
+                new ChanceCardController(new ChanceCardModel("E"))
         };
 
         pile = new ChanceCardsPileController(cardControllers);

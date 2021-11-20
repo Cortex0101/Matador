@@ -21,7 +21,7 @@ public class GameBoard {
         Bank.winnerController = new WinnerGUIController(new WinnerController(players, fieldModel), GUIInstance.getInstance());
 
 
-        freeFieldCards = new FreeFieldChanceCardCreator(GUIInstance.getInstance());
+        freeFieldCards = new FreeFieldChanceCardCreator();
         chanceCardsPile = new ChanceCardsPileController(freeFieldCards.getFreeFieldChanceCardControllers());
         chanceCardsPile.addCard(new OutOfJailChanceCardController(GUIInstance.getInstance()));
 
