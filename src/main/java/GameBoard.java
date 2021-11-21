@@ -23,25 +23,39 @@ public class GameBoard {
 
     public void play() {
         while(true) {
-            if (playerController.getActivePlayer().getCar().isInJail() && !playerController.getActivePlayer().hasGetOutOfJailCard()) {
-                Bank.payBank(playerController.getActivePlayer(), 1);
-                playerController.getActivePlayer().getCar().setInJail(false);
-            }
-            else if (playerController.getActivePlayer().getCar().isInJail() && playerController.getActivePlayer().hasGetOutOfJailCard()){
-                playerController.getActivePlayer().setHasGetOutOfJailCard(false);
-                playerController.getActivePlayer().getCar().setInJail(false);
-            }
+            handleInJail();
+            playerController.getActivePlayer().getCar().moveCar(rollDie());
 
-            GUIInstance.getInstance().getUserButtonPressed(playerController.getActivePlayer().getName() + ", it is your turn.","Roll dice");
-            int roll = playerController.getActivePlayer().getDie().roll();
-            GUIInstance.getInstance().setDie(roll);
-            playerController.getActivePlayer().getCar().moveCar(roll);
             if (playerController.getActivePlayer().getCar().hasPassedStart()) {
                 Bank.payPlayer(playerController.getActivePlayer(), 2);
             }
-            fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(), fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()], chanceCardsPile, playerController.getActivePlayer(), players);
+
+            fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(),
+                    fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()],
+                    chanceCardsPile,
+                    playerController.getActivePlayer(),
+                    players);
+
             playerController.nextPlayerTurn();
         }
+    }
+
+    private void handleInJail() {
+        if (playerController.getActivePlayer().getCar().isInJail() && !playerController.getActivePlayer().hasGetOutOfJailCard()) {
+            Bank.payBank(playerController.getActivePlayer(), 1);
+            playerController.getActivePlayer().getCar().setInJail(false);
+        }
+        else if (playerController.getActivePlayer().getCar().isInJail() && playerController.getActivePlayer().hasGetOutOfJailCard()){
+            playerController.getActivePlayer().setHasGetOutOfJailCard(false);
+            playerController.getActivePlayer().getCar().setInJail(false);
+        }
+    }
+
+    private int rollDie() {
+        GUIInstance.getInstance().getUserButtonPressed(playerController.getActivePlayer().getName() + ", it is your turn.","Roll dice");
+        int roll = playerController.getActivePlayer().getDie().roll();
+        GUIInstance.getInstance().setDie(roll);
+        return roll;
     }
 
     @Override
