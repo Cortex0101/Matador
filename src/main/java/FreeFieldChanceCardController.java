@@ -7,18 +7,16 @@ import java.util.Collections;
 
 public class FreeFieldChanceCardController extends ChanceCardController {
     private FieldSelector fieldSelector;
-    GUI_Field[] fields;
     private int[] positions;
 
-    public FreeFieldChanceCardController(GUI gui, GUI_Field[] fields, int[] positions) {
-        super(new ChanceCardModel("asdfasdf"), gui);
-        this.fields = fields;
+    public FreeFieldChanceCardController(int[] positions) {
+        super(new ChanceCardModel("asdfasdf"));
         this.positions = positions;
         GUI_Field[] options = new GUI_Field[positions.length];
         for (int i = 0; i < positions.length; i++) {
-            options[i] = fields[positions[i]];
+            options[i] = GUIInstance.getInstance().getFields()[positions[i]];
         }
-        fieldSelector = new FieldSelector(options, gui);
+        fieldSelector = new FieldSelector(options);
         StringBuilder str = new StringBuilder("Move to one of ");
         for (String title : fieldSelector.getFieldTitles()) {
             str.append(title).append(", ");
@@ -34,14 +32,14 @@ public class FreeFieldChanceCardController extends ChanceCardController {
 
         GUI_Ownable field = (GUI_Ownable) this.fieldSelector.getSelected();
         if (field.getOwnerName() == null) {
-            player.getCar().setCarPosition(Arrays.asList(this.fields).indexOf(this.fieldSelector.getSelected()));
+            player.getCar().setCarPosition(Arrays.asList(GUIInstance.getInstance().getFields()).indexOf(this.fieldSelector.getSelected()));
             if (player.getCar().hasPassedStart()) {
                 Bank.payPlayer(player, 2);
             }
             field.setOwnerName(player.getName());
             field.setBorder(player.getCar().getCarColor());
         } else {
-            player.getCar().setCarPosition(Arrays.asList(this.fields).indexOf(this.fieldSelector.getSelected()));
+            player.getCar().setCarPosition(Arrays.asList(GUIInstance.getInstance().getFields()).indexOf(this.fieldSelector.getSelected()));
             if (player.getCar().hasPassedStart()) {
                 Bank.payPlayer(player, 2);
             }

@@ -2,11 +2,9 @@ import gui_main.GUI;
 
 public class WinnerGUIController {
     WinnerController winnerController;
-    GUI gui;
 
-    public WinnerGUIController(WinnerController winnerController, GUI gui) {
+    public WinnerGUIController(WinnerController winnerController) {
         this.winnerController = winnerController;
-        this.gui = gui;
     }
 
     public void printPlayerInfoTable() {
@@ -17,8 +15,8 @@ public class WinnerGUIController {
         }
         sb.append("Player " + "\"").append(winnerController.getWinner().getName()).append("\"").append(" won!");
 
-        gui.showMessage(sb.toString());
-        gui.getUserButtonPressed("", "Close game");
-        gui.close();
+        GUIInstance.getInstance().showMessage(sb.toString());
+        GUIInstance.getInstance().getUserButtonPressed("", "Close game");
+        GUIInstance.getInstance().close();
     }
 }

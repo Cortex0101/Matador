@@ -6,11 +6,9 @@ import java.util.Arrays;
 
 public class WinnerController {
     Player[] players;
-    FieldModel fieldModel;
 
-    public WinnerController(Player[] players, FieldModel fieldModel) {
+    public WinnerController(Player[] players) {
         this.players = players;
-        this.fieldModel = fieldModel;
     }
 
     /***
@@ -66,7 +64,7 @@ public class WinnerController {
 
     public int getTotalPropertyValue(Player player) {
         int totalValue = 0;
-        for (GUI_Field field : this.fieldModel.FieldInfo()) {
+        for (GUI_Field field : GUIInstance.getInstance().getFields()) {
             try {
                 GUI_Street street = (GUI_Street) field;
                 if (street.getOwnerName() == null) { continue; }

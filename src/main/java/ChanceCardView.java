@@ -7,8 +7,8 @@ public class ChanceCardView {
         this.text = text;
     }
 
-    public void display(GUI gui) {
-        gui.displayChanceCard(this.text);
+    public void display() {
+        GUIInstance.getInstance().displayChanceCard(this.text);
     }
 
     public void setText(String text) {this.text = text;}

@@ -1,25 +1,23 @@
+import java.util.Arrays;
+
 public class PlayerController {
-    private Player[] players;
+    private final Player[] players;
     private int activePlayerIndex;
-    private Player activePlayer;
 
     public PlayerController(Player[] players) {
         this.players = players;
         this.activePlayerIndex = 0;
-        this.activePlayer = players[activePlayerIndex];
     }
 
     public Player getActivePlayer() {
-        return this.activePlayer;
+        return this.players[this.activePlayerIndex];
     }
 
     public void nextPlayerTurn() {
         if (this.activePlayerIndex == this.players.length - 1) {
             activePlayerIndex = 0;
-        }
-        else {
+        } else {
             activePlayerIndex++;
         }
-        activePlayer = players[activePlayerIndex];
     }
 }
