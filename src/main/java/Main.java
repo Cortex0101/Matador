@@ -4,6 +4,7 @@ import gui_main.GUI;
 
 public class Main {
     public static void main(String[] args) {
-        GameBoard gameBoard = new GameBoard();
+        GameBoard game = new GameBoard();
+        game.play();
     }
 }

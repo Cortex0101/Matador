@@ -16,13 +16,13 @@ public class GameBoard {
         this.gameRunning = true;
         playerController = new PlayerController(players);
         Bank.winnerController = new WinnerGUIController(new WinnerController(players));
-
-
         freeFieldCards = new FreeFieldChanceCardCreator();
         chanceCardsPile = new ChanceCardsPileController(freeFieldCards.getFreeFieldChanceCardControllers());
         chanceCardsPile.addCard(new OutOfJailChanceCardController());
+    }
 
-        while(gameRunning) {
+    public void play() {
+        while(true) {
             if (playerController.getActivePlayer().getCar().isInJail() && !playerController.getActivePlayer().hasGetOutOfJailCard()) {
                 Bank.payBank(playerController.getActivePlayer(), 1);
                 playerController.getActivePlayer().getCar().setInJail(false);
