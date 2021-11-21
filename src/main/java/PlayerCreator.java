@@ -18,7 +18,7 @@ public class PlayerCreator {
         }
 
         for (Player player : players) {
-            GUIInstance.getInstance().addPlayer(player.getCar().getGui_player());
+            GUIInstance.getInstance().addPlayer(player.gui_player);
         }
     }
     public Player[] getPlayers(){
