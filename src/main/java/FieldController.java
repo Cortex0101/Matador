@@ -45,7 +45,7 @@ public class FieldController {
         }
     }
     private void landOnOwnedOwnable(int position, GUI_Street street, Player activePlayer, Player[] players){
-        if(street.getOwnerName().equals(activePlayer.getName())) {
+        if(!street.getOwnerName().equals(activePlayer.getName())) {
             for (Player player : players) {
                 if (player.getName().equals(street.getOwnerName())) {
                     Bank.transferMoney(activePlayer, player, FieldModel.getFieldValue(position));
