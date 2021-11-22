@@ -25,5 +25,4 @@ class FileReaderTest {
         assertArrayEquals(testString2, fileReader.ReadFileText());
 
     }
-
 }

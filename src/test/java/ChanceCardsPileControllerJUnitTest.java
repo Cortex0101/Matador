@@ -6,15 +6,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ChanceCardsPileControllerJUnitTest {
-    GUI gui;
-    int pileSize;
+    final int pileSize = 5;
     ChanceCardsPileController pile;
 
     @BeforeEach
     void setUp() {
-        gui = new GUI();
-        pileSize = 5;
-
         ChanceCardController[] cardControllers = new ChanceCardController[]{
                 new ChanceCardController(new ChanceCardModel("A")),
                 new ChanceCardController(new ChanceCardModel("B")),
