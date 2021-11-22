@@ -1,3 +1,4 @@
+import gui_codebehind.GUI_Center;
 import gui_fields.*;
 
 public class GameBoard {
@@ -19,6 +20,7 @@ public class GameBoard {
         freeFieldCards = new FreeFieldChanceCardCreator();
         chanceCardsPile = new ChanceCardsPileController(freeFieldCards.getFreeFieldChanceCardControllers());
         chanceCardsPile.addCard(new OutOfJailChanceCardController());
+        GUI_Center.chanceCardText = "Chance";
     }
 
     public void play() {
