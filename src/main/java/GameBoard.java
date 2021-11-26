@@ -59,9 +59,4 @@ public class GameBoard {
         GUIInstance.getInstance().setDie(roll);
         return roll;
     }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }
