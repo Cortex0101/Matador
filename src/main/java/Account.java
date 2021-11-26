@@ -45,11 +45,4 @@ public class Account {
     public int getBalance() {
         return balance;
     }
-
-    @Override
-    public String toString() {
-        return "Account{" +
-                "balance=" + balance +
-                '}';
-    }
 }
