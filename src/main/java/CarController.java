@@ -43,9 +43,4 @@ public class CarController {
     public int getCarPosition() {
         return carModel.getPosition();
     }
-
-    private static Color getColor(int i) {
-        Color[] colors = new Color[]{Color.blue, Color.red, Color.yellow, Color.green};
-        return colors[i];
-    }
 }
