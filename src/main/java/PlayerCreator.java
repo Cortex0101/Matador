@@ -16,8 +16,4 @@ public class PlayerCreator {
     public Player[] getPlayers(){
         return players;
     }
-
-    public int getPlayerCount() {
-        return playercount;
-    }
 }

@@ -48,11 +48,4 @@ public class Player {
     public void setHasGetOutOfJailCard(boolean bool) {
         this.getOutOfJailCard = bool;
     }
-
-    @Override
-    public String toString() {
-        return "Player{" +
-                "name='" + name + '\'' +
-                '}';
-    }
 }

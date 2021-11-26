@@ -19,11 +19,4 @@ class PlayerJUnitTest {
         int roll = player.getDie().roll();
         assertTrue(0 < roll && roll < 7);
     }
-
-    @DisplayName("Dice stores last roll correctly")
-    @Test
-    void diceStoresLastRoll() {
-        int lastRoll = player.getDie().roll();
-        assertEquals(lastRoll, player.getDie().getLastRoll());
-    }
 }
