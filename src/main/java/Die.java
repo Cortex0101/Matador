@@ -11,15 +11,4 @@ public class Die {
         value = (int)(Math.random() * MAX_ROLL + 1); // Generates random number between (0 : MAX_ROLL) inclusive
         return value;
     }
-
-    public int getLastRoll() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return "Die{" +
-                "value='" + value + '\'' +
-                '}';
-    }
 }
