@@ -12,7 +12,7 @@ public class Die {
         return value;
     }
 
-    public int getEyeCount() {
+    public int getValue() {
         return value;
     }
 }

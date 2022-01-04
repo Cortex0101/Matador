@@ -7,7 +7,7 @@ public class RaffleCup {
     }
 
     public int getEyes() {
-        return die1.getEyeCount() + die2.getEyeCount();
+        return die1.getValue() + die2.getValue();
     }
 
     public int shake() {
@@ -17,6 +17,6 @@ public class RaffleCup {
     }
 
     public boolean isDouble() {
-        return die1.getEyeCount() == die2.getEyeCount();
+        return die1.getValue() == die2.getValue();
     }
 }
