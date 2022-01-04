@@ -48,7 +48,7 @@ public class GameBoard {
         boolean pay = false;
         boolean chanceCard = false; // can only be true if the player has a getOutOfJailFreeCard. the check for playerController.getActivePlayer().hasGetOutOfJailCard() will be done with the button and be greyed out if false
         boolean roll = false;
-        boolean isDouble = true;
+        boolean isDouble = false;
 
 
         if (playerController.getActivePlayer().getCar().isInJail() && chanceCard) {
@@ -58,11 +58,12 @@ public class GameBoard {
         }
 
         else if (playerController.getActivePlayer().getCar().isInJail() && roll){
-            int rollCount = 0;
             if (isDouble){ playerController.getActivePlayer().getCar().setInJail(false); }
-            else if (!isDouble && rollCount < 3) { rollCount++; }
+            else if (!isDouble && playerController.getActivePlayer().getRollCount() < 3) { playerController.getActivePlayer().addToRollCount();
+                System.out.println(playerController.getActivePlayer().getRollCount());}
             else {
                 Bank.payBank(playerController.getActivePlayer(), 1000);
+                playerController.getActivePlayer().resetRollCount();
                 playerController.getActivePlayer().getCar().setInJail(false);
             }
         }
