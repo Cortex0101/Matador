@@ -1,5 +1,4 @@
 public class Die {
-    private final int MAX_ROLL = 6;
 
     private int value;
 
@@ -8,7 +7,12 @@ public class Die {
     }
 
     public int roll() {
+        final int MAX_ROLL = 6;
         value = (int)(Math.random() * MAX_ROLL + 1); // Generates random number between (0 : MAX_ROLL) inclusive
+        return value;
+    }
+
+    public int getValue() {
         return value;
     }
 }
