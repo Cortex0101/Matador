@@ -25,7 +25,7 @@ public class CarView {
     }
 
     private static Color getColor(int i) {
-        Color[] colors = new Color[]{Color.blue, Color.red, Color.yellow, Color.green};
+        Color[] colors = new Color[]{Color.blue, Color.red, Color.yellow, Color.green, Color.orange, Color.white};
         return colors[i];
     }
 }
