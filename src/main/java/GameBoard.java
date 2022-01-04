@@ -26,6 +26,7 @@ public class GameBoard {
     public void play() {
         while(true) {
             handleInJail();
+            if(!playerController.getActivePlayer().getCar().isInJail())
             playerController.getActivePlayer().getCar().moveCar(rollDie());
 
             if (playerController.getActivePlayer().getCar().hasPassedStart()) {
