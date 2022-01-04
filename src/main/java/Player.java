@@ -37,7 +37,7 @@ public class Player {
 
     public int getRollCount(){ return rollCount;}
 
-    public void addToRollCount() {rollCount++;}
+    public void IncrementCount() {rollCount++;}
 
     public void resetRollCount() {rollCount = 0;}
 

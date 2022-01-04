@@ -26,9 +26,9 @@ public class GameBoard {
     public void play() {
         while(true) {
             handleInJail();
-            if(!playerController.getActivePlayer().getCar().isInJail())
-            playerController.getActivePlayer().getCar().moveCar(rollDie());
-
+            if(!playerController.getActivePlayer().getCar().isInJail()) {
+                playerController.getActivePlayer().getCar().moveCar(rollDie());
+            }
             if (playerController.getActivePlayer().getCar().hasPassedStart()) {
                 Bank.payPlayer(playerController.getActivePlayer(), 2);
             }
@@ -59,7 +59,7 @@ public class GameBoard {
 
         else if (playerController.getActivePlayer().getCar().isInJail() && roll){
             if (isDouble){ playerController.getActivePlayer().getCar().setInJail(false); }
-            else if (!isDouble && playerController.getActivePlayer().getRollCount() < 3) { playerController.getActivePlayer().addToRollCount();
+            else if (!isDouble && playerController.getActivePlayer().getRollCount() < 3) { playerController.getActivePlayer().IncrementCount();
                 System.out.println(playerController.getActivePlayer().getRollCount());}
             else {
                 Bank.payBank(playerController.getActivePlayer(), 1000);
