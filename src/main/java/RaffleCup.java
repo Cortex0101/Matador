@@ -1,6 +1,6 @@
 public class RaffleCup {
-    private Die die1;
-    private Die die2;
+    private final Die die1 = new Die();
+    private final Die die2 = new Die();
 
     public RaffleCup() {
         shake();
