@@ -15,4 +15,8 @@ public class RaffleCup {
         die2.roll();
         return getEyes();
     }
+
+    public boolean isDouble() {
+        return die1.getEyeCount() == die2.getEyeCount();
+    }
 }
