@@ -8,6 +8,7 @@ public class Player {
     private final CarController carController;
     protected GUI_Player gui_player;
     private boolean getOutOfJailCard;
+    private int rollCount;
 
     public Player(String name, int initialCapital) {
         this.name = name;
@@ -33,6 +34,12 @@ public class Player {
     public Account getAccount() {
         return account;
     }
+
+    public int getRollCount(){ return rollCount;}
+
+    public void IncrementCount() {rollCount++;}
+
+    public void resetRollCount() {rollCount = 0;}
 
     /*
         Needed because the GUI does not update the balance automatically. It is called by the Bank class, so dont worry about it.
