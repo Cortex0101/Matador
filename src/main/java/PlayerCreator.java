@@ -8,7 +8,7 @@ public class PlayerCreator {
 
         players = new Player[PLAYER_COUNT];
         for (int i = 0; i < PLAYER_COUNT; i++) {
-            players[i] = new Player(GUIInstance.getInstance().getUserString("What shall player " + (i + 1) + " be called?"), 20);
+            players[i] = new Player(GUIInstance.getInstance().getUserString("What shall player " + (i + 1) + " be called?"), 30000);
             GUIInstance.getInstance().addPlayer(players[i].gui_player);
         }
     }
