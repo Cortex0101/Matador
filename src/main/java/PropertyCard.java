@@ -28,4 +28,8 @@ public class PropertyCard {
     public void setMortgaged(boolean mortgaged) {
         this.mortgaged = mortgaged;
     }
+
+    public int getMortgageValue() {
+        return mortgageValue;
+    }
 }
