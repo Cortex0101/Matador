@@ -1,7 +1,9 @@
 public class StreetCard extends PropertyCard {
-    private int housePrice;
+    private final int housePrice;
     private int houseCount;
-    public StreetCard(String name, int[] rents, int mortgageValue) {
+    public StreetCard(String name, int[] rents, int mortgageValue, int housePrice) {
         super(name, rents, mortgageValue);
+        this.housePrice = housePrice;
+        this.houseCount = 0;
     }
 }
