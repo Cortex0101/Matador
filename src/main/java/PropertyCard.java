@@ -3,12 +3,14 @@ public class PropertyCard {
     private final String name;
     private Player owner;
     private boolean mortgaged;
+    private final int mortgageValue;
 
-    public PropertyCard(int[] rents, String name) {
+    public PropertyCard(String name, int[] rents, int mortgageValue) {
         this.rents = rents;
         this.name = name;
         this.owner = null;
         this.mortgaged = false;
+        this.mortgageValue = mortgageValue;
     }
 
     public Player getOwner() {
