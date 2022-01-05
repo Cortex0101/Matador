@@ -27,7 +27,15 @@ public class GameBoard {
         while(true) {
             handleInJail();
             if(!playerController.getActivePlayer().getCar().isInJail()) {
-                playerController.getActivePlayer().getCar().moveCar(rollDie());
+                do {
+                    playerController.getActivePlayer().getCar().moveCar(rollDie());
+                    playerController.getActivePlayer().IncrementRollCount();
+                    if(playerController.getActivePlayer().getRollCount() == 3){
+                        playerController.getActivePlayer().getCar().setInJail(true);
+                    }
+                }
+                while(playerController.getActivePlayer().getRaffleCup().isDouble() && !playerController.getActivePlayer().getCar().isInJail());
+                playerController.getActivePlayer().resetRollCount();
             }
             if (playerController.getActivePlayer().getCar().hasPassedStart()) {
                 Bank.payPlayer(playerController.getActivePlayer(), 2);
