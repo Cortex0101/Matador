@@ -80,4 +80,19 @@ public class FieldController {
         player.getCar().setInJail(true);
         System.out.println("Jail");
     }
+
+    public void landOnIncomeTax(Player player){
+        boolean option1 = true;
+        boolean option2 = false;
+        if(option1)
+        Bank.payBank(player, 4000);
+        else if(option2){
+            Bank.payBank(player, player.getAccount().getBalance()/10);
+        }
+
+    }
+
+    public void landOnStateTax(Player player){
+        Bank.payBank(player, 2000);
+    }
 }
