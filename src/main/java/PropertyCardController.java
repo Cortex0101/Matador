@@ -12,7 +12,7 @@ public class PropertyCardController {
         if (propertyCard.getOwner() == null) return;
 
         if (isStreet(propertyCard)) {
-            // check if there are houses.
+            // TODO: check if there are houses.
         }
 
         Bank.payPlayer(propertyCard.getOwner(), propertyCard.getMortgageValue());
