@@ -3,7 +3,7 @@ import gui_fields.GUI_Player;
 
 public class Player {
     private final String name;
-    private final Die die;
+    private final RaffleCup raffleCup;
     private final Account account;
     private final CarController carController;
     protected GUI_Player gui_player;
@@ -12,15 +12,15 @@ public class Player {
 
     public Player(String name, int initialCapital) {
         this.name = name;
-        this.die = new Die();
+        this.raffleCup = new RaffleCup();
         this.account = new Account(initialCapital);
         this.gui_player = new GUI_Player(this.name, this.account.getBalance());
         this.carController = new CarController(this.gui_player);
         this.getOutOfJailCard = false;
     }
 
-    public Die getDie() {
-        return die;
+    public RaffleCup getRaffleCup() {
+        return raffleCup;
     }
 
     public CarController getCar() {
@@ -37,7 +37,7 @@ public class Player {
 
     public int getRollCount(){ return rollCount;}
 
-    public void IncrementCount() {rollCount++;}
+    public void IncrementRollCount() {rollCount++;}
 
     public void resetRollCount() {rollCount = 0;}
 
