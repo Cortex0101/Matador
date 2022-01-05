@@ -59,7 +59,7 @@ public class GameBoard {
 
         else if (playerController.getActivePlayer().getCar().isInJail() && roll){
             if (isDouble){ playerController.getActivePlayer().getCar().setInJail(false); }
-            else if (!isDouble && playerController.getActivePlayer().getRollCount() < 3) { playerController.getActivePlayer().IncrementCount();
+            else if (!isDouble && playerController.getActivePlayer().getRollCount() < 3) { playerController.getActivePlayer().IncrementRollCount();
                 System.out.println(playerController.getActivePlayer().getRollCount());}
             else {
                 Bank.payBank(playerController.getActivePlayer(), 1000);
@@ -76,7 +76,7 @@ public class GameBoard {
 
     private int rollDie() {
         GUIInstance.getInstance().getUserButtonPressed(playerController.getActivePlayer().getName() + ", it is your turn.","Roll dice");
-        int roll = playerController.getActivePlayer().getDie().roll();
+        int roll = playerController.getActivePlayer().getRaffleCup().shake();
         GUIInstance.getInstance().setDie(roll);
         return roll;
     }
