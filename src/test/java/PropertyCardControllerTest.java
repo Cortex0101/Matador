@@ -123,4 +123,43 @@ class PropertyCardControllerTest {
 
         assertEquals(initialCapital - ((((StreetCard) propertyCards[0]).getHousePrice() / 2) * 10), john.getAccount().getBalance());
     }
+
+    @DisplayName("Can calculate rent on properties")
+    @Test
+    void rentOnProperties() {
+        final int initialCapital = 30000;
+        Player john = new Player("John", initialCapital);
+
+        propertyCards[0].setOwner(john);
+        assertEquals(50, propertyCardController.getRent((StreetCard) propertyCards[0]));
+
+        propertyCards[1].setOwner(john);
+        assertEquals(100, propertyCardController.getRent((StreetCard) propertyCards[0]));
+
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[0], john));
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[1], john));
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[0], john));
+
+        assertEquals(750, propertyCardController.getRent((StreetCard) propertyCards[0]));
+
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[1], john));
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[0], john));
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[1], john));
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[0], john));
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[1], john));
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[0], john));
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[1], john));
+
+        assertEquals(6000, propertyCardController.getRent((StreetCard) propertyCards[0]));
+
+        propertyCards[20].setOwner(john);
+        assertEquals(700, propertyCardController.getRent((StreetCard) propertyCards[20]));
+
+        propertyCards[21].setOwner(john);
+        assertEquals(1400, propertyCardController.getRent((StreetCard) propertyCards[20]));
+
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[21], john));
+        assertEquals(4000, propertyCardController.getRent((StreetCard) propertyCards[21]));
+
+    }
 }

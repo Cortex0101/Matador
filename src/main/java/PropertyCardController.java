@@ -98,6 +98,25 @@ public class PropertyCardController {
         return true;
     }
 
+    public int getRent(StreetCard streetCard) {
+        if (!allStreetsInGroupOwnedBy(streetCard, streetCard.getOwner())) { // Will fail is street card is owned by no one - TODO: fix, maybe use exception
+            return streetCard.getRents(0);
+        } else if (streetCard.getHouses() == 0) {
+            return streetCard.getRents(0) * 2;
+        } else {
+            return streetCard.getRents(streetCard.getHouses());
+        }
+    }
+
+    public int getRent(ShippingCard shippingCard) {
+        return 0;
+    }
+
+    public int getRent(BreweryCard breweryCard) {
+        return 0;
+    }
+
+
     private boolean isStreet(PropertyCard propertyCard) {
         int index = indexOfCard(propertyCard);
         return index >= 0 && index < 22;
