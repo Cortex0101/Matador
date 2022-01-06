@@ -1,4 +1,4 @@
-public class PropertyCard {
+public class PropertyCard implements Comparable<PropertyCard> {
     private final int[] rents;
     private final String name;
     private Player owner;
@@ -31,5 +31,10 @@ public class PropertyCard {
 
     public int getMortgageValue() {
         return mortgageValue;
+    }
+
+    @Override
+    public int compareTo(PropertyCard propertyCard) {
+        return 0;
     }
 }
