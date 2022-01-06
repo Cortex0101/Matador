@@ -15,6 +15,10 @@ public class StreetCard extends PropertyCard {
         ++this.houseCount;
     }
 
+    public void removeHouse() {
+        --this.houseCount;
+    }
+
     public boolean hasHotel() {
         return getHouses() == 5;
     }
