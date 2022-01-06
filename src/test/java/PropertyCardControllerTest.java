@@ -61,4 +61,40 @@ class PropertyCardControllerTest {
         //assertFalse(propertyCardController.allStreetsInGroupOwnedBy((StreetCard) propertyCards[15], john));
         assertFalse(propertyCardController.allStreetsInGroupOwnedBy((StreetCard) propertyCards[15], bob));
     }
+
+    @DisplayName("Can purchase houses")
+    @Test
+    void purchaseHouse() {
+        final int initialCapital = 30000;
+        Player john = new Player("John", initialCapital);
+        propertyCards[0].setOwner(john);
+        propertyCards[1].setOwner(john);
+
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[1], john));
+        assertEquals(1, ((StreetCard) propertyCards[1]).getHouses());
+        assertEquals(initialCapital - ((StreetCard) propertyCards[1]).getHousePrice(), john.getAccount().getBalance());
+
+        assertFalse(propertyCardController.purchaseHouse((StreetCard) propertyCards[1], john));
+        assertEquals(1, ((StreetCard) propertyCards[1]).getHouses());
+        assertEquals(initialCapital - ((StreetCard) propertyCards[1]).getHousePrice(), john.getAccount().getBalance());
+
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[0], john));
+        assertEquals(1, ((StreetCard) propertyCards[0]).getHouses());
+        assertEquals(initialCapital - ((StreetCard) propertyCards[1]).getHousePrice() - ((StreetCard) propertyCards[0]).getHousePrice(), john.getAccount().getBalance());
+
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[0], john));
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[1], john));
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[1], john));
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[0], john));
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[1], john));
+        assertFalse(propertyCardController.purchaseHouse((StreetCard) propertyCards[1], john));
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[0], john));
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[1], john));
+        assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[0], john));
+
+        assertFalse(propertyCardController.purchaseHouse((StreetCard) propertyCards[0], john));
+        assertFalse(propertyCardController.purchaseHouse((StreetCard) propertyCards[1], john));
+
+        assertFalse(propertyCardController.purchaseHouse((StreetCard) propertyCards[2], john));
+    }
 }

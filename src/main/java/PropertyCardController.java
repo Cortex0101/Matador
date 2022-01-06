@@ -61,6 +61,27 @@ public class PropertyCardController {
         return true;
     }
 
+    private boolean housesWouldBeEvenlyPlacedInGroup(StreetCard streetCard) {
+        PropertyCard[] streetCards = getStreetsInSameGroup(streetCard);
+        for (PropertyCard card : streetCards) {
+            if (((StreetCard) card).getHouses() < streetCard.getHouses()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public boolean purchaseHouse(StreetCard streetCard, Player player) {
+        if (!allStreetsInGroupOwnedBy(streetCard, player)) return false;
+        if (streetCard.hasHotel()) return false;
+        if (!housesWouldBeEvenlyPlacedInGroup(streetCard)) return false;
+
+        Bank.payBank(player, streetCard.getHousePrice()); // If the player does not have money, he will loose the game when trying to purchase - maybe it shoulden't be an option?
+        streetCard.addHouse();
+        return true;
+    }
+
     private boolean isStreet(PropertyCard propertyCard) {
         int index = indexOfCard(propertyCard);
         return index >= 0 && index < 22;

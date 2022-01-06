@@ -11,8 +11,12 @@ public class StreetCard extends PropertyCard {
         return houseCount;
     }
 
-    public void setHouses(int houses) {
-        this.houseCount = houses;
+    public void addHouse() {
+        ++this.houseCount;
+    }
+
+    public boolean hasHotel() {
+        return getHouses() == 5;
     }
 
     public int getHousePrice() {
