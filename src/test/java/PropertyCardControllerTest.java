@@ -62,9 +62,9 @@ class PropertyCardControllerTest {
         assertFalse(propertyCardController.allStreetsInGroupOwnedBy((StreetCard) propertyCards[15], bob));
     }
 
-    @DisplayName("Can purchase houses")
+    @DisplayName("Can purchase houses and sell")
     @Test
-    void purchaseHouse() {
+    void purchaseAndSellHouses() {
         final int initialCapital = 30000;
         Player john = new Player("John", initialCapital);
         propertyCards[0].setOwner(john);
@@ -96,5 +96,31 @@ class PropertyCardControllerTest {
         assertFalse(propertyCardController.purchaseHouse((StreetCard) propertyCards[1], john));
 
         assertFalse(propertyCardController.purchaseHouse((StreetCard) propertyCards[2], john));
+
+
+        int capitalAfterBuying = john.getAccount().getBalance();
+        // Sell
+        assertTrue(propertyCardController.sellHouse((StreetCard) propertyCards[0], john));
+        assertEquals(4, ((StreetCard) propertyCards[0]).getHouses());
+        assertEquals(capitalAfterBuying + (((StreetCard) propertyCards[0]).getHousePrice() / 2), john.getAccount().getBalance());
+
+        assertFalse(propertyCardController.sellHouse((StreetCard) propertyCards[0], john));
+
+        assertTrue(propertyCardController.sellHouse((StreetCard) propertyCards[1], john));
+        assertEquals(4, ((StreetCard) propertyCards[1]).getHouses());
+        assertEquals(capitalAfterBuying + (((StreetCard) propertyCards[0]).getHousePrice() / 2) + (((StreetCard) propertyCards[1]).getHousePrice() / 2), john.getAccount().getBalance());
+
+        assertTrue(propertyCardController.sellHouse((StreetCard) propertyCards[0], john));
+        assertTrue(propertyCardController.sellHouse((StreetCard) propertyCards[1], john));
+        assertTrue(propertyCardController.sellHouse((StreetCard) propertyCards[0], john));
+        assertTrue(propertyCardController.sellHouse((StreetCard) propertyCards[1], john));
+        assertTrue(propertyCardController.sellHouse((StreetCard) propertyCards[0], john));
+        assertTrue(propertyCardController.sellHouse((StreetCard) propertyCards[1], john));
+        assertTrue(propertyCardController.sellHouse((StreetCard) propertyCards[0], john));
+        assertTrue(propertyCardController.sellHouse((StreetCard) propertyCards[1], john));
+        assertFalse(propertyCardController.sellHouse((StreetCard) propertyCards[0], john));
+        assertFalse(propertyCardController.sellHouse((StreetCard) propertyCards[1], john));
+
+        assertEquals(initialCapital - ((((StreetCard) propertyCards[0]).getHousePrice() / 2) * 10), john.getAccount().getBalance());
     }
 }
