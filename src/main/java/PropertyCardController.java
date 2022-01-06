@@ -109,11 +109,28 @@ public class PropertyCardController {
     }
 
     public int getRent(ShippingCard shippingCard) {
+        int shipsOwnedByOwner = amountOfShipsOwnedByPlayer(shippingCard.getOwner()); // will fail if no owner...
+        if (shipsOwnedByOwner > 0) {
+            return shippingCard.getRents(shipsOwnedByOwner - 1);
+        }
         return 0;
-    }
+     }
 
     public int getRent(BreweryCard breweryCard) {
         return 0;
+    }
+
+    private int amountOfShipsOwnedByPlayer(Player player) {
+        int shipsOwnedByPlayer = 0;
+        for (int i = 22; i < 26; i++) {
+            Player owner = propertyCards[i].getOwner();
+            if (owner != null) {
+                if (owner.equals(player)) {
+                    ++shipsOwnedByPlayer;
+                }
+            }
+        }
+        return shipsOwnedByPlayer;
     }
 
 

@@ -160,6 +160,32 @@ class PropertyCardControllerTest {
 
         assertTrue(propertyCardController.purchaseHouse((StreetCard) propertyCards[21], john));
         assertEquals(4000, propertyCardController.getRent((StreetCard) propertyCards[21]));
+    }
 
+    @DisplayName("Can calculate rent on ships")
+    @Test
+    void rentOnShips() {
+        final int initialCapital = 30000;
+        Player john = new Player("John", initialCapital);
+
+        propertyCards[22].setOwner(john);
+        assertEquals(500, propertyCardController.getRent((ShippingCard) propertyCards[22]));
+
+        propertyCards[23].setOwner(john);
+        assertEquals(1000, propertyCardController.getRent((ShippingCard) propertyCards[22]));
+        assertEquals(1000, propertyCardController.getRent((ShippingCard) propertyCards[23]));
+
+        propertyCards[25].setOwner(john);
+        assertEquals(2000, propertyCardController.getRent((ShippingCard) propertyCards[22]));
+        assertEquals(2000, propertyCardController.getRent((ShippingCard) propertyCards[23]));
+        assertEquals(2000, propertyCardController.getRent((ShippingCard) propertyCards[25]));
+
+        assertEquals(0, propertyCardController.getRent((ShippingCard) propertyCards[24]));
+
+        propertyCards[24].setOwner(john);
+        assertEquals(4000, propertyCardController.getRent((ShippingCard) propertyCards[22]));
+        assertEquals(4000, propertyCardController.getRent((ShippingCard) propertyCards[23]));
+        assertEquals(4000, propertyCardController.getRent((ShippingCard) propertyCards[24]));
+        assertEquals(4000, propertyCardController.getRent((ShippingCard) propertyCards[25]));
     }
 }
