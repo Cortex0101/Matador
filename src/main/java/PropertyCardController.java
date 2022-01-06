@@ -19,7 +19,7 @@ public class PropertyCardController {
         propertyCard.setMortgaged(true);
     }
 
-    public int fieldsInGroup(PropertyCard propertyCard) {
+    int fieldsInGroup(PropertyCard propertyCard) {
         if (isStreet(propertyCard)) {
             int index = indexOfCard(propertyCard);
             return switch (index) {
@@ -34,27 +34,31 @@ public class PropertyCardController {
         return -1; // error;
     }
 
-    public boolean allStreetsInGroupOwnedBy(StreetCard streetCard, Player player) {
+    public PropertyCard[] getStreetsInSameGroup(StreetCard streetCard) {
+        int amountOfFieldsInGroup = fieldsInGroup(streetCard);
+        int cardIndex = indexOfCard(streetCard);
+        int indexOfFirstCardInGroup = switch (cardIndex) {
+            case 0, 1 -> 0;
+            case 20, 21 -> 20;
+            default -> cardIndex - ((cardIndex - 2) % 3);
+        };
+
+        return Arrays.copyOfRange(propertyCards, indexOfFirstCardInGroup, indexOfFirstCardInGroup + amountOfFieldsInGroup);
+    }
+
+    boolean allStreetsInGroupOwnedBy(StreetCard streetCard, Player player) {
         Player owner = streetCard.getOwner();
         if (owner == null) return false;
         if (!streetCard.getOwner().equals(player)) return false;
 
-        int amountOfFieldsInGroup = fieldsInGroup(streetCard);
-        int cardIndex = indexOfCard(streetCard);
-        int indexOfFirstCardInGroup = -1;
-        switch (cardIndex) {
-            case 0: case 1: indexOfFirstCardInGroup = 0; break;
-            case 20: case 21: indexOfFirstCardInGroup = 20; break;
-            default: indexOfFirstCardInGroup = cardIndex - ((cardIndex - 2) % 3);
-        }
-
-        boolean allStreetsOwnedByPlayer = true;
-        for (int i = 0; i < amountOfFieldsInGroup; i++) {
-            if (!propertyCards[indexOfFirstCardInGroup + i].getOwner().equals(player)) {
-                allStreetsOwnedByPlayer = false;
+        for (PropertyCard propertyCard : getStreetsInSameGroup(streetCard)) {
+            if (propertyCard.getOwner() == null) {
+                return false;
+            } else if (!propertyCard.getOwner().equals(owner)) {
+                return false;
             }
         }
-        return allStreetsOwnedByPlayer;
+        return true;
     }
 
     private boolean isStreet(PropertyCard propertyCard) {
