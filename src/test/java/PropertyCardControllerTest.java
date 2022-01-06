@@ -188,4 +188,20 @@ class PropertyCardControllerTest {
         assertEquals(4000, propertyCardController.getRent((ShippingCard) propertyCards[24]));
         assertEquals(4000, propertyCardController.getRent((ShippingCard) propertyCards[25]));
     }
+
+    @DisplayName("Can calculate rent on breweries")
+    @Test
+    void rentOnBreweries() {
+        final int initialCapital = 30000;
+        Player john = new Player("John", initialCapital);
+
+        int diceRoll = 9;
+
+        propertyCards[26].setOwner(john);
+        assertEquals(100 * diceRoll, propertyCardController.getRent((BreweryCard) propertyCards[26]) * diceRoll);
+
+        propertyCards[27].setOwner(john);
+        assertEquals(200 * diceRoll, propertyCardController.getRent((BreweryCard) propertyCards[27]) * diceRoll);
+        assertEquals(200 * diceRoll, propertyCardController.getRent((BreweryCard) propertyCards[26]) * diceRoll);
+    }
 }

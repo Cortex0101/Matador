@@ -116,8 +116,19 @@ public class PropertyCardController {
         return 0;
      }
 
+     // Multiplication by the dice roll will be done elsewhere (where the dice is... maybe in game board?)
     public int getRent(BreweryCard breweryCard) {
-        return 0;
+        if (ownsBothBreweries(breweryCard.getOwner())) {
+            return breweryCard.getRents(1);
+        }
+        return breweryCard.getRents(0);
+    }
+
+    private boolean ownsBothBreweries(Player player) {
+        if (propertyCards[26].getOwner() != null && propertyCards[27].getOwner() != null) {
+            return propertyCards[26].getOwner().equals(player) && propertyCards[27].getOwner().equals(player);
+        }
+        return false;
     }
 
     private int amountOfShipsOwnedByPlayer(Player player) {
