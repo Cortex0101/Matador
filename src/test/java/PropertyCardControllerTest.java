@@ -30,4 +30,35 @@ class PropertyCardControllerTest {
         expected = propertyCardController.fieldsInGroup(propertyCards[26]);
         assertEquals(expected, 2);
     }
+
+    @DisplayName("Can detect owning all streets")
+    @Test
+    void ownAllStreets() {
+        Player john = new Player("John", 30000);
+        Player bob = new Player("Bob", 30000);
+
+        propertyCards[0].setOwner(john);
+        propertyCards[1].setOwner(john);
+        assertTrue(propertyCardController.allStreetsInGroupOwnedBy((StreetCard) propertyCards[1], john));
+        assertFalse(propertyCardController.allStreetsInGroupOwnedBy((StreetCard) propertyCards[1], bob));
+
+        propertyCards[8].setOwner(john);
+        propertyCards[9].setOwner(john);
+        propertyCards[10].setOwner(john);
+        assertTrue(propertyCardController.allStreetsInGroupOwnedBy((StreetCard) propertyCards[10], john));
+        assertFalse(propertyCardController.allStreetsInGroupOwnedBy((StreetCard) propertyCards[10], bob));
+
+        propertyCards[11].setOwner(john);
+        propertyCards[12].setOwner(bob);
+        propertyCards[13].setOwner(john);
+        assertFalse(propertyCardController.allStreetsInGroupOwnedBy((StreetCard) propertyCards[11], john));
+        assertFalse(propertyCardController.allStreetsInGroupOwnedBy((StreetCard) propertyCards[13], bob));
+
+        propertyCards[20].setOwner(bob);
+        propertyCards[21].setOwner(bob);
+        assertTrue(propertyCardController.allStreetsInGroupOwnedBy((StreetCard) propertyCards[20], bob));
+
+        //assertFalse(propertyCardController.allStreetsInGroupOwnedBy((StreetCard) propertyCards[15], john));
+        assertFalse(propertyCardController.allStreetsInGroupOwnedBy((StreetCard) propertyCards[15], bob));
+    }
 }

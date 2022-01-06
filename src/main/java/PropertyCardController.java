@@ -34,12 +34,28 @@ public class PropertyCardController {
         return -1; // error;
     }
 
-    /*
     public boolean allStreetsInGroupOwnedBy(StreetCard streetCard, Player player) {
-        int index = Arrays.binarySearch(propertyCards, streetCard);
+        Player owner = streetCard.getOwner();
+        if (owner == null) return false;
+        if (!streetCard.getOwner().equals(player)) return false;
 
+        int amountOfFieldsInGroup = fieldsInGroup(streetCard);
+        int cardIndex = indexOfCard(streetCard);
+        int indexOfFirstCardInGroup = -1;
+        switch (cardIndex) {
+            case 0: case 1: indexOfFirstCardInGroup = 0; break;
+            case 20: case 21: indexOfFirstCardInGroup = 20; break;
+            default: indexOfFirstCardInGroup = cardIndex - ((cardIndex - 2) % 3);
+        }
+
+        boolean allStreetsOwnedByPlayer = true;
+        for (int i = 0; i < amountOfFieldsInGroup; i++) {
+            if (!propertyCards[indexOfFirstCardInGroup + i].getOwner().equals(player)) {
+                allStreetsOwnedByPlayer = false;
+            }
+        }
+        return allStreetsOwnedByPlayer;
     }
-     */
 
     private boolean isStreet(PropertyCard propertyCard) {
         int index = indexOfCard(propertyCard);
