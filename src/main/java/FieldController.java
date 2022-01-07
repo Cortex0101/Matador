@@ -4,9 +4,11 @@ import gui_fields.GUI_Street;
 
 public class FieldController {
     private FieldModel fieldModel;
+    private PropertyCardController propertyCardController;
 
-    public FieldController(){
+    public FieldController(PropertyCardController propertyCardController){
         this.fieldModel = new FieldModel();
+        this.propertyCardController = propertyCardController;
     }
 
     public void landOnField(int position,GUI_Field field, ChanceCardsPileController chanceCardsPileController, Player player, Player[] players){
@@ -20,7 +22,6 @@ public class FieldController {
             case 38 -> landOnStateTax(player);
             default -> landOnFreeSpot();
         }
-
     }
 
     public void landOnProperty(int position, GUI_Field field, Player activePlayer, Player[] players, String propertyType){
@@ -28,9 +29,7 @@ public class FieldController {
             GUI_Street street = (GUI_Street) field;
             if (street.getOwnerName() != null) {
                 landOnOwnedProperty(position,street, activePlayer, players);
-            }
-            else
-            {
+            } else {
                 landOnUnownedProperty(position,street, activePlayer);
             }
         }
