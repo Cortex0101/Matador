@@ -26,18 +26,18 @@ public class FieldController {
 
     public void landOnProperty(int position, GUI_Field field, Player activePlayer, Player[] players, String propertyType){
         if (FieldModel.getFieldPrice(position)>0){
-            GUI_Street street = (GUI_Street) field;
-            if (street.getOwnerName() != null) {
-                landOnOwnedProperty(position,street, activePlayer, players);
+            GUI_Ownable ownableField = (GUI_Ownable) field;
+            if (ownableField.getOwnerName() != null) {
+                landOnOwnedProperty(position, ownableField, activePlayer, players);
             } else {
-                landOnUnownedProperty(position,street, activePlayer);
+                landOnUnownedProperty(position, ownableField, activePlayer);
             }
         }
     }
 
-    private void landOnUnownedProperty(int position, GUI_Street street, Player player){
+    private void landOnUnownedProperty(int position, GUI_Ownable ownable, Player player){
         Bank.payBank(player, FieldModel.getFieldPrice(position));
-        street.setOwnerName(player.getName());
+        ownable.setOwnerName(player.getName());
         GUI_Ownable gui_ownable = (GUI_Ownable) GUIInstance.getInstance().getFields()[position];
         gui_ownable.setOwnerName(player.getName());
         gui_ownable.setBorder(player.getCar().getCarColor());
@@ -46,10 +46,11 @@ public class FieldController {
             System.out.println("game over");
         }
     }
-    private void landOnOwnedProperty(int position, GUI_Street street, Player activePlayer, Player[] players){
-        if(!street.getOwnerName().equals(activePlayer.getName())) {
+
+    private void landOnOwnedProperty(int position, GUI_Ownable ownable, Player activePlayer, Player[] players){
+        if(!ownable.getOwnerName().equals(activePlayer.getName())) {
             for (Player player : players) {
-                if (player.getName().equals(street.getOwnerName())) {
+                if (player.getName().equals(ownable.getOwnerName())) {
                     Bank.transferMoney(activePlayer, player, FieldModel.getFieldPrice(position));
                     System.out.println("Owned Space: " + activePlayer.getName() + " payed and now has " + activePlayer.getAccount().getBalance() + " and player " + player.getName() + " has " + player.getAccount().getBalance());
                     if (!activePlayer.getAccount().withdraw(0)) {
