@@ -11,29 +11,32 @@ public class FieldController {
 
     public void landOnField(int position,GUI_Field field, ChanceCardsPileController chanceCardsPileController, Player player, Player[] players){
         switch (position) {
-            case 1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23 -> landOnOwnable(position,field, player, players);
-            case 3, 9, 15, 21 -> landOnChance(chanceCardsPileController, players, player);
-            case 0, 6, 12 -> landOnFreeSpot();
-            case 18 -> landOnGoToJail(player);
+            case 1, 3, 6, 8, 9, 10, 11, 13, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29, 31, 32, 34, 37, 39 -> landOnProperty(position,field, player, players, "Property");
+            case 5, 15, 25, 35 -> landOnProperty(position,field, player, players, "Shipping");
+            case 12, 28 -> landOnProperty(position,field, player, players, "Brewery");
+            case 2, 7, 17, 22, 33, 36 -> landOnChance(chanceCardsPileController, players, player);
+            case 30 -> landOnGoToJail(player);
+            case 4 -> landOnIncomeTax(player);
+            case 38 -> landOnStateTax(player);
             default -> landOnFreeSpot();
         }
 
     }
 
-    public void landOnOwnable(int position, GUI_Field field, Player activePlayer, Player[] players){
+    public void landOnProperty(int position, GUI_Field field, Player activePlayer, Player[] players, String propertyType){
         if (FieldModel.getFieldValue(position)>0){
             GUI_Street street = (GUI_Street) field;
             if (street.getOwnerName() != null) {
-                landOnOwnedOwnable(position,street, activePlayer, players);
+                landOnOwnedProperty(position,street, activePlayer, players);
             }
             else
             {
-                landOnUnownedOwnable(position,street, activePlayer);
+                landOnUnownedProperty(position,street, activePlayer);
             }
         }
     }
 
-    private void landOnUnownedOwnable(int position, GUI_Street street, Player player){
+    private void landOnUnownedProperty(int position, GUI_Street street, Player player){
         Bank.payBank(player, FieldModel.getFieldValue(position));
         street.setOwnerName(player.getName());
         GUI_Ownable gui_ownable = (GUI_Ownable) GUIInstance.getInstance().getFields()[position];
@@ -44,7 +47,7 @@ public class FieldController {
             System.out.println("game over");
         }
     }
-    private void landOnOwnedOwnable(int position, GUI_Street street, Player activePlayer, Player[] players){
+    private void landOnOwnedProperty(int position, GUI_Street street, Player activePlayer, Player[] players){
         if(!street.getOwnerName().equals(activePlayer.getName())) {
             for (Player player : players) {
                 if (player.getName().equals(street.getOwnerName())) {
