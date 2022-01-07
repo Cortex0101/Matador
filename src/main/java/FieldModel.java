@@ -6,38 +6,54 @@ public class FieldModel {
     private final GUI_Field[] fields;
 
     public FieldModel(){
-        this.fields = new GUI_Field[24];
+        this.fields = new GUI_Field[40];
         String[][] fieldText = new String[fields.length][5];
         FileReader fileReader = new FileReader();
         int i = 0;
-        for (int j = 0; j < 24; j++) {
+        for (int j = 0; j < 40; j++) {
             fieldText[j] = fileReader.ReadFileText();
         }
 
         fields[i++] = new GUI_Start(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2],Color.decode(fieldText[i-1][4]), Color.BLACK);
-        fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
+        fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.LIGHT_GRAY);
+        fields[i++] = new GUI_Chance(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], Color.decode(fieldText[i-1][4]), Color.BLACK);
+        fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.LIGHT_GRAY);
+        fields[i++] = new GUI_Tax(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], Color.decode(fieldText[i-1][4]), Color.BLACK);
+        fields[i++] = new GUI_Shipping("default",fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.LIGHT_GRAY);
         fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
         fields[i++] = new GUI_Chance(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], Color.decode(fieldText[i-1][4]), Color.BLACK);
         fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
         fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
-        fields[i++] = new GUI_Jail("default", fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], Color.decode(fieldText[i-1][4]), Color.BLACK);
+        fields[i++] = new GUI_Jail("default", fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], Color.decode(fieldText[i-1][4]), Color.GRAY);
         fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
+        fields[i++] = new GUI_Brewery("default", fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
+        fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
+        fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
+        fields[i++] = new GUI_Shipping("default", fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.LIGHT_GRAY);
         fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
         fields[i++] = new GUI_Chance(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], Color.decode(fieldText[i-1][4]), Color.BLACK);
         fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
         fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
         fields[i++] = new GUI_Refuge("default", fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], Color.decode(fieldText[i-1][4]), Color.BLACK);
         fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
-        fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
         fields[i++] = new GUI_Chance(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], Color.decode(fieldText[i-1][4]), Color.BLACK);
         fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
         fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
-        fields[i++] = new GUI_Jail("default", fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], Color.decode(fieldText[i-1][4]), Color.BLACK);
+        fields[i++] = new GUI_Shipping("default", fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.LIGHT_GRAY);
+        fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
+        fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
+        fields[i++] = new GUI_Brewery("default", fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
+        fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
+        fields[i++] = new GUI_Jail("default", fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], Color.decode(fieldText[i-1][4]), Color.LIGHT_GRAY);
         fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
         fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
         fields[i++] = new GUI_Chance(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], Color.decode(fieldText[i-1][4]), Color.BLACK);
         fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.BLACK);
-        fields[i] = new GUI_Street(fieldText[i][0], fieldText[i][1], fieldText[i][2], fieldText[i][3], Color.decode(fieldText[i][4]), Color.BLACK);
+        fields[i++] = new GUI_Shipping("default", fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.LIGHT_GRAY);
+        fields[i++] = new GUI_Chance(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], Color.decode(fieldText[i-1][4]), Color.BLACK);
+        fields[i++] = new GUI_Street(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], fieldText[i-1][3], Color.decode(fieldText[i-1][4]), Color.LIGHT_GRAY);
+        fields[i++] = new GUI_Tax(fieldText[i-1][0], fieldText[i-1][1], fieldText[i-1][2], Color.decode(fieldText[i-1][4]), Color.BLACK);
+        fields[i] = new GUI_Street(fieldText[i][0], fieldText[i][1], fieldText[i][2], fieldText[i][3], Color.decode(fieldText[i][4]), Color.LIGHT_GRAY);
     }
     public GUI_Field[] FieldInfo() {
         return fields;
@@ -55,3 +71,4 @@ public class FieldModel {
         };
     }
 }
+

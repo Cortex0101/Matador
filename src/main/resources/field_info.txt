@@ -1,145 +1,242 @@
-Title: GO
-Subtext: 2$
+Title: START
+Subtext: 4000$
+Description: Every time you pass or land on this field, you gain 4000$
+Rent: 0
+Color: #A0292B
+
+Title: Rødovrevej 1
+Subtext: 1200$
 Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
-Rent: -1
-Color: #ffffff
-
-Title: BURGER JOINT
-Subtext: 1$
-Description: Big Mac on sale
-Rent: 1
-Color: #7f5822
-
-Title: PIZZA HOUSE
-Subtext: 1$
-Description: All you can eat pizza for the small price of 1 dollar
-Rent: 1
-Color: #7f5822
+Rent: 50
+Color: #01375D
 
 Title: ?
-Subtext: Chance
-Description: Chance
-Rent: -1
-Color: #ffffff
+Subtext: Chance card
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 0
+Color: #4E7613
 
-Title: CANDY STORE
-Subtext: 1$
-Description: No amount of candy is enough
-Rent: 1
-Color: #2acaea
+Title: Hvidovrevej 1
+Subtext: 1200$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 50
+Color: #01375D
 
-Title: ICE CREAM PARLOR
-Subtext: 1$
-Description: So much Ice Cream, yet no time to enjoy it all
-Rent: 1
-Color: #2acaea
+Title: Income Tax
+Subtext: 4000$ or 10%
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 4000
+Color: #6F9695
 
-Title: Jail
-Subtext: JAIL
-Description: Here you can visit the naughty boys and girls
-Rent: -1
-Color: #ffffff
+Title: Helsingør - Helsingborg 2
+Subtext: 4000$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 500
+Color: #033059
 
-Title: MUSEUM
-Subtext: 2$
-Description: Learn some stuff, or take a nap
-Rent: 2
-Color: #ffb6ff
-
-Title: LIBRARY
-Subtext: 2$
-Description: Quiet! This is a public library not a concert!
-Rent: 2
-Color: #ffb6ff
+Title: Roskildevej 3
+Subtext: 2000$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 100
+Color: #9B3618
 
 Title: ?
-Subtext: Chance
-Description: Chance
-Rent: -1
-Color: #ffffff
+Subtext: Chance card
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 0
+Color: #4E7613
 
-Title: SKATE PARK
-Subtext: 2$
-Description: Safety first, Helmet and kneecaps. Now do a backflip
-Rent: 2
-Color: #d26742
+Title: Valby Langgade 3
+Subtext: 2000$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 100
+Color: #9B3618
 
-Title: SWIMMING POOL
-Subtext: 2$
-Description: CAREFUL! the floor is wet but do remember to try our fries.
-Rent: 2
-Color: #d26742
+Title: Allégade 3
+Subtext: 2400$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 150
+Color: #9B3618
 
-Title: PARKING SPOT
-Subtext: Parking
-Description: Free Parking
-Rent: -1
-Color: #ffffff
+Title: JAIL
+Subtext: Visiting jail
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 0$
+Color: #150C07
 
-Title: GAME ARCADE
-Subtext: 3$
-Description: Welcome to the game arcade, we got every game under the sun. If you can beat our pacman record you get a free hotdog.
-Rent: 3
-Color: #f6546a
+Title: Frederiksberg Allé 4
+Subtext: 2800$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 200
+Color: #806D03
 
-Title: MOVIE THEATER
-Subtext: 3$
-Description: Sorry you have to be this tall to see this movie.
-Rent: 3
-Color: #f6546a
+Title: Squash 5
+Subtext: 3000$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 100
+Color: #96201E
+
+Title: Bülowsvej 4
+Subtext: 2800$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 200
+Color: #806D03
+
+Title: Gl. Kongevej 4
+Subtext: 3200$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 250
+Color: #806D03
+
+Title: Mols-linien 2
+Subtext: 4000$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 500
+Color: #033059
+
+Title: Bernstorfsvej 6
+Subtext: 3600$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 300
+Color: #696A5C
 
 Title: ?
-Subtext: Chance
-Description: Chance
-Rent: -1
-Color: #ffffff
+Subtext: Chance card
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 0
+Color: #4E7613
 
-Title: TOY STORE
-Subtext: 3$
-Description: We have recently restocked on pokemon boosters.
-Rent: 3
-Color: #d8d8e6
+Title: Hellerupvej 6
+Subtext: 3600$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 300
+Color: #696A5C
 
-Title: PET STORE
-Subtext: 3$
-Description: You can try to have a snake around your neck, but you have to calm down.
-Rent: 3
-Color: #d8d8e6
+Title: Strandvejen 6
+Subtext: 4000$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 350
+Color: #696A5C
+
+Title: FREE PARKING
+Subtext: Free parking
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 0
+Color: #6F9695
+
+Title: Trianglen 7
+Subtext: 4400$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 350
+Color: #A02D26
+
+Title: ?
+Subtext: Chance card
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 0
+Color: #4E7613
+
+Title: Østerbrogade 7
+Subtext: 4400$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 350
+Color: #A02D26
+
+Title: Grønningen 7
+Subtext: 4800$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 400
+Color: #A02D26
+
+Title: Gedser - Rostock 2
+Subtext: 4000$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 500
+Color: #033059
+
+Title: Bredgade 8
+Subtext: 5200$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 450
+Color: #B49F8B
+
+Title: Kgs. Nytorv 8
+Subtext: 5200$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 450
+Color: #B49F8B
+
+Title: Coca Cola 9
+Subtext: 3000$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 100
+Color: #922121
+
+Title: Østergade 8
+Subtext: 5600$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 500
+Color: #B49F8B
 
 Title: GO TO JAIL
-Subtext: GO TO JAIL
-Description: Go to jail
-Rent: -1
-Color: #ffffff
+Subtext: Go to jail
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 0
+Color: #0D0908
 
-Title: BOWLING ALLEY
-Subtext: 4$
-Description: Right in the gutter, every single time...
-Rent: 4
-Color: #97c783
+Title: Amagertorv 10
+Subtext: 6000$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 550
+Color: #B0840A
 
-Title: THE ZOO
-Subtext: 4$
-Description: Attention Attention, We are closing the zoo in 1 hour.
-Rent: 4
-Color: #97c783
+Title: Vimmelskaftet 10
+Subtext: 6000$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 550
+Color: #B0840A
 
 Title: ?
-Subtext: Chance
-Description: Chance
-Rent: -1
-Color: #ffffff
+Subtext: Chance card
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 0
+Color: #4E7613
 
-Title: PARK PLACE
-Subtext: 5$
-Description: Sorry, no children allowed
-Rent: 5
-Color: #3481ED
+Title: Nygade 10
+Subtext: 6400$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 600
+Color: #B0840A
 
-Title: BOARDWALK
-Subtext: 5$
-Description: The Red Dragon roller coaster is finally done, come and try if you dare!
-Rent: 5
-Color: #3481ED
+Title: Rødby - Puttgarden 2
+Subtext: 4000$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 500
+Color: #033059
+
+Title: ?
+Subtext: Chance card
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 0
+Color: #4E7613
+
+Title: Frederiksberggade 11
+Subtext: 7000$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 700
+Color: #331842
+
+Title: State Tax
+Subtext: 2000$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 2000
+Color: #6F9695
+
+Title: Rådhuspladsen 11
+Subtext: 8000$
+Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
+Rent: 1000
+Color: #331842
 
 END OF DOCUMENT
+
