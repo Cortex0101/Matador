@@ -13,7 +13,7 @@ public class FieldController {
 
     public void landOnField(int position,GUI_Field field, ChanceCardsPileController chanceCardsPileController, Player player, Player[] players){
         switch (position) {
-            case 1, 3, 6, 8, 9, 10, 11, 13, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29, 31, 32, 34, 37, 39 -> landOnProperty(position,field, player, players, "Property");
+            case 1, 3, 6, 8, 9, 11, 13, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29, 31, 32, 34, 37, 39 -> landOnProperty(position,field, player, players, "Property");
             case 5, 15, 25, 35 -> landOnProperty(position,field, player, players, "Shipping");
             case 12, 28 -> landOnProperty(position,field, player, players, "Brewery");
             case 2, 7, 17, 22, 33, 36 -> landOnChance(chanceCardsPileController, players, player);
