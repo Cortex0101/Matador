@@ -4,14 +4,16 @@ import gui_fields.GUI_Street;
 
 public class FieldController {
     private FieldModel fieldModel;
+    private PropertyCardController propertyCardController;
 
-    public FieldController(){
+    public FieldController(PropertyCardController propertyCardController){
         this.fieldModel = new FieldModel();
+        this.propertyCardController = propertyCardController;
     }
 
     public void landOnField(int position,GUI_Field field, ChanceCardsPileController chanceCardsPileController, Player player, Player[] players){
         switch (position) {
-            case 1, 3, 6, 8, 9, 10, 11, 13, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29, 31, 32, 34, 37, 39 -> landOnProperty(position,field, player, players, "Property");
+            case 1, 3, 6, 8, 9, 11, 13, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29, 31, 32, 34, 37, 39 -> landOnProperty(position,field, player, players, "Property");
             case 5, 15, 25, 35 -> landOnProperty(position,field, player, players, "Shipping");
             case 12, 28 -> landOnProperty(position,field, player, players, "Brewery");
             case 2, 7, 17, 22, 33, 36 -> landOnChance(chanceCardsPileController, players, player);
@@ -20,25 +22,22 @@ public class FieldController {
             case 38 -> landOnStateTax(player);
             default -> landOnFreeSpot();
         }
-
     }
 
     public void landOnProperty(int position, GUI_Field field, Player activePlayer, Player[] players, String propertyType){
-        if (FieldModel.getFieldValue(position)>0){
-            GUI_Street street = (GUI_Street) field;
-            if (street.getOwnerName() != null) {
-                landOnOwnedProperty(position,street, activePlayer, players);
-            }
-            else
-            {
-                landOnUnownedProperty(position,street, activePlayer);
+        if (FieldModel.getFieldPrice(position)>0){
+            GUI_Ownable ownableField = (GUI_Ownable) field;
+            if (ownableField.getOwnerName() != null) {
+                landOnOwnedProperty(position, ownableField, activePlayer, players);
+            } else {
+                landOnUnownedProperty(position, ownableField, activePlayer);
             }
         }
     }
 
-    private void landOnUnownedProperty(int position, GUI_Street street, Player player){
-        Bank.payBank(player, FieldModel.getFieldValue(position));
-        street.setOwnerName(player.getName());
+    private void landOnUnownedProperty(int position, GUI_Ownable ownable, Player player){
+        Bank.payBank(player, FieldModel.getFieldPrice(position));
+        ownable.setOwnerName(player.getName());
         GUI_Ownable gui_ownable = (GUI_Ownable) GUIInstance.getInstance().getFields()[position];
         gui_ownable.setOwnerName(player.getName());
         gui_ownable.setBorder(player.getCar().getCarColor());
@@ -47,11 +46,12 @@ public class FieldController {
             System.out.println("game over");
         }
     }
-    private void landOnOwnedProperty(int position, GUI_Street street, Player activePlayer, Player[] players){
-        if(!street.getOwnerName().equals(activePlayer.getName())) {
+
+    private void landOnOwnedProperty(int position, GUI_Ownable ownable, Player activePlayer, Player[] players){
+        if(!ownable.getOwnerName().equals(activePlayer.getName())) {
             for (Player player : players) {
-                if (player.getName().equals(street.getOwnerName())) {
-                    Bank.transferMoney(activePlayer, player, FieldModel.getFieldValue(position));
+                if (player.getName().equals(ownable.getOwnerName())) {
+                    Bank.transferMoney(activePlayer, player, FieldModel.getFieldPrice(position)); // TOD0: Change to use PropertyCardController.getRent()
                     System.out.println("Owned Space: " + activePlayer.getName() + " payed and now has " + activePlayer.getAccount().getBalance() + " and player " + player.getName() + " has " + player.getAccount().getBalance());
                     if (!activePlayer.getAccount().withdraw(0)) {
                         System.out.println("game over");

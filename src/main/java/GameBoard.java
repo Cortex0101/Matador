@@ -8,12 +8,14 @@ public class GameBoard {
     private final PlayerController playerController;
     private final boolean gameRunning;
     private final FreeFieldChanceCardCreator freeFieldCards;
-    ChanceCardsPileController chanceCardsPile;
+    private ChanceCardsPileController chanceCardsPile;
+    PropertyCard[] propertyCards = PropertyCardCreator.createPropertyCards();
+    private PropertyCardController propertyCardController = new PropertyCardController(propertyCards);
 
     public GameBoard() {
         this.players = new PlayerCreator().getPlayers();
         this.fieldModel = new FieldModel();
-        this.fieldController = new FieldController();
+        this.fieldController = new FieldController(propertyCardController);
         this.gameRunning = true;
         playerController = new PlayerController(players);
         Bank.winnerController = new WinnerGUIController(new WinnerController(players));
