@@ -98,6 +98,53 @@ public class PropertyCardController {
         return true;
     }
 
+    public int getRent(StreetCard streetCard) {
+        if (!allStreetsInGroupOwnedBy(streetCard, streetCard.getOwner())) { // Will fail is street card is owned by no one - TODO: fix, maybe use exception
+            return streetCard.getRents(0);
+        } else if (streetCard.getHouses() == 0) {
+            return streetCard.getRents(0) * 2;
+        } else {
+            return streetCard.getRents(streetCard.getHouses());
+        }
+    }
+
+    public int getRent(ShippingCard shippingCard) {
+        int shipsOwnedByOwner = amountOfShipsOwnedByPlayer(shippingCard.getOwner()); // will fail if no owner...
+        if (shipsOwnedByOwner > 0) {
+            return shippingCard.getRents(shipsOwnedByOwner - 1);
+        }
+        return 0;
+     }
+
+     // Multiplication by the dice roll will be done elsewhere (where the dice is... maybe in game board?)
+    public int getRent(BreweryCard breweryCard) {
+        if (ownsBothBreweries(breweryCard.getOwner())) {
+            return breweryCard.getRents(1);
+        }
+        return breweryCard.getRents(0);
+    }
+
+    private boolean ownsBothBreweries(Player player) {
+        if (propertyCards[26].getOwner() != null && propertyCards[27].getOwner() != null) {
+            return propertyCards[26].getOwner().equals(player) && propertyCards[27].getOwner().equals(player);
+        }
+        return false;
+    }
+
+    private int amountOfShipsOwnedByPlayer(Player player) {
+        int shipsOwnedByPlayer = 0;
+        for (int i = 22; i < 26; i++) {
+            Player owner = propertyCards[i].getOwner();
+            if (owner != null) {
+                if (owner.equals(player)) {
+                    ++shipsOwnedByPlayer;
+                }
+            }
+        }
+        return shipsOwnedByPlayer;
+    }
+
+
     private boolean isStreet(PropertyCard propertyCard) {
         int index = indexOfCard(propertyCard);
         return index >= 0 && index < 22;

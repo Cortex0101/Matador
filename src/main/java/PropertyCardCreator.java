@@ -169,12 +169,12 @@ public class PropertyCardCreator {
 
         propertyCards[26] = new BreweryCard(
                 "X",
-                new int[]{100},
+                new int[]{100, 200},
                 1500);
 
         propertyCards[27] = new BreweryCard(
                 "X",
-                new int[]{100},
+                new int[]{100, 200},
                 1500);
 
         return propertyCards;

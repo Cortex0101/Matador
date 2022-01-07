@@ -17,6 +17,10 @@ public class PropertyCard {
         return owner;
     }
 
+    public int getRents(int i) {
+        return this.rents[i];
+    }
+
     public void setOwner(Player owner) {
         this.owner = owner;
     }
