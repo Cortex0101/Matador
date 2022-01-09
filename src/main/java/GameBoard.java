@@ -87,7 +87,8 @@ public class GameBoard {
     private int rollDie() {
         GUIInstance.getInstance().getUserButtonPressed(playerController.getActivePlayer().getName() + ", it is your turn.","Roll dice");
         int roll = playerController.getActivePlayer().getRaffleCup().shake();
-        GUIInstance.getInstance().setDie(roll);
+        int[] eyes = playerController.getActivePlayer().getRaffleCup().getIndividualEyes();
+        GUIInstance.getInstance().setDice(eyes[0], eyes[1]);
         return roll;
     }
 }
