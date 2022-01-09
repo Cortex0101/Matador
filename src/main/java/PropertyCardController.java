@@ -1,4 +1,9 @@
+import gui_fields.GUI_Ownable;
+import gui_fields.GUI_Street;
+
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PropertyCardController {
     private PropertyCard[] propertyCards; // 0 - 21 are streets 22 - 26 are shipping, 27 - 28 are brewery
@@ -96,6 +101,62 @@ public class PropertyCardController {
         Bank.payPlayer(player, streetCard.getHousePrice() / 2);
         streetCard.removeHouse();
         return true;
+    }
+
+    public PropertyCard getCorrespondingPropertyCard(int position) {
+        Map<Integer, PropertyCard> propertyCardMap = new HashMap<Integer, PropertyCard>();
+        propertyCardMap.put(1, propertyCards[0]);
+        propertyCardMap.put(3, propertyCards[1]);
+
+        propertyCardMap.put(6, propertyCards[2]);
+        propertyCardMap.put(8, propertyCards[3]);
+        propertyCardMap.put(9, propertyCards[4]);
+
+        propertyCardMap.put(11, propertyCards[5]);
+        propertyCardMap.put(13, propertyCards[6]);
+        propertyCardMap.put(14, propertyCards[7]);
+
+        propertyCardMap.put(16, propertyCards[8]);
+        propertyCardMap.put(18, propertyCards[9]);
+        propertyCardMap.put(19, propertyCards[10]);
+
+        propertyCardMap.put(21, propertyCards[11]);
+        propertyCardMap.put(23, propertyCards[12]);
+        propertyCardMap.put(24, propertyCards[13]);
+
+        propertyCardMap.put(26, propertyCards[14]);
+        propertyCardMap.put(27, propertyCards[15]);
+        propertyCardMap.put(29, propertyCards[16]);
+
+        propertyCardMap.put(31, propertyCards[17]);
+        propertyCardMap.put(32, propertyCards[18]);
+        propertyCardMap.put(34, propertyCards[19]);
+
+        propertyCardMap.put(37, propertyCards[20]);
+        propertyCardMap.put(39, propertyCards[21]);
+
+        propertyCardMap.put(5, propertyCards[22]);
+        propertyCardMap.put(15, propertyCards[23]);
+        propertyCardMap.put(25, propertyCards[24]);
+        propertyCardMap.put(35, propertyCards[25]);
+
+        propertyCardMap.put(12, propertyCards[26]);
+        propertyCardMap.put(28, propertyCards[27]);
+
+        return propertyCardMap.get(position);
+    }
+
+    public int getRent(PropertyCard propertyCard) {
+        if (propertyCard instanceof StreetCard) {
+            return getRent((StreetCard) propertyCard);
+        }
+        if (propertyCard instanceof ShippingCard) {
+            return getRent((ShippingCard) propertyCard);
+        }
+        if (propertyCard instanceof BreweryCard) {
+            return getRent((BreweryCard) propertyCard);
+        }
+        return -1;
     }
 
     public int getRent(StreetCard streetCard) {

@@ -2,6 +2,9 @@ import gui_fields.GUI_Field;
 import gui_fields.GUI_Ownable;
 import gui_fields.GUI_Street;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FieldController {
     private FieldModel fieldModel;
     private PropertyCardController propertyCardController;
@@ -51,7 +54,7 @@ public class FieldController {
         if(!ownable.getOwnerName().equals(activePlayer.getName())) {
             for (Player player : players) {
                 if (player.getName().equals(ownable.getOwnerName())) {
-                    Bank.transferMoney(activePlayer, player, FieldModel.getFieldPrice(position)); // TOD0: Change to use PropertyCardController.getRent()
+                    Bank.transferMoney(activePlayer, player, propertyCardController.getRent(propertyCardController.getCorrespondingPropertyCard(position))); // TOD0: Change to use PropertyCardController.getRent()
                     System.out.println("Owned Space: " + activePlayer.getName() + " payed and now has " + activePlayer.getAccount().getBalance() + " and player " + player.getName() + " has " + player.getAccount().getBalance());
                     if (!activePlayer.getAccount().withdraw(0)) {
                         System.out.println("game over");
