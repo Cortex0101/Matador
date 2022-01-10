@@ -10,11 +10,12 @@ public class GameBoard {
     private final FreeFieldChanceCardCreator freeFieldCards;
     private ChanceCardsPileController chanceCardsPile;
     PropertyCard[] propertyCards = PropertyCardCreator.createPropertyCards();
-    private PropertyCardController propertyCardController = new PropertyCardController(propertyCards);
+    private PropertyCardController propertyCardController;
 
     public GameBoard() {
         this.players = new PlayerCreator().getPlayers();
         this.fieldModel = new FieldModel();
+        this.propertyCardController = new PropertyCardController(propertyCards, fieldModel.FieldInfo());
         this.fieldController = new FieldController(propertyCardController);
         this.gameRunning = true;
         playerController = new PlayerController(players);

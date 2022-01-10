@@ -1,5 +1,7 @@
+import gui_fields.GUI_Field;
 import gui_fields.GUI_Ownable;
 import gui_fields.GUI_Street;
+import gui_main.GUI;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,8 +10,9 @@ import java.util.Map;
 public class PropertyCardController {
     private PropertyCard[] propertyCards; // 0 - 21 are streets 22 - 26 are shipping, 27 - 28 are brewery
     private Map<Integer, PropertyCard> propertyCardMap = new HashMap<Integer, PropertyCard>();
+    private Map<PropertyCard, GUI_Ownable> ownableMap = new HashMap<PropertyCard, GUI_Ownable>();
 
-    public PropertyCardController(PropertyCard[] propertyCards) {
+    public PropertyCardController(PropertyCard[] propertyCards, GUI_Field[] fields) {
         this.propertyCards = propertyCards;
         propertyCardMap.put(1, propertyCards[0]);
         propertyCardMap.put(3, propertyCards[1]);
@@ -49,6 +52,34 @@ public class PropertyCardController {
         propertyCardMap.put(12, propertyCards[26]);
         propertyCardMap.put(28, propertyCards[27]);
 
+        ownableMap.put(propertyCards[0], (GUI_Ownable) fields[1]);
+        ownableMap.put(propertyCards[1], (GUI_Ownable) fields[3]);
+        ownableMap.put(propertyCards[2], (GUI_Ownable) fields[6]);
+        ownableMap.put(propertyCards[3], (GUI_Ownable) fields[8]);
+        ownableMap.put(propertyCards[4], (GUI_Ownable) fields[9]);
+        ownableMap.put(propertyCards[5], (GUI_Ownable) fields[11]);
+        ownableMap.put(propertyCards[6], (GUI_Ownable) fields[13]);
+        ownableMap.put(propertyCards[7], (GUI_Ownable) fields[14]);
+        ownableMap.put(propertyCards[8], (GUI_Ownable) fields[16]);
+        ownableMap.put(propertyCards[9], (GUI_Ownable) fields[18]);
+        ownableMap.put(propertyCards[10], (GUI_Ownable) fields[19]);
+        ownableMap.put(propertyCards[11], (GUI_Ownable) fields[21]);
+        ownableMap.put(propertyCards[12], (GUI_Ownable) fields[23]);
+        ownableMap.put(propertyCards[13], (GUI_Ownable) fields[24]);
+        ownableMap.put(propertyCards[14], (GUI_Ownable) fields[26]);
+        ownableMap.put(propertyCards[15], (GUI_Ownable) fields[27]);
+        ownableMap.put(propertyCards[16], (GUI_Ownable) fields[29]);
+        ownableMap.put(propertyCards[17], (GUI_Ownable) fields[31]);
+        ownableMap.put(propertyCards[18], (GUI_Ownable) fields[32]);
+        ownableMap.put(propertyCards[19], (GUI_Ownable) fields[34]);
+        ownableMap.put(propertyCards[20], (GUI_Ownable) fields[37]);
+        ownableMap.put(propertyCards[21], (GUI_Ownable) fields[39]);
+        ownableMap.put(propertyCards[22], (GUI_Ownable) fields[5]);
+        ownableMap.put(propertyCards[23], (GUI_Ownable) fields[15]);
+        ownableMap.put(propertyCards[24], (GUI_Ownable) fields[25]);
+        ownableMap.put(propertyCards[25], (GUI_Ownable) fields[35]);
+        ownableMap.put(propertyCards[26], (GUI_Ownable) fields[12]);
+        ownableMap.put(propertyCards[27], (GUI_Ownable) fields[28]);
     }
 
     public void mortgageProperty(PropertyCard propertyCard) {
@@ -144,6 +175,10 @@ public class PropertyCardController {
 
     public PropertyCard getCorrespondingPropertyCard(int position) {
         return propertyCardMap.get(position);
+    }
+
+    public GUI_Ownable getCorrespondingOwnable(PropertyCard propertyCard) {
+        return ownableMap.get(propertyCard);
     }
 
     public int getRent(PropertyCard propertyCard) {
