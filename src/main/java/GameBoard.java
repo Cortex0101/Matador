@@ -50,6 +50,13 @@ public class GameBoard {
                     playerController.getActivePlayer(),
                     players);
 
+            // TODO: REMOVE, ITS ONLY FOR TESTING
+            PropertyCard card =propertyCardController.getCorrespondingPropertyCard(playerController.getActivePlayer().getCar().getCarPosition());
+            if (card instanceof StreetCard) {
+                propertyCardController.purchaseHouse((StreetCard) card, playerController.getActivePlayer());
+            }
+            //
+
             playerController.nextPlayerTurn();
         }
     }

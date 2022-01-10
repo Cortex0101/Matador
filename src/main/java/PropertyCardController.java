@@ -154,22 +154,24 @@ public class PropertyCardController {
 
 
     public boolean purchaseHouse(StreetCard streetCard, Player player) {
-        if (!allStreetsInGroupOwnedBy(streetCard, player)) return false;
+        //if (!allStreetsInGroupOwnedBy(streetCard, player)) return false;
         if (streetCard.hasHotel()) return false;
         if (!housesWouldBeEvenlyPlacedInGroup(streetCard, true)) return false;
 
         Bank.payBank(player, streetCard.getHousePrice()); // If the player does not have money, he will loose the game when trying to purchase - maybe it shoulden't be an option?
         streetCard.addHouse();
+        updateHousesGUI(streetCard);
         return true;
     }
 
     public boolean sellHouse(StreetCard streetCard, Player player) {
-        if (!allStreetsInGroupOwnedBy(streetCard, player)) return false;
+        //if (!allStreetsInGroupOwnedBy(streetCard, player)) return false;
         if (streetCard.getHouses() < 1) return false;
         if (!housesWouldBeEvenlyPlacedInGroup(streetCard, false)) return false;
 
         Bank.payPlayer(player, streetCard.getHousePrice() / 2);
         streetCard.removeHouse();
+        updateHousesGUI(streetCard);
         return true;
     }
 
@@ -177,8 +179,22 @@ public class PropertyCardController {
         return propertyCardMap.get(position);
     }
 
-    public GUI_Ownable getCorrespondingOwnable(PropertyCard propertyCard) {
+    private GUI_Ownable getCorrespondingOwnable(PropertyCard propertyCard) {
         return ownableMap.get(propertyCard);
+    }
+
+    private void updateHousesGUI(PropertyCard propertyCard) {
+        if (!(propertyCard instanceof StreetCard)) return;
+
+        StreetCard streetCard = (StreetCard) propertyCard;
+        GUI_Street street = (GUI_Street) getCorrespondingOwnable(propertyCard);
+
+        if (streetCard.hasHotel()) {
+            street.setHotel(true);
+        } else {
+            street.setHotel(false);
+            street.setHouses(streetCard.getHouses());
+        }
     }
 
     public int getRent(PropertyCard propertyCard) {
