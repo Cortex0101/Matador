@@ -11,10 +11,11 @@ public final class GUIInstance {
         gui = new GUI(new FieldModel().FieldInfo());
     }
 
+    public static void setFields(FieldModel fieldModel) {
+        gui = new GUI(fieldModel.FieldInfo());
+    }
+
     public static GUI getInstance() {
-        if (instance == null) {
-            instance = new GUIInstance();
-        }
         return instance.gui;
     }
 }

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PropertyCardControllerTest {
     PropertyCard[] propertyCards = PropertyCardCreator.createPropertyCards();
-    PropertyCardController propertyCardController = new PropertyCardController(propertyCards);
+    PropertyCardController propertyCardController = new PropertyCardController(propertyCards, new FieldModel().FieldInfo());
 
     @DisplayName("Property counts work")
     @Test
