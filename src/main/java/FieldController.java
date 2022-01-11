@@ -1,25 +1,20 @@
-import gui_fields.GUI_Field;
-import gui_fields.GUI_Ownable;
-import gui_fields.GUI_Street;
+import gui_fields.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.awt.*;
 
 public class FieldController {
-    private FieldModel fieldModel;
-    private PropertyCardController propertyCardController;
+    private final PlayerLostController playerLostController;
 
-    public FieldController(PropertyCardController propertyCardController){
-        this.fieldModel = new FieldModel();
-        this.propertyCardController = propertyCardController;
+    public FieldController(){
+        this.playerLostController = new PlayerLostController();
     }
 
-    public void landOnField(int position,GUI_Field field, ChanceCardsPileController chanceCardsPileController, Player player, Player[] players){
+    public void landOnField(int position, ChanceCardsPileController chanceCardsPileController, Player player, Player[] players, PropertyCardController propertyCards){
         switch (position) {
-            case 1, 3, 6, 8, 9, 11, 13, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29, 31, 32, 34, 37, 39 -> landOnProperty(position,field, player, players, "Property");
-            case 5, 15, 25, 35 -> landOnProperty(position,field, player, players, "Shipping");
-            case 12, 28 -> landOnProperty(position,field, player, players, "Brewery");
-            case 2, 7, 17, 22, 33, 36 -> landOnChance(chanceCardsPileController, players, player);
+            case 1, 3, 6, 8, 9, 11, 13, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29, 31, 32, 34, 37, 39 -> landOnProperty(position, player, players, "Property", propertyCards);
+            case 5, 15, 25, 35 -> landOnProperty(position, player, players, "Shipping", propertyCards);
+            case 12, 28 -> landOnProperty(position, player, players, "Brewery", propertyCards);
+            case 2, 7, 17, 22, 33, 36 -> landOnChance();
             case 30 -> landOnGoToJail(player);
             case 4 -> landOnIncomeTax(player);
             case 38 -> landOnStateTax(player);
@@ -27,78 +22,98 @@ public class FieldController {
         }
     }
 
-    public void landOnProperty(int position, GUI_Field field, Player activePlayer, Player[] players, String propertyType){
-        if (FieldModel.getFieldPrice(position)>0){
-            GUI_Ownable ownableField = (GUI_Ownable) field;
-            if (ownableField.getOwnerName() != null) {
-                landOnOwnedProperty(position, ownableField, activePlayer, players);
-            } else {
-                landOnUnownedProperty(position, ownableField, activePlayer);
-            }
+    public void landOnProperty(int position, Player activePlayer, Player[] players, String propertyType, PropertyCardController propertyCards){
+        if (propertyType.equals("Property") && propertyCards.getCorrespondingPropertyCard(position).getOwner()!=null){
+            landOnOwnedProperty(position, activePlayer, players, propertyType, propertyCards);
+
         }
+        else if (propertyType.equals("Shipping") && propertyCards.getCorrespondingPropertyCard(position).getOwner()!=null){
+            landOnOwnedProperty(position, activePlayer, players, propertyType, propertyCards);
+        }
+        else if (propertyType.equals("Brewery") && propertyCards.getCorrespondingPropertyCard(position).getOwner()!=null) {
+            landOnOwnedProperty(position, activePlayer, players, propertyType, propertyCards);
+        }
+        else{ landOnUnownedProperty(position, activePlayer, propertyCards); }
     }
 
-    private void landOnUnownedProperty(int position, GUI_Ownable ownable, Player player){
-        Bank.payBank(player, FieldModel.getFieldPrice(position));
-        ownable.setOwnerName(player.getName());
-        GUI_Ownable gui_ownable = (GUI_Ownable) GUIInstance.getInstance().getFields()[position];
-        gui_ownable.setOwnerName(player.getName());
-        gui_ownable.setBorder(player.getCar().getCarColor());
-        System.out.println("Unowned Space: " + player.getAccount().getBalance());
-        if(!player.getAccount().withdraw(0)){
-            System.out.println("game over");
+    private void landOnUnownedProperty(int position, Player player, PropertyCardController propertyCards){
+        if(checkIfPlayerCanAffordCost(player,propertyCards, FieldModel.getFieldPrice(position))) {
+            Bank.payBank(player, FieldModel.getFieldPrice(position));
+            propertyCards.getCorrespondingPropertyCard(position).setOwner(player);
+            GUI_Ownable gui_ownable = (GUI_Ownable) GUIInstance.getInstance().getFields()[position];
+            gui_ownable.setBorder(player.getCar().getCarColor());
+            gui_ownable.setOwnerName(player.getName());
         }
     }
-
-    private void landOnOwnedProperty(int position, GUI_Ownable ownable, Player activePlayer, Player[] players){
-        if(!ownable.getOwnerName().equals(activePlayer.getName())) {
-            for (Player player : players) {
-                if (player.getName().equals(ownable.getOwnerName())) {
-                    Bank.transferMoney(activePlayer, player, propertyCardController.getRent(propertyCardController.getCorrespondingPropertyCard(position))); // TOD0: Change to use PropertyCardController.getRent()
-                    System.out.println("Owned Space: " + activePlayer.getName() + " payed " + propertyCardController.getRent(propertyCardController.getCorrespondingPropertyCard(position)) + "$ and now has " + activePlayer.getAccount().getBalance() + " and player " + player.getName() + " has " + player.getAccount().getBalance());
-                    if (!activePlayer.getAccount().withdraw(0)) {
-                        System.out.println("game over");
+    private void landOnOwnedProperty(int position, Player activePlayer, Player[] players, String propertyType, PropertyCardController propertyCards){
+                for (Player player : players) {
+                    if (propertyType.equals("Property") && propertyCards.getCorrespondingPropertyCard(position).getOwner().equals(player)) {
+                        StreetCard card = (StreetCard) propertyCards.getCorrespondingPropertyCard(position);
+                        if (checkIfPlayerCanAffordCost(player, propertyCards, FieldModel.getFieldPrice(position))) {
+                            Bank.transferMoney(activePlayer, player, propertyCards.getRent(card));
+                        }
+                    }
+                    if (propertyType.equals("Shipping") && propertyCards.getCorrespondingPropertyCard(position).getOwner().equals(player)) {
+                        ShippingCard card = (ShippingCard) propertyCards.getCorrespondingPropertyCard(position);
+                        if (checkIfPlayerCanAffordCost(player, propertyCards, FieldModel.getFieldPrice(position))) {
+                            Bank.transferMoney(activePlayer, player, propertyCards.getRent(card));
+                        }
+                    }
+                    if (propertyType.equals("Brewery") && propertyCards.getCorrespondingPropertyCard(position).getOwner().equals(player)) {
+                        BreweryCard card = (BreweryCard) propertyCards.getCorrespondingPropertyCard(position);
+                        if (checkIfPlayerCanAffordCost(player, propertyCards, FieldModel.getFieldPrice(position))) {
+                            Bank.transferMoney(activePlayer, player, propertyCards.getRent(card) * activePlayer.getRaffleCup().getEyes());
+                        }
                     }
                 }
-            }
-        }
     }
 
-    public void landOnChance(ChanceCardsPileController chanceCardsPileController, Player[] players, Player player){
-        ChanceCardController chanceCardController = chanceCardsPileController.drawCard();
-        if (chanceCardController.model.getText().startsWith("Move to one of ")) {
-            FreeFieldChanceCardController chanceCard = (FreeFieldChanceCardController) chanceCardController;
-            chanceCard.action(players, player);
-        }
-        else if (chanceCardController.model.getText().startsWith("Get out of ")) {
-            OutOfJailChanceCardController chanceCard = (OutOfJailChanceCardController) chanceCardController;
-            chanceCard.action(player);
-        }
-        System.out.println("Chance");
+    public void landOnChance(){
+        //TODO
     }
 
     public void landOnFreeSpot(){
-        System.out.println("FreeSpot");
     }
 
     public void landOnGoToJail(Player player){
-        player.getCar().setCarPosition(6);
+        player.getCar().setCarPosition(10);
         player.getCar().setInJail(true);
-        System.out.println("Jail");
     }
 
     public void landOnIncomeTax(Player player){
-        boolean option1 = true;
-        boolean option2 = false;
+        boolean option1 = true; //TODO
+        boolean option2 = false; //TODO
         if(option1)
-        Bank.payBank(player, 4000);
+            Bank.payBank(player, 4000);
         else if(option2){
-            Bank.payBank(player, player.getAccount().getBalance()/10);
+            Bank.payBank(player, player.getAccount().getBalance()/10); //TODO total worth of all owned properties
         }
-
     }
 
     public void landOnStateTax(Player player){
         Bank.payBank(player, 2000);
+    }
+
+    public boolean checkIfPlayerCanAffordCost(Player player, PropertyCardController propertyCards, int cost){
+        while(player.getAccount().getBalance()<cost)
+        {
+
+            if(player.getOwnedPropertyCards(propertyCards).length > 0){
+                String[] propertyNames = new String[player.getOwnedPropertyCards(propertyCards).length];
+                for (int i = 0; i < propertyNames.length; i++) {
+                    propertyNames[i] = player.getOwnedPropertyCards(propertyCards)[i].getOwner().getName();
+                }
+                String test = GUIInstance.getInstance().getUserSelection("Choose property to mortgage", propertyNames);
+                for (int i = 0; i < propertyNames.length; i++) {
+                    if (test.equals(propertyNames[i])){propertyCards.mortgageProperty(player.getOwnedPropertyCards(propertyCards)[i]);}
+                }
+            }
+            else{
+                player.setIsActive(false);
+                playerLostController.removePlayer(player, propertyCards);
+                return false;
+            }
+        }
+        return true;
     }
 }

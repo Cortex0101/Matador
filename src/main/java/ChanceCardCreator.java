@@ -1,9 +1,9 @@
 import gui_main.GUI;
 
-public class FreeFieldChanceCardCreator {
+public class ChanceCardCreator {
     private FreeFieldChanceCardController[] freeFieldChanceCardControllers;
 
-    public FreeFieldChanceCardCreator() {
+    public ChanceCardCreator() {
         freeFieldChanceCardControllers = new FreeFieldChanceCardController[]{
                 new FreeFieldChanceCardController(new int[]{4, 5}),
                 new FreeFieldChanceCardController(new int[]{10, 11}),

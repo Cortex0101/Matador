@@ -1,13 +1,12 @@
 import gui_codebehind.GUI_Center;
-import gui_fields.*;
+import gui_fields.GUI_Field;
 
 public class GameBoard {
     private final FieldController fieldController;
     private final FieldModel fieldModel;
     private final Player[] players;
     private final PlayerController playerController;
-    private final boolean gameRunning;
-    private final FreeFieldChanceCardCreator freeFieldCards;
+    private final ChanceCardCreator freeFieldCards;
     private ChanceCardsPileController chanceCardsPile;
     PropertyCard[] propertyCards = PropertyCardCreator.createPropertyCards();
     private PropertyCardController propertyCardController;
@@ -17,50 +16,49 @@ public class GameBoard {
         GUIInstance.setFields(this.fieldModel);
         this.players = new PlayerCreator().getPlayers();
         this.propertyCardController = new PropertyCardController(propertyCards, fieldModel.FieldInfo());
-        this.fieldController = new FieldController(propertyCardController);
-        this.gameRunning = true;
+        this.fieldController = new FieldController();
         playerController = new PlayerController(players);
-        Bank.winnerController = new WinnerGUIController(new WinnerController(players));
-        freeFieldCards = new FreeFieldChanceCardCreator();
+        freeFieldCards = new ChanceCardCreator();
         chanceCardsPile = new ChanceCardsPileController(freeFieldCards.getFreeFieldChanceCardControllers());
         chanceCardsPile.addCard(new OutOfJailChanceCardController());
         GUI_Center.chanceCardText = "Chance";
     }
 
     public void play() {
-        while(true) {
+        while(players.length > 1) {
             handleInJail();
-            if(!playerController.getActivePlayer().getCar().isInJail()) {
-                do {
-                    playerController.getActivePlayer().getCar().moveCar(rollDie());
-                    playerController.getActivePlayer().IncrementRollCount();
-                    if(playerController.getActivePlayer().getRollCount() == 3){
-                        playerController.getActivePlayer().getCar().setInJail(true);
+            if (playerController.getActivePlayer().getIsActive()) {
+                if (!playerController.getActivePlayer().getCar().isInJail()) {
+                    do {
+                        playerController.getActivePlayer().getCar().moveCar(rollDie());
+                        playerController.getActivePlayer().IncrementRollCount();
+                        if (playerController.getActivePlayer().getRollCount() == 3) {
+                            playerController.getActivePlayer().getCar().setInJail(true);
+                        }
+                        fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(),
+                                chanceCardsPile,
+                                playerController.getActivePlayer(),
+                                players, propertyCardController);
                     }
+                    while (playerController.getActivePlayer().getRaffleCup().isDouble() && !playerController.getActivePlayer().getCar().isInJail());
+                    playerController.getActivePlayer().resetRollCount();
                 }
-                while(playerController.getActivePlayer().getRaffleCup().isDouble() && !playerController.getActivePlayer().getCar().isInJail());
-                playerController.getActivePlayer().resetRollCount();
+                if (playerController.getActivePlayer().getCar().hasPassedStart()) {
+                    Bank.payPlayer(playerController.getActivePlayer(), 2);
+                }
             }
-            if (playerController.getActivePlayer().getCar().hasPassedStart()) {
-                Bank.payPlayer(playerController.getActivePlayer(), 2);
-            }
-
-            fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(),
-                    fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()],
-                    chanceCardsPile,
-                    playerController.getActivePlayer(),
-                    players);
-
             playerController.nextPlayerTurn();
+
         }
+        GUIInstance.getInstance().showMessage(playerController.getActivePlayer().getName()+" is the last player standing and wins!");
+        System.exit(0);
     }
 
     private void handleInJail() {
-        //Temporary boolean to simulate the different buttons. will be replaced with button inputs later
-        boolean pay = false;
-        boolean chanceCard = false; // can only be true if the player has a getOutOfJailFreeCard. the check for playerController.getActivePlayer().hasGetOutOfJailCard() will be done with the button and be greyed out if false
-        boolean roll = false;
-        boolean isDouble = false;
+        boolean pay = false; // TODO
+        boolean chanceCard = false; // TODO
+        boolean roll = false; // TODO
+        boolean isDouble = false; // TODO
 
 
         if (playerController.getActivePlayer().getCar().isInJail() && chanceCard) {
@@ -79,6 +77,7 @@ public class GameBoard {
                 playerController.getActivePlayer().getCar().setInJail(false);
             }
         }
+
 
         else if (playerController.getActivePlayer().getCar().isInJail() && pay){
             Bank.payBank(playerController.getActivePlayer(), 1000);
