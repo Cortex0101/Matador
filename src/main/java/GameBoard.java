@@ -13,8 +13,9 @@ public class GameBoard {
     private PropertyCardController propertyCardController;
 
     public GameBoard() {
-        this.players = new PlayerCreator().getPlayers();
         this.fieldModel = new FieldModel();
+        GUIInstance.setFields(this.fieldModel);
+        this.players = new PlayerCreator().getPlayers();
         this.propertyCardController = new PropertyCardController(propertyCards, fieldModel.FieldInfo());
         this.fieldController = new FieldController(propertyCardController);
         this.gameRunning = true;
@@ -49,13 +50,6 @@ public class GameBoard {
                     chanceCardsPile,
                     playerController.getActivePlayer(),
                     players);
-
-            // TODO: REMOVE, ITS ONLY FOR TESTING
-            PropertyCard card =propertyCardController.getCorrespondingPropertyCard(playerController.getActivePlayer().getCar().getCarPosition());
-            if (card instanceof StreetCard) {
-                propertyCardController.purchaseHouse((StreetCard) card, playerController.getActivePlayer());
-            }
-            //
 
             playerController.nextPlayerTurn();
         }
