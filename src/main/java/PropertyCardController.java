@@ -154,7 +154,7 @@ public class PropertyCardController {
 
 
     public boolean purchaseHouse(StreetCard streetCard, Player player) {
-        //if (!allStreetsInGroupOwnedBy(streetCard, player)) return false;
+        if (!allStreetsInGroupOwnedBy(streetCard, player)) return false;
         if (streetCard.hasHotel()) return false;
         if (!housesWouldBeEvenlyPlacedInGroup(streetCard, true)) return false;
 
@@ -165,7 +165,7 @@ public class PropertyCardController {
     }
 
     public boolean sellHouse(StreetCard streetCard, Player player) {
-        //if (!allStreetsInGroupOwnedBy(streetCard, player)) return false;
+        if (!allStreetsInGroupOwnedBy(streetCard, player)) return false;
         if (streetCard.getHouses() < 1) return false;
         if (!housesWouldBeEvenlyPlacedInGroup(streetCard, false)) return false;
 
