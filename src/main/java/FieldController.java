@@ -9,11 +9,11 @@ public class FieldController {
         this.playerLostController = new PlayerLostController();
     }
 
-    public void landOnField(int position, ChanceCardsPileController chanceCardsPileController, Player player, Player[] players, PropertyCardController propertyCards){
+    public void landOnField(int position, ChanceCardsPileController chanceCardsPileController, Player player, Player[] players, PropertyCardController propertyCards, HandleStartOfTurnChoice handleStartOfTurnChoice){
         switch (position) {
-            case 1, 3, 6, 8, 9, 11, 13, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29, 31, 32, 34, 37, 39 -> landOnProperty(position, player, players, "Property", propertyCards);
-            case 5, 15, 25, 35 -> landOnProperty(position, player, players, "Shipping", propertyCards);
-            case 12, 28 -> landOnProperty(position, player, players, "Brewery", propertyCards);
+            case 1, 3, 6, 8, 9, 11, 13, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29, 31, 32, 34, 37, 39 -> landOnProperty(position, player, players, "Property", propertyCards, handleStartOfTurnChoice);
+            case 5, 15, 25, 35 -> landOnProperty(position, player, players, "Shipping", propertyCards, handleStartOfTurnChoice);
+            case 12, 28 -> landOnProperty(position, player, players, "Brewery", propertyCards, handleStartOfTurnChoice);
             case 2, 7, 17, 22, 33, 36 -> landOnChance();
             case 30 -> landOnGoToJail(player);
             case 4 -> landOnIncomeTax(player);
@@ -22,22 +22,22 @@ public class FieldController {
         }
     }
 
-    public void landOnProperty(int position, Player activePlayer, Player[] players, String propertyType, PropertyCardController propertyCards){
+    public void landOnProperty(int position, Player activePlayer, Player[] players, String propertyType, PropertyCardController propertyCards, HandleStartOfTurnChoice handleStartOfTurnChoice){
         if (propertyType.equals("Property") && propertyCards.getCorrespondingPropertyCard(position).getOwner()!=null){
-            landOnOwnedProperty(position, activePlayer, players, propertyType, propertyCards);
+            landOnOwnedProperty(position, activePlayer, players, propertyType, propertyCards, handleStartOfTurnChoice);
 
         }
         else if (propertyType.equals("Shipping") && propertyCards.getCorrespondingPropertyCard(position).getOwner()!=null){
-            landOnOwnedProperty(position, activePlayer, players, propertyType, propertyCards);
+            landOnOwnedProperty(position, activePlayer, players, propertyType, propertyCards, handleStartOfTurnChoice);
         }
         else if (propertyType.equals("Brewery") && propertyCards.getCorrespondingPropertyCard(position).getOwner()!=null) {
-            landOnOwnedProperty(position, activePlayer, players, propertyType, propertyCards);
+            landOnOwnedProperty(position, activePlayer, players, propertyType, propertyCards, handleStartOfTurnChoice);
         }
-        else{ landOnUnownedProperty(position, activePlayer, propertyCards); }
+        else{ landOnUnownedProperty(position, activePlayer, propertyCards, handleStartOfTurnChoice); }
     }
 
-    private void landOnUnownedProperty(int position, Player player, PropertyCardController propertyCards){
-        if(checkIfPlayerCanAffordCost(player,propertyCards, FieldModel.getFieldPrice(position))) {
+    private void landOnUnownedProperty(int position, Player player, PropertyCardController propertyCards, HandleStartOfTurnChoice handleStartOfTurnChoice){
+        if(checkIfPlayerCanAffordCost(handleStartOfTurnChoice, player,propertyCards, FieldModel.getFieldPrice(position))) {
             Bank.payBank(player, FieldModel.getFieldPrice(position));
             propertyCards.getCorrespondingPropertyCard(position).setOwner(player);
             GUI_Ownable gui_ownable = (GUI_Ownable) GUIInstance.getInstance().getFields()[position];
@@ -45,23 +45,23 @@ public class FieldController {
             gui_ownable.setOwnerName(player.getName());
         }
     }
-    private void landOnOwnedProperty(int position, Player activePlayer, Player[] players, String propertyType, PropertyCardController propertyCards){
+    private void landOnOwnedProperty(int position, Player activePlayer, Player[] players, String propertyType, PropertyCardController propertyCards, HandleStartOfTurnChoice handleStartOfTurnChoice){
                 for (Player player : players) {
                     if (propertyType.equals("Property") && propertyCards.getCorrespondingPropertyCard(position).getOwner().equals(player)) {
                         StreetCard card = (StreetCard) propertyCards.getCorrespondingPropertyCard(position);
-                        if (checkIfPlayerCanAffordCost(player, propertyCards, FieldModel.getFieldPrice(position))) {
+                        if (checkIfPlayerCanAffordCost(handleStartOfTurnChoice, player, propertyCards, FieldModel.getFieldPrice(position))) {
                             Bank.transferMoney(activePlayer, player, propertyCards.getRent(card));
                         }
                     }
                     if (propertyType.equals("Shipping") && propertyCards.getCorrespondingPropertyCard(position).getOwner().equals(player)) {
                         ShippingCard card = (ShippingCard) propertyCards.getCorrespondingPropertyCard(position);
-                        if (checkIfPlayerCanAffordCost(player, propertyCards, FieldModel.getFieldPrice(position))) {
+                        if (checkIfPlayerCanAffordCost(handleStartOfTurnChoice, player, propertyCards, FieldModel.getFieldPrice(position))) {
                             Bank.transferMoney(activePlayer, player, propertyCards.getRent(card));
                         }
                     }
                     if (propertyType.equals("Brewery") && propertyCards.getCorrespondingPropertyCard(position).getOwner().equals(player)) {
                         BreweryCard card = (BreweryCard) propertyCards.getCorrespondingPropertyCard(position);
-                        if (checkIfPlayerCanAffordCost(player, propertyCards, FieldModel.getFieldPrice(position))) {
+                        if (checkIfPlayerCanAffordCost(handleStartOfTurnChoice, player, propertyCards, FieldModel.getFieldPrice(position))) {
                             Bank.transferMoney(activePlayer, player, propertyCards.getRent(card) * activePlayer.getRaffleCup().getEyes());
                         }
                     }
@@ -94,19 +94,12 @@ public class FieldController {
         Bank.payBank(player, 2000);
     }
 
-    public boolean checkIfPlayerCanAffordCost(Player player, PropertyCardController propertyCards, int cost){
+    public boolean checkIfPlayerCanAffordCost(HandleStartOfTurnChoice handleStartOfTurnChoice, Player player, PropertyCardController propertyCards, int cost){
         while(player.getAccount().getBalance()<cost)
         {
 
             if(player.getOwnedPropertyCards(propertyCards).length > 0){
-                String[] propertyNames = new String[player.getOwnedPropertyCards(propertyCards).length];
-                for (int i = 0; i < propertyNames.length; i++) {
-                    propertyNames[i] = player.getOwnedPropertyCards(propertyCards)[i].getOwner().getName();
-                }
-                String test = GUIInstance.getInstance().getUserSelection("Choose property to mortgage", propertyNames);
-                for (int i = 0; i < propertyNames.length; i++) {
-                    if (test.equals(propertyNames[i])){propertyCards.mortgageProperty(player.getOwnedPropertyCards(propertyCards)[i]);}
-                }
+                handleStartOfTurnChoice.mortgageProperty(player, propertyCards);
             }
             else{
                 player.setIsActive(false);
