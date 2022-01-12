@@ -1,7 +1,5 @@
 import gui_fields.*;
 
-import java.awt.*;
-
 public class FieldController {
     private final PlayerLostController playerLostController;
 
@@ -18,7 +16,6 @@ public class FieldController {
             case 30 -> landOnGoToJail(player);
             case 4 -> landOnIncomeTax(player);
             case 38 -> landOnStateTax(player);
-            default -> landOnFreeSpot();
         }
     }
 
@@ -72,9 +69,6 @@ public class FieldController {
         //TODO
     }
 
-    public void landOnFreeSpot(){
-    }
-
     public void landOnGoToJail(Player player){
         player.getCar().setCarPosition(10);
         player.getCar().setInJail(true);
@@ -101,11 +95,30 @@ public class FieldController {
             if(player.getOwnedPropertyCards(propertyCards).length > 0){
                 String[] propertyNames = new String[player.getOwnedPropertyCards(propertyCards).length];
                 for (int i = 0; i < propertyNames.length; i++) {
-                    propertyNames[i] = player.getOwnedPropertyCards(propertyCards)[i].getOwner().getName();
+                    if (!player.getOwnedPropertyCards(propertyCards)[i].isMortgaged()){
+                        propertyNames[i] = player.getOwnedPropertyCards(propertyCards)[i].getName();
+                    }
+                    else {
+                        propertyNames[i] = player.getOwnedPropertyCards(propertyCards)[i].getName() + ": Is already mortgaged";
+                    }
                 }
-                String test = GUIInstance.getInstance().getUserSelection("Choose property to mortgage", propertyNames);
-                for (int i = 0; i < propertyNames.length; i++) {
-                    if (test.equals(propertyNames[i])){propertyCards.mortgageProperty(player.getOwnedPropertyCards(propertyCards)[i]);}
+                    String mortgagedProperty = GUIInstance.getInstance().getUserSelection("Choose property to mortgage", propertyNames);
+                    for (int i = 0; i < propertyNames.length; i++) {
+                        if (mortgagedProperty.equals(propertyNames[i]) && !mortgagedProperty.contains(": Is already mortgaged")) {
+                            propertyCards.mortgageProperty(player.getOwnedPropertyCards(propertyCards)[i]);
+                        }
+                    }
+                if(propertyNames.length > 0) {
+                    System.out.println(player.getName());
+                    for (int i = 0; i < propertyNames.length; i++) {
+                        System.out.println(propertyNames[i]);
+                    }
+                    System.out.println("chosen mort:" + mortgagedProperty);
+                }
+                else {
+                    player.setIsActive(false);
+                    playerLostController.removePlayer(player, propertyCards);
+                    return false;
                 }
             }
             else{
@@ -116,4 +129,7 @@ public class FieldController {
         }
         return true;
     }
-}
+}//TODO replace propertycard casting with instanceof
+//TODO condense ownedproperty
+//TODO split checkifplayercanafford
+//TODO rename isActive in player to something more fitting

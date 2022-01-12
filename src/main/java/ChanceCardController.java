@@ -1,5 +1,3 @@
-import gui_main.GUI;
-
 public class ChanceCardController {
     protected ChanceCardModel model;
     protected ChanceCardView view;

@@ -30,11 +30,11 @@ public class GameBoard {
             if (playerController.getActivePlayer().getIsActive()) {
                 if (!playerController.getActivePlayer().getCar().isInJail()) {
                     do {
-                        playerController.getActivePlayer().getCar().moveCar(rollDie());
-                        playerController.getActivePlayer().IncrementRollCount();
                         if (playerController.getActivePlayer().getRollCount() == 3) {
                             playerController.getActivePlayer().getCar().setInJail(true);
                         }
+                        playerController.getActivePlayer().getCar().moveCar(rollDie());
+                        playerController.getActivePlayer().IncrementRollCount();
                         fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(),
                                 chanceCardsPile,
                                 playerController.getActivePlayer(),
@@ -53,6 +53,8 @@ public class GameBoard {
         GUIInstance.getInstance().showMessage(playerController.getActivePlayer().getName()+" is the last player standing and wins!");
         System.exit(0);
     }
+
+    //TODO handlejail skal kigges på
 
     private void handleInJail() {
         boolean pay = false; // TODO
