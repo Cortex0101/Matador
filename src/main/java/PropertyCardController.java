@@ -96,6 +96,11 @@ public class PropertyCardController {
         propertyCard.setMortgaged(true);
     }
 
+    public void unmortgageProperty(PropertyCard propertyCard){
+        Bank.payBank(propertyCard.getOwner(), propertyCard.getMortgageValue());
+        propertyCard.setMortgaged(false);
+    }
+
     int fieldsInGroup(PropertyCard propertyCard) {
         if (isStreet(propertyCard)) {
             int index = indexOfCard(propertyCard);

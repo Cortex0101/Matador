@@ -31,7 +31,7 @@ public class GameBoard {
             if (playerController.getActivePlayer().getIsActive()) {
                 if (!playerController.getActivePlayer().getCar().isInJail()) {
 
-                    String playerChoice = GUIInstance.getInstance().getUserSelection(playerController.getActivePlayer().getName() + ", it is your turn. Choose what to do.", "Roll", "Trade Properties", "Buy houses", "Sell houses", "Mortgage property", "Umortgage Property");
+                    String playerChoice = GUIInstance.getInstance().getUserSelection(playerController.getActivePlayer().getName() + ", it is your turn. Choose what to do.", "Roll", "Trade Properties", "Buy houses", "Sell houses", "Mortgage property", "Unmortgage Property");
                     switch (playerChoice) {
                         case "Roll": //it's not pretty but i didn't wanna mess with it just to cram it all in the HandleStartOfTunrChoice.roll method so it's staying liek this for now
                             do {
@@ -61,7 +61,7 @@ public class GameBoard {
                         case "Mortgage property":
                             handleStartOfTurnChoice.mortgageProperty(playerController.getActivePlayer(), propertyCardController);
                             break;
-                        case "Unmortgage property":
+                        case "Unmortgage Property":
                             handleStartOfTurnChoice.unmortgageProperty(playerController.getActivePlayer(), propertyCardController);
                             break;
                     }
@@ -77,7 +77,7 @@ public class GameBoard {
     private void handleInJail() {
         boolean pay = false; // TODO
         boolean chanceCard = false; // TODO
-        boolean roll = false; // TODO
+        boolean roll = true; // TODO
         boolean isDouble = false; // TODO
 
 

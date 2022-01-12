@@ -19,7 +19,12 @@ public class HandleStartOfTurnChoice {
             if(player.getOwnedPropertyCards(propertyCards).length > 0){
                 String[] propertyNames = new String[player.getOwnedPropertyCards(propertyCards).length];
                 for (int i = 0; i < propertyNames.length; i++) {
-                    propertyNames[i] = player.getOwnedPropertyCards(propertyCards)[i].getOwner().getName();
+                    if (!player.getOwnedPropertyCards(propertyCards)[i].isMortgaged()){
+                        propertyNames[i] = player.getOwnedPropertyCards(propertyCards)[i].getName();
+                    }
+                    else {
+                        propertyNames[i] = player.getOwnedPropertyCards(propertyCards)[i].getName() + ": Is already mortgaged";
+                    }
                 }
                 String propertiesToMortgage = GUIInstance.getInstance().getUserSelection("Choose property to mortgage", propertyNames);
                 for (int i = 0; i < propertyNames.length; i++) {
@@ -30,23 +35,35 @@ public class HandleStartOfTurnChoice {
         }
 
     public void unmortgageProperty(Player player, PropertyCardController propertyCards){
+        System.out.println("test1");
         if(player.getOwnedPropertyCards(propertyCards).length > 0){
             int x = 0;
+            System.out.println("test2");
             for (int i = 0; i < player.getOwnedPropertyCards(propertyCards).length; i++) {
-                if (player.getOwnedPropertyCards(propertyCards)[i].isMortgaged()){ x++; }
+
+                if (player.getOwnedPropertyCards(propertyCards)[i].isMortgaged()){
+                    x++;
+                }
             }
             String[] propertyNames = new String[x];
             int y = 0;
-            for (int i = 0; i < propertyNames.length; i++) {
+            for (int i = 0; i < player.getOwnedPropertyCards(propertyCards).length; i++) {
                 if (player.getOwnedPropertyCards(propertyCards)[i].isMortgaged()) {
-                    propertyNames[y] = player.getOwnedPropertyCards(propertyCards)[i].getOwner().getName();
+                    System.out.println(player.getOwnedPropertyCards(propertyCards)[i].getName());
+                    propertyNames[y] = player.getOwnedPropertyCards(propertyCards)[i].getName();
                     y++;
                 }
 
             }
             String propertiesToUnmortgage = GUIInstance.getInstance().getUserSelection("Choose property to unmortgage", propertyNames);
             for (int i = 0; i < propertyNames.length; i++) {
-                if (propertiesToUnmortgage.equals(propertyNames[i])){propertyCards.mortgageProperty(player.getOwnedPropertyCards(propertyCards)[i]);}
+                if (propertiesToUnmortgage.equals(propertyNames[i])){
+                    for (int j = 0; j < player.getOwnedPropertyCards(propertyCards).length; j++) {
+                        if(propertiesToUnmortgage.equals(player.getOwnedPropertyCards(propertyCards)[j].getName())){ propertyCards.unmortgageProperty(player.getOwnedPropertyCards(propertyCards)[j]); }
+
+                    }
+
+                }
             }
         }
 
