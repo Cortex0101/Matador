@@ -1,7 +1,5 @@
 import gui_fields.*;
 
-import java.awt.*;
-
 public class FieldController {
     private final PlayerLostController playerLostController;
 
@@ -18,7 +16,6 @@ public class FieldController {
             case 30 -> landOnGoToJail(player);
             case 4 -> landOnIncomeTax(player);
             case 38 -> landOnStateTax(player);
-            default -> landOnFreeSpot();
         }
     }
 
@@ -72,9 +69,6 @@ public class FieldController {
         //TODO
     }
 
-    public void landOnFreeSpot(){
-    }
-
     public void landOnGoToJail(Player player){
         player.getCar().setCarPosition(10);
         player.getCar().setInJail(true);
@@ -109,4 +103,7 @@ public class FieldController {
         }
         return true;
     }
-}
+}//TODO replace propertycard casting with instanceof
+//TODO condense ownedproperty
+//TODO split checkifplayercanafford
+//TODO rename isActive in player to something more fitting

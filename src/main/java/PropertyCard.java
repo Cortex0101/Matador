@@ -17,6 +17,8 @@ public class PropertyCard {
         return owner;
     }
 
+    public String getName() { return name; }
+
     public int getRents(int i) {
         return this.rents[i];
     }

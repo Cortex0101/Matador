@@ -72,6 +72,8 @@ public class GameBoard {
         System.exit(0);
     }
 
+    //TODO handlejail skal kigges på
+
     private void handleInJail() {
         boolean pay = false; // TODO
         boolean chanceCard = false; // TODO

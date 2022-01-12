@@ -1,5 +1,3 @@
-import gui_main.GUI;
-
 public class ChanceCardCreator {
     private FreeFieldChanceCardController[] freeFieldChanceCardControllers;
 
@@ -19,3 +17,5 @@ public class ChanceCardCreator {
         return freeFieldChanceCardControllers;
     }
 }
+
+//TODO retructure to work with new cards
