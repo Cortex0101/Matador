@@ -82,6 +82,8 @@ public class PropertyCardController {
         ownableMap.put(propertyCards[27], (GUI_Ownable) fields[28]);
     }
 
+    public PropertyCard[] getPropertyCards(){return propertyCards;}
+
     public void mortgageProperty(PropertyCard propertyCard) {
         if (propertyCard.isMortgaged()) return;
         if (propertyCard.getOwner() == null) return;
@@ -92,6 +94,11 @@ public class PropertyCardController {
 
         Bank.payPlayer(propertyCard.getOwner(), propertyCard.getMortgageValue());
         propertyCard.setMortgaged(true);
+    }
+
+    public void unmortgageProperty(PropertyCard propertyCard){
+        Bank.payBank(propertyCard.getOwner(), propertyCard.getMortgageValue());
+        propertyCard.setMortgaged(false);
     }
 
     int fieldsInGroup(PropertyCard propertyCard) {

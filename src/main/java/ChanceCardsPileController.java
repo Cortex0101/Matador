@@ -22,3 +22,5 @@ public class ChanceCardsPileController {
         this.chanceCards.addFirst(chanceCardController);
     }
 }
+
+//TODO add new card to the pile

@@ -1,5 +1,3 @@
-import gui_main.GUI;
-
 public class ChanceCardView {
     private String text;
 

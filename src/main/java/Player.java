@@ -9,6 +9,7 @@ public class Player {
     protected GUI_Player gui_player;
     private boolean getOutOfJailCard;
     private int rollCount;
+    private boolean isActive = true;
 
     public Player(String name, int initialCapital) {
         this.name = name;
@@ -41,6 +42,10 @@ public class Player {
 
     public void resetRollCount() {rollCount = 0;}
 
+    public boolean getIsActive(){return isActive;}
+
+    public void setIsActive(boolean isAciveState){this.isActive = isAciveState;}
+
     /*
         Needed because the GUI does not update the balance automatically. It is called by the Bank class, so dont worry about it.
      */
@@ -54,5 +59,23 @@ public class Player {
 
     public void setHasGetOutOfJailCard(boolean bool) {
         this.getOutOfJailCard = bool;
+    }
+
+    public PropertyCard[] getOwnedPropertyCards(PropertyCardController propertyCardController){ //Method is kinda clunky but it was the best solution my sleep deprived brain could come up with while the cards aren't directly attached to the player
+        int ownedPropertyCount = 0;
+            for (int i = 0; i < propertyCardController.getPropertyCards().length; i++) {
+                if (propertyCardController.getPropertyCards()[i].getOwner() != null && propertyCardController.getPropertyCards()[i].getOwner().getName().equals(name)) {
+                    ownedPropertyCount++;
+                }
+            }
+        PropertyCard[] propertyCards = new PropertyCard[ownedPropertyCount];
+        int filledPropertyCards = 0;
+            for (int i = 0; i < propertyCardController.getPropertyCards().length; i++) {
+                if (propertyCardController.getPropertyCards()[i].getOwner() != null && propertyCardController.getPropertyCards()[i].getOwner().getName().equals(name)) {
+                    propertyCards[filledPropertyCards] = propertyCardController.getPropertyCards()[i];
+                    filledPropertyCards++;
+                }
+            }
+        return propertyCards;
     }
 }

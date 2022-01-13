@@ -58,8 +58,8 @@ public class FieldModel {
     public GUI_Field[] FieldInfo() {
         return fields;
     }
-    public static int getFieldPrice(int field){
-        return switch (field) { // First field "Rødovrevej" is at field 1
+    public static int getFieldPrice(int position){
+        return switch (position) { // First field "Rødovrevej" is at field 1
             case 1, 3 -> 1200;
             case 6, 8 -> 2000; case 9 -> 2400;
             case 11, 13 -> 2800; case 14 -> 3200;

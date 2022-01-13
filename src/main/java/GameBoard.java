@@ -1,66 +1,84 @@
 import gui_codebehind.GUI_Center;
-import gui_fields.*;
 
 public class GameBoard {
     private final FieldController fieldController;
     private final FieldModel fieldModel;
     private final Player[] players;
     private final PlayerController playerController;
-    private final boolean gameRunning;
-    private final FreeFieldChanceCardCreator freeFieldCards;
+    private final ChanceCardCreator freeFieldCards;
     private ChanceCardsPileController chanceCardsPile;
     PropertyCard[] propertyCards = PropertyCardCreator.createPropertyCards();
     private PropertyCardController propertyCardController;
+    private HandleStartOfTurnChoice handleStartOfTurnChoice;
 
     public GameBoard() {
         this.fieldModel = new FieldModel();
         GUIInstance.setFields(this.fieldModel);
         this.players = new PlayerCreator().getPlayers();
         this.propertyCardController = new PropertyCardController(propertyCards, fieldModel.FieldInfo());
-        this.fieldController = new FieldController(propertyCardController);
-        this.gameRunning = true;
+        this.fieldController = new FieldController();
+        this.handleStartOfTurnChoice = new HandleStartOfTurnChoice();
         playerController = new PlayerController(players);
-        Bank.winnerController = new WinnerGUIController(new WinnerController(players));
-        freeFieldCards = new FreeFieldChanceCardCreator();
+        freeFieldCards = new ChanceCardCreator();
         chanceCardsPile = new ChanceCardsPileController(freeFieldCards.getFreeFieldChanceCardControllers());
         chanceCardsPile.addCard(new OutOfJailChanceCardController());
         GUI_Center.chanceCardText = "Chance";
     }
 
     public void play() {
-        while(true) {
+        while (players.length > 1) {
             handleInJail();
-            if(!playerController.getActivePlayer().getCar().isInJail()) {
-                do {
-                    playerController.getActivePlayer().getCar().moveCar(rollDie());
-                    playerController.getActivePlayer().IncrementRollCount();
-                    if(playerController.getActivePlayer().getRollCount() == 3){
-                        playerController.getActivePlayer().getCar().setInJail(true);
+            if (playerController.getActivePlayer().getIsActive()) {
+                if (!playerController.getActivePlayer().getCar().isInJail()) {
+
+                    String playerChoice = GUIInstance.getInstance().getUserSelection(playerController.getActivePlayer().getName() + ", it is your turn. Choose what to do.", "Roll", "Trade Properties", "Buy houses", "Sell houses", "Mortgage property", "Unmortgage Property");
+                    switch (playerChoice) {
+                        case "Roll": //it's not pretty but i didn't wanna mess with it just to cram it all in the HandleStartOfTunrChoice.roll method so it's staying liek this for now
+                            do {
+                                playerController.getActivePlayer().getCar().moveCar(rollDie());
+                                handleStartOfTurnChoice.roll(playerController);
+                                fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(),
+                                        chanceCardsPile,
+                                        playerController.getActivePlayer(),
+                                        players, propertyCardController, handleStartOfTurnChoice);
+                            }
+                            while (playerController.getActivePlayer().getRaffleCup().isDouble() && !playerController.getActivePlayer().getCar().isInJail());
+                            playerController.getActivePlayer().resetRollCount();
+                            if (playerController.getActivePlayer().getCar().hasPassedStart()) {
+                                Bank.payPlayer(playerController.getActivePlayer(), 2);
+                            }
+                            playerController.nextPlayerTurn();
+                            break;
+                        case "Trade Properties":
+                            //TODO
+                            break;
+                        case "Buy houses":
+                            //TODO
+                            break;
+                        case "Sell houses":
+                            //TODO
+                            break;
+                        case "Mortgage property":
+                            handleStartOfTurnChoice.mortgageProperty(playerController.getActivePlayer(), propertyCardController);
+                            break;
+                        case "Unmortgage Property":
+                            handleStartOfTurnChoice.unmortgageProperty(playerController.getActivePlayer(), propertyCardController);
+                            break;
                     }
                 }
-                while(playerController.getActivePlayer().getRaffleCup().isDouble() && !playerController.getActivePlayer().getCar().isInJail());
-                playerController.getActivePlayer().resetRollCount();
             }
-            if (playerController.getActivePlayer().getCar().hasPassedStart()) {
-                Bank.payPlayer(playerController.getActivePlayer(), 2);
-            }
-
-            fieldController.landOnField(playerController.getActivePlayer().getCar().getCarPosition(),
-                    fieldModel.FieldInfo()[playerController.getActivePlayer().getCar().getCarPosition()],
-                    chanceCardsPile,
-                    playerController.getActivePlayer(),
-                    players);
-
-            playerController.nextPlayerTurn();
         }
+        GUIInstance.getInstance().showMessage(playerController.getActivePlayer().getName() + " is the last player standing and wins!");
+        System.exit(0);
     }
 
+    //TODO handlejail skal kigges på
+
     private void handleInJail() {
-        //Temporary boolean to simulate the different buttons. will be replaced with button inputs later
-        boolean pay = false;
-        boolean chanceCard = false; // can only be true if the player has a getOutOfJailFreeCard. the check for playerController.getActivePlayer().hasGetOutOfJailCard() will be done with the button and be greyed out if false
-        boolean roll = false;
-        boolean isDouble = false;
+        boolean pay = false; // TODO
+        boolean chanceCard = false; // TODO
+        boolean roll = true; // TODO
+        boolean isDouble = false; // TODO
 
 
         if (playerController.getActivePlayer().getCar().isInJail() && chanceCard) {
@@ -79,6 +97,7 @@ public class GameBoard {
                 playerController.getActivePlayer().getCar().setInJail(false);
             }
         }
+
 
         else if (playerController.getActivePlayer().getCar().isInJail() && pay){
             Bank.payBank(playerController.getActivePlayer(), 1000);
