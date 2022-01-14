@@ -1,10 +1,8 @@
-public class ChanceCardView {
-    private String text;
-
-    public ChanceCardView(String text) {
+public class ChanceCard {
+    String text;
+    public ChanceCard(String text){
         this.text = text;
     }
-
     public void display() {
         GUIInstance.getInstance().displayChanceCard(this.text);
     }
