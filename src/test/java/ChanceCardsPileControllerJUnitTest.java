@@ -11,15 +11,15 @@ class ChanceCardsPileControllerJUnitTest {
 
     @BeforeEach
     void setUp() {
-        ChanceCardController[] cardControllers = new ChanceCardController[]{
-                new ChanceCardController(new ChanceCardModel("A")),
-                new ChanceCardController(new ChanceCardModel("B")),
-                new ChanceCardController(new ChanceCardModel("C")),
-                new ChanceCardController(new ChanceCardModel("D")),
-                new ChanceCardController(new ChanceCardModel("E"))
-        };
+        /*ChanceCard[] cards = new ChanceCard[]{
+                new ChanceCard(new ChanceCardModel("A")),
+                new ChanceCard(new ChanceCardModel("B")),
+                new ChanceCard(new ChanceCardModel("C")),
+                new ChanceCard(new ChanceCardModel("D")),
+                new ChanceCard(new ChanceCardModel("E"))
+        };*/
 
-        pile = new ChanceCardsPileController(cardControllers);
+        //pile = new ChanceCardsPileController(cards);
     }
 
     @Test
