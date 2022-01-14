@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class HandleStartOfTurnChoice {
 
     public void roll(PlayerController playerController){
@@ -7,11 +10,50 @@ public class HandleStartOfTurnChoice {
         }
     }
 
-    public void buyHouse(){
-        //TODO
+    public void buyHouse(Player player, PropertyCardController propertyCardController){
+        final PropertyCard[] ownedPropertyCards = player.getOwnedPropertyCards(propertyCardController);
+        ArrayList<StreetCard> streetCardsThatCanHaveHouses = new ArrayList<>();
+        for (PropertyCard propertyCard : ownedPropertyCards) {
+            if (!(propertyCard instanceof StreetCard)) continue;
+
+            StreetCard streetCard = (StreetCard) propertyCard;
+            if (propertyCardController.allStreetsInGroupOwnedBy(streetCard, player)) {
+                PropertyCard[] propertyCards = propertyCardController.getStreetsInSameGroup(streetCard);
+                if (streetCardsThatCanHaveHouses.stream().noneMatch(streetCard1 -> {
+                    for (PropertyCard c : propertyCards) {
+                        if (c.getName().equals(streetCard1.getName())) {
+                            return true;
+                        }
+                    }
+                    return false;
+                })) {
+                    for (PropertyCard property : propertyCards) {
+                        streetCardsThatCanHaveHouses.add((StreetCard) property);
+                    }
+                }
+            }
+        }
+
+        ArrayList<StreetCard> streetOptions = new ArrayList<>();
+        for (StreetCard street : streetCardsThatCanHaveHouses) {
+            if (propertyCardController.housesWouldBeEvenlyPlacedInGroup(street, true) && street.getHouses() != 5) {
+                streetOptions.add(street);
+            }
+        }
+        String[] streetNames = new String[streetOptions.size()];
+        for (int i = 0; i < streetOptions.size(); ++i) {
+            streetNames[i] = streetOptions.get(i).getName();
+        }
+
+        String streetName = GUIInstance.getInstance().getUserSelection("Select where to purchase a house, ", streetNames);
+        for (int i = 0; i < streetNames.length; i++) {
+            if (streetNames[i].equals(streetName)) {
+                propertyCardController.purchaseHouse(streetOptions.get(i), player);
+            }
+        }
     }
 
-    public void sellHouse(){
+    public void sellHouse(Player player, PropertyCardController propertyCardController){
         //TODO
     }
 

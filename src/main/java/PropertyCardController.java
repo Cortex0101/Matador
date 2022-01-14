@@ -128,7 +128,7 @@ public class PropertyCardController {
         return Arrays.copyOfRange(propertyCards, indexOfFirstCardInGroup, indexOfFirstCardInGroup + amountOfFieldsInGroup);
     }
 
-    boolean allStreetsInGroupOwnedBy(StreetCard streetCard, Player player) {
+    public boolean allStreetsInGroupOwnedBy(StreetCard streetCard, Player player) {
         Player owner = streetCard.getOwner();
         if (owner == null) return false;
         if (!streetCard.getOwner().equals(player)) return false;
@@ -143,7 +143,7 @@ public class PropertyCardController {
         return true;
     }
 
-    private boolean housesWouldBeEvenlyPlacedInGroup(StreetCard streetCard, boolean purchase) {
+    public boolean housesWouldBeEvenlyPlacedInGroup(StreetCard streetCard, boolean purchase) {
         PropertyCard[] streetCards = getStreetsInSameGroup(streetCard);
         for (PropertyCard card : streetCards) {
             if (purchase) {
