@@ -1,26 +1,20 @@
 import java.util.*;
 
 public class ChanceCardsPileController {
-    private Deque<ChanceCardController> chanceCards;
+    private Deque<ChanceCard> chanceCards;
 
-    public ChanceCardsPileController(ChanceCardController[] chanceCardControllers) {
-        shufflePile(chanceCardControllers);
-        chanceCards = new ArrayDeque<>(Arrays.asList(chanceCardControllers));
+    public ChanceCardsPileController(ChanceCard[] chanceCards) {
+        shufflePile(chanceCards);
+        this.chanceCards = new ArrayDeque<>(Arrays.asList(chanceCards));
     }
 
-    public ChanceCardController drawCard() {
-        ChanceCardController ccc = this.chanceCards.pop();
-        this.chanceCards.addLast(ccc); // Place at the bottom of pile after drawing
-        return ccc;
+    public ChanceCard drawCard() {
+        ChanceCard cc = this.chanceCards.pop();
+        this.chanceCards.addLast(cc); // Place at the bottom of pile after drawing
+        return cc;
     }
 
-    public static void shufflePile(ChanceCardController[] chanceCardControllers) {
-        Collections.shuffle(Arrays.asList(chanceCardControllers));
-    }
-
-    public void addCard(ChanceCardController chanceCardController) {
-        this.chanceCards.addFirst(chanceCardController);
+    public static void shufflePile(ChanceCard[] chanceCards) {
+        Collections.shuffle(Arrays.asList(chanceCards));
     }
 }
-
-//TODO add new card to the pile

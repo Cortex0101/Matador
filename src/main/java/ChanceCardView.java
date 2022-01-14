@@ -8,6 +8,4 @@ public class ChanceCardView {
     public void display() {
         GUIInstance.getInstance().displayChanceCard(this.text);
     }
-
-    public void setText(String text) {this.text = text;}
 }
