@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class HandleStartOfTurnChoice {
 
     public void roll(PlayerController playerController){
@@ -7,12 +10,88 @@ public class HandleStartOfTurnChoice {
         }
     }
 
-    public void buyHouse(){
-        //TODO
+    public void buyHouse(Player player, PropertyCardController propertyCardController){
+        final PropertyCard[] ownedPropertyCards = player.getOwnedPropertyCards(propertyCardController);
+        ArrayList<StreetCard> streetCardsThatCanHaveHouses = new ArrayList<>();
+        for (PropertyCard propertyCard : ownedPropertyCards) {
+            if (!(propertyCard instanceof StreetCard)) continue;
+
+            StreetCard streetCard = (StreetCard) propertyCard;
+            if (propertyCardController.allStreetsInGroupOwnedBy(streetCard, player)) {
+                PropertyCard[] propertyCards = propertyCardController.getStreetsInSameGroup(streetCard);
+                if (streetCardsThatCanHaveHouses.stream().noneMatch(streetCard1 -> {
+                    for (PropertyCard c : propertyCards) {
+                        if (c.getName().equals(streetCard1.getName())) {
+                            return true;
+                        }
+                    }
+                    return false;
+                })) {
+                    for (PropertyCard property : propertyCards) {
+                        streetCardsThatCanHaveHouses.add((StreetCard) property);
+                    }
+                }
+            }
+        }
+
+        ArrayList<StreetCard> streetOptions = new ArrayList<>();
+        for (StreetCard street : streetCardsThatCanHaveHouses) {
+            if (propertyCardController.housesWouldBeEvenlyPlacedInGroup(street, true) && street.getHouses() != 5) {
+                streetOptions.add(street);
+            }
+        }
+        String[] streetNames = new String[streetOptions.size()];
+        for (int i = 0; i < streetOptions.size(); ++i) {
+            streetNames[i] = streetOptions.get(i).getName();
+        }
+
+        if (streetNames.length < 1) return;
+
+        String streetName = GUIInstance.getInstance().getUserSelection("Select where to purchase a house, ", streetNames);
+        for (int i = 0; i < streetNames.length; i++) {
+            if (streetNames[i].equals(streetName)) {
+                propertyCardController.purchaseHouse(streetOptions.get(i), player);
+            }
+        }
     }
 
-    public void sellHouse(){
-        //TODO
+    public void sellHouse(Player player, PropertyCardController propertyCardController){
+        final PropertyCard[] ownedPropertyCards = player.getOwnedPropertyCards(propertyCardController);
+
+        int amountOfOwnedStreets = 0;
+        for (PropertyCard card : ownedPropertyCards) {
+            if (card instanceof StreetCard) ++amountOfOwnedStreets;
+        }
+
+        StreetCard[] ownedStreetCards = new StreetCard[amountOfOwnedStreets];
+        int j = 0;
+        for (PropertyCard card : ownedPropertyCards) {
+            if (card instanceof StreetCard) {
+                ownedStreetCards[j] = (StreetCard) card;
+                ++j;
+            }
+        }
+
+        ArrayList<StreetCard> streetCardsThatCanSellHouses = new ArrayList<>();
+        for (StreetCard streetCard : ownedStreetCards) {
+            if (streetCard.getHouses() > 0 && propertyCardController.housesWouldBeEvenlyPlacedInGroup(streetCard, false)) {
+                streetCardsThatCanSellHouses.add(streetCard);
+            }
+        }
+
+        String[] streetNames = new String[streetCardsThatCanSellHouses.size()];
+        for (int i = 0; i < streetCardsThatCanSellHouses.size(); i++) {
+            streetNames[i] = streetCardsThatCanSellHouses.get(i).getName();
+        }
+
+        if (streetNames.length < 1) return;
+
+        String streetName = GUIInstance.getInstance().getUserSelection("Select property to sell house on, ", streetNames);
+        for (int i = 0; i < streetNames.length; i++) {
+            if (streetNames[i].equals(streetName)) {
+                propertyCardController.sellHouse(streetCardsThatCanSellHouses.get(i), player);
+            }
+        }
     }
 
     public void mortgageProperty(Player player, PropertyCardController propertyCards){

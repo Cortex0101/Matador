@@ -52,10 +52,10 @@ public class GameBoard {
                             //TODO
                             break;
                         case "Buy houses":
-                            //TODO
+                            handleStartOfTurnChoice.buyHouse(playerController.getActivePlayer(), propertyCardController);
                             break;
                         case "Sell houses":
-                            //TODO
+                            handleStartOfTurnChoice.sellHouse(playerController.getActivePlayer(), propertyCardController);
                             break;
                         case "Mortgage property":
                             handleStartOfTurnChoice.mortgageProperty(playerController.getActivePlayer(), propertyCardController);
