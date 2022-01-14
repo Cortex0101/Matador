@@ -3,7 +3,6 @@ public class RaffleCup {
     private final Die die2 = new Die();
 
     public RaffleCup() {
-        shake();
     }
 
     public int[] getIndividualEyes() {
@@ -15,6 +14,10 @@ public class RaffleCup {
     }
 
     public int shake() {
+        if (Debugger.getInstance().enabled()) {
+            return Debugger.getInstance().getIntegerFromConsole();
+        }
+
         die1.roll();
         die2.roll();
         return getEyes();
