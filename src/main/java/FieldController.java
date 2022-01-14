@@ -30,16 +30,28 @@ public class FieldController {
         else if (propertyType.equals("Brewery") && propertyCards.getCorrespondingPropertyCard(position).getOwner()!=null) {
             landOnOwnedProperty(position, activePlayer, players, propertyType, propertyCards, handleStartOfTurnChoice);
         }
-        else{ landOnUnownedProperty(position, activePlayer, propertyCards, handleStartOfTurnChoice); }
+        else{ landOnUnownedProperty(position, activePlayer, players, propertyCards, handleStartOfTurnChoice); }
     }
 
-    private void landOnUnownedProperty(int position, Player player, PropertyCardController propertyCards, HandleStartOfTurnChoice handleStartOfTurnChoice){
-        if(checkIfPlayerCanAffordCost(handleStartOfTurnChoice, player,propertyCards, FieldModel.getFieldPrice(position))) {
-            Bank.payBank(player, FieldModel.getFieldPrice(position));
-            propertyCards.getCorrespondingPropertyCard(position).setOwner(player);
+    private void landOnUnownedProperty(int position, Player activePlayer, Player[] players, PropertyCardController propertyCards, HandleStartOfTurnChoice handleStartOfTurnChoice){
+        String unownedPropertyChoice = GUIInstance.getInstance().getUserSelection("Choose what to do with the property", "buy property", "auction property");
+        if(unownedPropertyChoice.equals("auction property")){
+            HandleAuction handleAuction = new HandleAuction();
+            handleAuction.Auction(players);
+            Bank.payBank(handleAuction.getHighestBidder(), handleAuction.getHighestbid());
+            propertyCards.getCorrespondingPropertyCard(position).setOwner(handleAuction.getHighestBidder());
             GUI_Ownable gui_ownable = (GUI_Ownable) GUIInstance.getInstance().getFields()[position];
-            gui_ownable.setBorder(player.getCar().getCarColor());
-            gui_ownable.setOwnerName(player.getName());
+            gui_ownable.setBorder(handleAuction.getHighestBidder().getCar().getCarColor());
+            gui_ownable.setOwnerName(activePlayer.getName());
+        }
+        else {
+            if (checkIfPlayerCanAffordCost(handleStartOfTurnChoice, activePlayer, propertyCards, FieldModel.getFieldPrice(position))) {
+                Bank.payBank(activePlayer, FieldModel.getFieldPrice(position));
+                propertyCards.getCorrespondingPropertyCard(position).setOwner(activePlayer);
+                GUI_Ownable gui_ownable = (GUI_Ownable) GUIInstance.getInstance().getFields()[position];
+                gui_ownable.setBorder(activePlayer.getCar().getCarColor());
+                gui_ownable.setOwnerName(activePlayer.getName());
+            }
         }
     }
     private void landOnOwnedProperty(int position, Player activePlayer, Player[] players, String propertyType, PropertyCardController propertyCards, HandleStartOfTurnChoice handleStartOfTurnChoice){
