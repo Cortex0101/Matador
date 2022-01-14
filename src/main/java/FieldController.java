@@ -66,7 +66,7 @@ public class FieldController {
     }
 
     public void landOnChance(){
-        //TODO
+        //TODO can't make this part before seing the implementation of the individual cards
     }
 
     public void landOnGoToJail(Player player){
