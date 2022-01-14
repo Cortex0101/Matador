@@ -32,7 +32,7 @@ public class GameBoard {
 
                     String playerChoice = GUIInstance.getInstance().getUserSelection(playerController.getActivePlayer().getName() + ", it is your turn. Choose what to do.", "Roll", "Trade Properties", "Buy houses", "Sell houses", "Mortgage property", "Unmortgage Property");
                     switch (playerChoice) {
-                        case "Roll": //it's not pretty but i didn't wanna mess with it just to cram it all in the HandleStartOfTunrChoice.roll method so it's staying liek this for now
+                        case "Roll": //it's not pretty but i didn't wanna mess with it just to cram it all in the HandleStartOfTurnChoice.roll method so it's staying liek this for now
                             do {
                                 playerController.getActivePlayer().getCar().moveCar(rollDie());
                                 handleStartOfTurnChoice.roll(playerController);
@@ -71,36 +71,45 @@ public class GameBoard {
         System.exit(0);
     }
 
-    //TODO handlejail skal kigges på
-
     private void handleInJail() {
-        boolean pay = false; // TODO
-        boolean chanceCard = false; // TODO
-        boolean roll = true; // TODO
-        boolean isDouble = false; // TODO
-
-
-        if (playerController.getActivePlayer().getCar().isInJail() && chanceCard) {
-            playerController.getActivePlayer().setHasGetOutOfJailCard(false);
-            playerController.getActivePlayer().getCar().setInJail(false);
-
-        }
-
-        else if (playerController.getActivePlayer().getCar().isInJail() && roll){
-            if (isDouble){ playerController.getActivePlayer().getCar().setInJail(false); }
-            else if (!isDouble && playerController.getActivePlayer().getRollCount() < 3) { playerController.getActivePlayer().IncrementRollCount();
-                System.out.println(playerController.getActivePlayer().getRollCount());}
-            else {
-                Bank.payBank(playerController.getActivePlayer(), 1000);
-                playerController.getActivePlayer().resetRollCount();
-                playerController.getActivePlayer().getCar().setInJail(false);
+        if (playerController.getActivePlayer().getCar().isInJail()) {
+            String doesntHaveGetOutOfJailCard = "";
+            if(!playerController.getActivePlayer().hasGetOutOfJailCard()){
+                doesntHaveGetOutOfJailCard = ": no card owned";
             }
-        }
 
-
-        else if (playerController.getActivePlayer().getCar().isInJail() && pay){
-            Bank.payBank(playerController.getActivePlayer(), 1000);
-            playerController.getActivePlayer().getCar().setInJail(false);
+            String handleJailChoice = GUIInstance.getInstance().getUserSelection(playerController.getActivePlayer().getName() + ", choose how you wanna get out of jail.", "pay 1000 kr.", "use chance card"+doesntHaveGetOutOfJailCard, "roll: " + (3 - playerController.getActivePlayer().getRollCount()) + " attempts left");
+            if (handleJailChoice.equals("roll: " + (3 - playerController.getActivePlayer().getRollCount()) + " attempts left")) {
+                handleJailChoice = "roll";
+            }
+            switch (handleJailChoice) {
+                case "pay 1000 kr.":
+                    if (playerController.getActivePlayer().getAccount().getBalance() > 1000) {
+                        Bank.payBank(playerController.getActivePlayer(), 1000);
+                        playerController.getActivePlayer().getCar().setInJail(false);
+                    } else {
+                        handleStartOfTurnChoice.mortgageProperty(playerController.getActivePlayer(), propertyCardController);
+                    }
+                    break;
+                case "use chance card":
+                    if (playerController.getActivePlayer().hasGetOutOfJailCard()) {
+                        playerController.getActivePlayer().setHasGetOutOfJailCard(false);
+                        playerController.getActivePlayer().getCar().setInJail(false);
+                    }
+                    break;
+                case "roll":
+                    if (playerController.getActivePlayer().getRaffleCup().isDouble()) {
+                        playerController.getActivePlayer().getCar().setInJail(false);
+                    } else if (!playerController.getActivePlayer().getRaffleCup().isDouble() && playerController.getActivePlayer().getRollCount() < 3) {
+                        playerController.getActivePlayer().IncrementRollCount();
+                        playerController.nextPlayerTurn();
+                    } else {
+                        Bank.payBank(playerController.getActivePlayer(), 1000);
+                        playerController.getActivePlayer().resetRollCount();
+                        playerController.getActivePlayer().getCar().setInJail(false);
+                    }
+                    break;
+            }
         }
     }
 
