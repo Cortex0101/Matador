@@ -5,7 +5,7 @@ public class GameBoard {
     private final FieldModel fieldModel;
     private final Player[] players;
     private final PlayerController playerController;
-    private final ChanceCardCreator freeFieldCards;
+    private final ChanceCardCreator cards;
     private ChanceCardsPileController chanceCardsPile;
     PropertyCard[] propertyCards = PropertyCardCreator.createPropertyCards();
     private PropertyCardController propertyCardController;
@@ -19,9 +19,8 @@ public class GameBoard {
         this.fieldController = new FieldController();
         this.handleStartOfTurnChoice = new HandleStartOfTurnChoice();
         playerController = new PlayerController(players);
-        freeFieldCards = new ChanceCardCreator();
-        chanceCardsPile = new ChanceCardsPileController(freeFieldCards.getFreeFieldChanceCardControllers());
-        chanceCardsPile.addCard(new OutOfJailChanceCardController());
+        cards = new ChanceCardCreator();
+        chanceCardsPile = new ChanceCardsPileController(cards.getChanceCards());
         GUI_Center.chanceCardText = "Chance";
     }
 
