@@ -2,7 +2,7 @@ public class CarModel {
     private int position;
     private boolean inJail;
     private boolean passedStart;
-    public static final int MAX_POSITION = 23; // Number of fields (0 is GO, and 23 is the last one, so its wraps on 24)
+    public static final int MAX_POSITION = 39; // Number of fields (0 is GO, and 23 is the last one, so its wraps on 24)
 
     public CarModel() {
         position = 0;

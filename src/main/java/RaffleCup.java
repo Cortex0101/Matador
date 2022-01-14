@@ -6,6 +6,10 @@ public class RaffleCup {
         shake();
     }
 
+    public int[] getIndividualEyes() {
+        return new int[]{die1.getValue(), die2.getValue()};
+    }
+
     public int getEyes() {
         return die1.getValue() + die2.getValue();
     }

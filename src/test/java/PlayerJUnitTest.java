@@ -16,7 +16,7 @@ class PlayerJUnitTest {
     @DisplayName("Player can roll dice")
     @Test
     void playerCanThrowDice() {
-        int roll = player.getDie().roll();
+        int roll = player.getRaffleCup().shake();
         assertTrue(0 < roll && roll < 7);
     }
 }

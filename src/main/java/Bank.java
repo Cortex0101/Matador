@@ -1,10 +1,7 @@
 public class Bank {
-    public static WinnerGUIController winnerController;
-
     public static void transferMoney(Player from, Player to, int amount) {
         if (!from.getAccount().withdraw(amount)) {
             System.out.println("Player " + from.getName() + " ran out of money!");
-            winnerController.printPlayerInfoTable();
         }
         to.getAccount().deposit(amount);
         to.updateAccountGUI();
@@ -14,7 +11,6 @@ public class Bank {
     public static void payBank(Player from, int amount) {
         if (!from.getAccount().withdraw(amount)) {
             System.out.println("Player " + from.getName() + " ran out of money!");
-            winnerController.printPlayerInfoTable();
         }
         from.updateAccountGUI();
     }

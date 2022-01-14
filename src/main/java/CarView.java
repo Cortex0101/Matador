@@ -1,6 +1,5 @@
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Player;
-
 import java.awt.*;
 
 public class CarView {
@@ -25,7 +24,7 @@ public class CarView {
     }
 
     private static Color getColor(int i) {
-        Color[] colors = new Color[]{Color.blue, Color.red, Color.yellow, Color.green, Color.orange, Color.white};
+        Color[] colors = new Color[]{Color.blue, Color.red, Color.yellow, Color.green, Color.cyan, Color.white};
         return colors[i];
     }
 }

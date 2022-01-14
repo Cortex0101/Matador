@@ -1,145 +1,241 @@
-Title: GO
-Subtext: 2$
-Description: Welcome to the starting Zone, you receive 2$ when you pass or land on this field
-Rent: -1
-Color: #ffffff
+Title: START
+Subtext: 4000$
+Description: Every time you pass or land on this field, you gain 4000 kr.
+Rent: 0
+Color: #A0292B
 
-Title: BURGER JOINT
-Subtext: 1$
-Description: Big Mac on sale
-Rent: 1
-Color: #7f5822
-
-Title: PIZZA HOUSE
-Subtext: 1$
-Description: All you can eat pizza for the small price of 1 dollar
-Rent: 1
-Color: #7f5822
+Title: Rødovrevej 1
+Subtext: 1200$
+Description: Field Rent: 50 kr. \n 1 House: 250 kr. \n 2 Houses: 750 kr. \n 3 Houses: 2250 kr. \n 4 Houses: 4000 kr. \n Hotel: 6000 kr. \n House Cost: 1000 kr. \n Mortgage: 600 kr.
+Rent: 50
+Color: #01375D
 
 Title: ?
-Subtext: Chance
-Description: Chance
-Rent: -1
-Color: #ffffff
+Subtext: Chance card
+Description: Chance field. Draw a card and see what happens.
+Rent: 0
+Color: #4E7613
 
-Title: CANDY STORE
-Subtext: 1$
-Description: No amount of candy is enough
-Rent: 1
-Color: #2acaea
+Title: Hvidovrevej 1
+Subtext: 1200$
+Description: Field Rent: 50 kr. \n 1 House: 250 kr. \n 2 Houses: 750 kr. \n 3 Houses: 2250 kr. \n 4 Houses: 4000 kr. \n Hotel: 6000 kr. \n House Cost: 1000 kr. \n Mortgage: 600 kr.
+Rent: 50
+Color: #01375D
 
-Title: ICE CREAM PARLOR
-Subtext: 1$
-Description: So much Ice Cream, yet no time to enjoy it all
-Rent: 1
-Color: #2acaea
+Title: Income Tax
+Subtext: 4000$ or 10%
+Description: Choose to either pay 4000 kr, or pay 10% of your current money.
+Rent: 4000
+Color: #6F9695
 
-Title: Jail
-Subtext: JAIL
-Description: Here you can visit the naughty boys and girls
-Rent: -1
-Color: #ffffff
+Title: Helsingør - Helsingborg 2
+Subtext: 4000$
+Description: 1 Shipping Owned: 500 kr. \n 2 Shipping Owned: 1000 kr. \n 3 Shipping Owned: 2000 kr. \n 4 Shipping Owned: 4000 kr. \n Mortgage: 2000 kr.
+Rent: 4000
+Color: #033059
 
-Title: MUSEUM
-Subtext: 2$
-Description: Learn some stuff, or take a nap
-Rent: 2
-Color: #ffb6ff
-
-Title: LIBRARY
-Subtext: 2$
-Description: Quiet! This is a public library not a concert!
-Rent: 2
-Color: #ffb6ff
+Title: Roskildevej 3
+Subtext: 2000$
+Description: Field Rent: 100 kr. \n 1 House: 600 kr. \n 2 Houses: 1800 kr. \n 3 Houses: 5400 kr. \n 4 Houses: 8000 kr. \n Hotel: 11000 kr. \n House Cost: 1000 kr. \n Mortgage: 1000 kr.
+Rent: 100
+Color: #9B3618
 
 Title: ?
-Subtext: Chance
-Description: Chance
-Rent: -1
-Color: #ffffff
+Subtext: Chance card
+Description: Chance field. Draw a card and see what happens.
+Rent: 0
+Color: #4E7613
 
-Title: SKATE PARK
-Subtext: 2$
-Description: Safety first, Helmet and kneecaps. Now do a backflip
-Rent: 2
-Color: #d26742
+Title: Valby Langgade 3
+Subtext: 2000$
+Description: Field Rent: 100 kr. \n 1 House: 600 kr. \n 2 Houses: 1800 kr. \n 3 Houses: 5400 kr. \n 4 Houses: 8000 kr. \n Hotel: 11000 kr. \n House Cost: 1000 kr. \n Mortgage: 1000 kr.
+Rent: 100
+Color: #9B3618
 
-Title: SWIMMING POOL
-Subtext: 2$
-Description: CAREFUL! the floor is wet but do remember to try our fries.
-Rent: 2
-Color: #d26742
+Title: Allégade 3
+Subtext: 2400$
+Description: Field Rent: 150 kr. \n 1 House: 800 kr. \n 2 Houses: 2000 kr. \n 3 Houses: 6000 kr. \n 4 Houses: 9000 kr. \n Hotel: 12000 kr. \n House Cost: 1000 kr. \n Mortgage: 1200 kr.
+Rent: 150
+Color: #9B3618
 
-Title: PARKING SPOT
-Subtext: Parking
-Description: Free Parking
-Rent: -1
-Color: #ffffff
+Title: JAIL
+Subtext: Visiting jail
+Description: Visiting jail: you are free to proceed. \n \n In jail: either roll the dice and get doubles, pay 1000 kr. or use a get out of jail card, to get freed
+Rent: 0$
+Color: #150C07
 
-Title: GAME ARCADE
-Subtext: 3$
-Description: Welcome to the game arcade, we got every game under the sun. If you can beat our pacman record you get a free hotdog.
-Rent: 3
-Color: #f6546a
+Title: Frederiksberg Allé 4
+Subtext: 2800$
+Description: Field Rent: 200 kr. \n 1 House: 1000 kr. \n 2 Houses: 3000 kr. \n 3 Houses: 9000 kr. \n 4 Houses: 12500 kr. \n Hotel: 15000 kr. \n House Cost: 2000 kr. \n Mortgage: 1400 kr.
+Rent: 200
+Color: #806D03
 
-Title: MOVIE THEATER
-Subtext: 3$
-Description: Sorry you have to be this tall to see this movie.
-Rent: 3
-Color: #f6546a
+Title: Squash 5
+Subtext: 3000$
+Description: 1 Brewery owned: pay equal to dice roll x100. \n 2 Brewery owned: pay equal to dice roll x200.
+Rent: 100
+Color: #96201E
+
+Title: Bülowsvej 4
+Subtext: 2800$
+Description: Field Rent: 200 kr. \n 1 House: 1000 kr. \n 2 Houses: 3000 kr. \n 3 Houses: 9000 kr. \n 4 Houses: 12500 kr. \n Hotel: 15000 kr. \n House Cost: 2000 kr. \n Mortgage: 1400 kr.
+Rent: 200
+Color: #806D03
+
+Title: Gl. Kongevej 4
+Subtext: 3200$
+Description: Field Rent: 250 kr. \n 1 House: 1250 kr. \n 2 Houses: 3750 kr. \n 3 Houses: 10000 kr. \n 4 Houses: 14000 kr. \n Hotel: 18000 kr. \n House Cost: 2000 kr. \n Mortgage: 1600 kr.
+Rent: 250
+Color: #806D03
+
+Title: Mols-linien 2
+Subtext: 4000$
+Description: 1 Shipping Owned: 500 kr. \n 2 Shipping Owned: 1000 kr. \n 3 Shipping Owned: 2000 kr. \n 4 Shipping Owned: 4000 kr. \n Mortgage: 2000 kr.
+Rent: 500
+Color: #033059
+
+Title: Bernstorfsvej 6
+Subtext: 3600$
+Description: Field Rent: 300 kr. \n 1 House: 1400 kr. \n 2 Houses: 4000 kr. \n 3 Houses: 11000 kr. \n 4 Houses: 15000 kr. \n Hotel: 19000 kr. \n House Cost: 2000 kr. \n Mortgage: 1800 kr.
+Rent: 300
+Color: #696A5C
 
 Title: ?
-Subtext: Chance
-Description: Chance
-Rent: -1
-Color: #ffffff
+Subtext: Chance card
+Description: Chance field. Draw a card and see what happens.
+Rent: 0
+Color: #4E7613
 
-Title: TOY STORE
-Subtext: 3$
-Description: We have recently restocked on pokemon boosters.
-Rent: 3
-Color: #d8d8e6
+Title: Hellerupvej 6
+Subtext: 3600$
+Description: Field Rent: 300 kr. \n 1 House: 1400 kr. \n 2 Houses: 4000 kr. \n 3 Houses: 11000 kr. \n 4 Houses: 15000 kr. \n Hotel: 19000 kr. \n House Cost: 2000 kr. \n Mortgage: 1800 kr.
+Rent: 300
+Color: #696A5C
 
-Title: PET STORE
-Subtext: 3$
-Description: You can try to have a snake around your neck, but you have to calm down.
-Rent: 3
-Color: #d8d8e6
+Title: Strandvejen 6
+Subtext: 4000$
+Description: Field Rent: 350 kr. \n 1 House: 1600 kr. \n 2 Houses: 4400 kr. \n 3 Houses: 12000 kr. \n 4 Houses: 16000 kr. \n Hotel: 20000 kr. \n House Cost: 2000 kr. \n Mortgage: 2000 kr.
+Rent: 350
+Color: #696A5C
+
+Title: FREE PARKING
+Subtext: Free parking
+Description: Free spot. Nothing happens on this spot.
+Rent: 0
+Color: #6F9695
+
+Title: Trianglen 7
+Subtext: 4400$
+Description: Field Rent: 350 kr. \n 1 House: 1800 kr. \n 2 Houses: 5000 kr. \n 3 Houses: 14000 kr. \n 4 Houses: 17500 kr. \n Hotel: 21000 kr. \n House Cost: 3000 kr. \n Mortgage: 2200 kr.
+Rent: 350
+Color: #A02D26
+
+Title: ?
+Subtext: Chance card
+Description: Chance field. Draw a card and see what happens.
+Rent: 0
+Color: #4E7613
+
+Title: Østerbrogade 7
+Subtext: 4400$
+Description: Field Rent: 350 kr. \n 1 House: 1800 kr. \n 2 Houses: 5000 kr. \n 3 Houses: 14000 kr. \n 4 Houses: 17500 kr. \n Hotel: 21000 kr. \n House Cost: 3000 kr. \n Mortgage: 2200 kr.
+Rent: 350
+Color: #A02D26
+
+Title: Grønningen 7
+Subtext: 4800$
+Description: Field Rent: 400 kr. \n 1 House: 2000 kr. \n 2 Houses: 6000 kr. \n 3 Houses: 15000 kr. \n 4 Houses: 18500 kr. \n Hotel: 22000 kr. \n House Cost: 3000 kr. \n Mortgage: 2400 kr.
+Rent: 400
+Color: #A02D26
+
+Title: Gedser - Rostock 2
+Subtext: 4000$
+Description: 1 Shipping Owned: 500 kr. \n 2 Shipping Owned: 1000 kr. \n 3 Shipping Owned: 2000 kr. \n 4 Shipping Owned: 4000 kr. \n Mortgage: 2000 kr.
+Rent: 500
+Color: #033059
+
+Title: Bredgade 8
+Subtext: 5200$
+Description: Field Rent: 450 kr. \n 1 House: 2200 kr. \n 2 Houses: 6600 kr. \n 3 Houses: 16000 kr. \n 4 Houses: 19500 kr. \n Hotel: 23000 kr. \n House Cost: 3000 kr. \n Mortgage: 2600 kr.
+Rent: 450
+Color: #B49F8B
+
+Title: Kgs. Nytorv 8
+Subtext: 5200$
+Description: Field Rent: 450 kr. \n 1 House: 2200 kr. \n 2 Houses: 6600 kr. \n 3 Houses: 16000 kr. \n 4 Houses: 19500 kr. \n Hotel: 23000 kr. \n House Cost: 3000 kr. \n Mortgage: 2600 kr.
+Rent: 450
+Color: #B49F8B
+
+Title: Coca Cola 9
+Subtext: 3000$
+Description: 1 Brewery owned: pay equal to dice roll x100. \n 2 Brewery owned: pay equal to dice roll x200.
+Rent: 100
+Color: #922121
+
+Title: Østergade 8
+Subtext: 5600$
+Description: Field Rent: 500 kr. \n 1 House: 2400 kr. \n 2 Houses: 7200 kr. \n 3 Houses: 17000 kr. \n 4 Houses: 20500 kr. \n Hotel: 24000 kr. \n House Cost: 3000 kr. \n Mortgage: 2800 kr.
+Rent: 500
+Color: #B49F8B
 
 Title: GO TO JAIL
-Subtext: GO TO JAIL
-Description: Go to jail
-Rent: -1
-Color: #ffffff
+Subtext: Go to jail
+Description: Go directly to jail. You do not recieve any bonus money from passing start
+Rent: 0
+Color: #0D0908
 
-Title: BOWLING ALLEY
-Subtext: 4$
-Description: Right in the gutter, every single time...
-Rent: 4
-Color: #97c783
+Title: Amagertorv 10
+Subtext: 6000$
+Description: Field Rent: 550 kr. \n 1 House: 2600 kr. \n 2 Houses: 7800 kr. \n 3 Houses: 18000 kr. \n 4 Houses: 22000 kr. \n Hotel: 25000 kr. \n House Cost: 4000 kr. \n Mortgage: 3000 kr.
+Rent: 550
+Color: #B0840A
 
-Title: THE ZOO
-Subtext: 4$
-Description: Attention Attention, We are closing the zoo in 1 hour.
-Rent: 4
-Color: #97c783
+Title: Vimmelskaftet 10
+Subtext: 6000$
+Description: Field Rent: 550 kr. \n 1 House: 2600 kr. \n 2 Houses: 7800 kr. \n 3 Houses: 18000 kr. \n 4 Houses: 22000 kr. \n Hotel: 25000 kr. \n House Cost: 4000 kr. \n Mortgage: 3000 kr.
+Rent: 550
+Color: #B0840A
 
 Title: ?
-Subtext: Chance
-Description: Chance
-Rent: -1
-Color: #ffffff
+Subtext: Chance card
+Description: Chance field. Draw a card and see what happens.
+Rent: 0
+Color: #4E7613
 
-Title: PARK PLACE
-Subtext: 5$
-Description: Sorry, no children allowed
-Rent: 5
-Color: #3481ED
+Title: Nygade 10
+Subtext: 6400$
+Description: Field Rent: 600 kr. \n 1 House: 3000 kr. \n 2 Houses: 9000 kr. \n 3 Houses: 20000 kr. \n 4 Houses: 24000 kr. \n Hotel: 28000 kr. \n House Cost: 4000 kr. \n Mortgage: 3200 kr.
+Rent: 600
+Color: #B0840A
 
-Title: BOARDWALK
-Subtext: 5$
-Description: The Red Dragon roller coaster is finally done, come and try if you dare!
-Rent: 5
-Color: #3481ED
+Title: Rødby - Puttgarden 2
+Subtext: 4000$
+Description: 1 Shipping Owned: 500 kr. \n 2 Shipping Owned: 1000 kr. \n 3 Shipping Owned: 2000 kr. \n 4 Shipping Owned: 4000 kr. \n Mortgage: 2000 kr.
+Rent: 500
+Color: #033059
+
+Title: ?
+Subtext: Chance card
+Description: Chance field. Draw a card and see what happens.
+Rent: 0
+Color: #4E7613
+
+Title: Frederiksberggade 11
+Subtext: 7000$
+Description: Field Rent: 700 kr. \n 1 House: 3500 kr. \n 2 Houses: 10000 kr. \n 3 Houses: 22000 kr. \n 4 Houses: 26000 kr. \n Hotel: 30000 kr. \n House Cost: 4000 kr. \n Mortgage: 3500 kr.
+Rent: 700
+Color: #331842
+
+Title: State Tax
+Subtext: 2000$
+Description: Pay 2000 kr.
+Rent: 2000
+Color: #6F9695
+
+Title: Rådhuspladsen 11
+Subtext: 8000$
+Description: Field Rent: 1000 kr. \n 1 House: 4000 kr. \n 2 Houses: 12000 kr. \n 3 Houses: 28000 kr. \n 4 Houses: 34000 kr. \n Hotel: 40000 kr. \n House Cost: 4000 kr. \n Mortgage: 4000 kr.
+Rent: 1000
+Color: #331842
 
 END OF DOCUMENT
