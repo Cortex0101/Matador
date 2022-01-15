@@ -1,4 +1,7 @@
 import gui_codebehind.GUI_Center;
+import gui_main.GUI;
+
+import java.awt.*;
 
 public class GameBoard {
     private final FieldController fieldController;
@@ -22,6 +25,7 @@ public class GameBoard {
         cards = new ChanceCardCreator();
         chanceCardsPile = new ChanceCardsPileController(cards.getChanceCards());
         GUI_Center.chanceCardText = "Chance";
+
     }
 
     public void play() {
@@ -114,7 +118,11 @@ public class GameBoard {
     }
 
     private int rollDie() {
-        GUIInstance.getInstance().getUserButtonPressed(playerController.getActivePlayer().getName() + ", it is your turn.","Roll dice");
+        String rollDiceText = ", it is your turn. roll the dice";
+        if (playerController.getActivePlayer().getRollCount()>=1) {
+            rollDiceText = ", it is your turn. roll the dice \n you have rolled doubles "+playerController.getActivePlayer().getRollCount()+" times this round";
+        }
+        GUIInstance.getInstance().getUserButtonPressed(playerController.getActivePlayer().getName() + rollDiceText, "Roll dice");
         int roll = playerController.getActivePlayer().getRaffleCup().shake();
         int[] eyes = playerController.getActivePlayer().getRaffleCup().getIndividualEyes();
         GUIInstance.getInstance().setDice(eyes[0], eyes[1]);
