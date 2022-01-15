@@ -29,7 +29,13 @@ public class GameBoard {
     }
 
     public void play() {
-        while (players.length > 1) {
+        int numberOfActivePlayers = players.length;
+        while (numberOfActivePlayers
+                > 1) {
+            numberOfActivePlayers = 0;
+            for (int i = 0; i < players.length; i++) {
+                if (players[i].getIsActive()){numberOfActivePlayers++;}
+            }
             handleInJail();
             if (playerController.getActivePlayer().getIsActive()) {
                 if (!playerController.getActivePlayer().getCar().isInJail()) {
