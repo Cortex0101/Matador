@@ -5,7 +5,7 @@ public class PlayerCreator {
 
     public PlayerCreator(){
         final int PLAYER_COUNT = getPlayerCountFromUser();
-        final int INITIAL_CAPITAL = 50000;
+        final int INITIAL_CAPITAL = 30000;
 
         players = new Player[PLAYER_COUNT];
         for (int i = 0; i < PLAYER_COUNT; i++) {
