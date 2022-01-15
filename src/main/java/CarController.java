@@ -40,4 +40,8 @@ public class CarController {
     public int getCarPosition() {
         return carModel.getPosition();
     }
+
+    public void removeCarFromGame(Player player){
+        carView.removeCarFromGame(player.getCar().getCarPosition());
+    }
 }
