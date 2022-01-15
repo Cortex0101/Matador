@@ -36,7 +36,7 @@ public class GameBoard {
 
                     String playerChoice = GUIInstance.getInstance().getUserSelection(playerController.getActivePlayer().getName() + ", it is your turn. Choose what to do.", "Roll", "Trade Properties", "Buy houses", "Sell houses", "Mortgage property", "Unmortgage Property");
                     switch (playerChoice) {
-                        case "Roll": //it's not pretty but i didn't wanna mess with it just to cram it all in the HandleStartOfTurnChoice.roll method so it's staying liek this for now
+                        case "Roll": //it's not pretty but i didn't wanna mess with it just to cram it all in the HandleStartOfTurnChoice.roll method so it's staying like this for now
                             do {
                                 playerController.getActivePlayer().getCar().moveCar(rollDie());
                                 handleStartOfTurnChoice.roll(playerController);
@@ -48,7 +48,7 @@ public class GameBoard {
                             while (playerController.getActivePlayer().getRaffleCup().isDouble() && !playerController.getActivePlayer().getCar().isInJail());
                             playerController.getActivePlayer().resetRollCount();
                             if (playerController.getActivePlayer().getCar().hasPassedStart()) {
-                                Bank.payPlayer(playerController.getActivePlayer(), 2);
+                                Bank.payPlayer(playerController.getActivePlayer(), 4000);
                             }
                             playerController.nextPlayerTurn();
                             break;
@@ -108,6 +108,9 @@ public class GameBoard {
                         playerController.getActivePlayer().IncrementRollCount();
                         playerController.nextPlayerTurn();
                     } else {
+                        if (playerController.getActivePlayer().getAccount().getBalance()<1000){
+                            handleStartOfTurnChoice.mortgageProperty(playerController.getActivePlayer(),propertyCardController);
+                        }
                         Bank.payBank(playerController.getActivePlayer(), 1000);
                         playerController.getActivePlayer().resetRollCount();
                         playerController.getActivePlayer().getCar().setInJail(false);
