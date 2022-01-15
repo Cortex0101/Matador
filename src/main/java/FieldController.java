@@ -1,7 +1,7 @@
 import gui_fields.*;
 
 public class FieldController {
-    private final PlayerLostController playerLostController;
+    private PlayerLostController playerLostController;
 
     public FieldController(){
         this.playerLostController = new PlayerLostController();
@@ -42,6 +42,7 @@ public class FieldController {
             propertyCards.getCorrespondingPropertyCard(position).setOwner(handleAuction.getHighestBidder());
             GUI_Ownable gui_ownable = (GUI_Ownable) GUIInstance.getInstance().getFields()[position];
             gui_ownable.setBorder(handleAuction.getHighestBidder().getCar().getCarColor());
+            gui_ownable.setOwnableLabel(activePlayer.getName());
             gui_ownable.setOwnerName(activePlayer.getName());
         }
         else {
@@ -50,6 +51,7 @@ public class FieldController {
                 propertyCards.getCorrespondingPropertyCard(position).setOwner(activePlayer);
                 GUI_Ownable gui_ownable = (GUI_Ownable) GUIInstance.getInstance().getFields()[position];
                 gui_ownable.setBorder(activePlayer.getCar().getCarColor());
+                gui_ownable.setOwnableLabel(activePlayer.getName());
                 gui_ownable.setOwnerName(activePlayer.getName());
             }
         }
@@ -58,19 +60,19 @@ public class FieldController {
                 for (Player player : players) {
                     if (propertyType.equals("Property") && propertyCards.getCorrespondingPropertyCard(position).getOwner().equals(player)) {
                         StreetCard card = (StreetCard) propertyCards.getCorrespondingPropertyCard(position);
-                        if (checkIfPlayerCanAffordCost(handleStartOfTurnChoice, player, propertyCards, FieldModel.getFieldPrice(position))) {
+                        if (checkIfPlayerCanAffordCost(handleStartOfTurnChoice, player, propertyCards, propertyCards.getRent(card))) {
                             Bank.transferMoney(activePlayer, player, propertyCards.getRent(card));
                         }
                     }
                     if (propertyType.equals("Shipping") && propertyCards.getCorrespondingPropertyCard(position).getOwner().equals(player)) {
                         ShippingCard card = (ShippingCard) propertyCards.getCorrespondingPropertyCard(position);
-                        if (checkIfPlayerCanAffordCost(handleStartOfTurnChoice, player, propertyCards, FieldModel.getFieldPrice(position))) {
+                        if (checkIfPlayerCanAffordCost(handleStartOfTurnChoice, player, propertyCards, propertyCards.getRent(card))) {
                             Bank.transferMoney(activePlayer, player, propertyCards.getRent(card));
                         }
                     }
                     if (propertyType.equals("Brewery") && propertyCards.getCorrespondingPropertyCard(position).getOwner().equals(player)) {
                         BreweryCard card = (BreweryCard) propertyCards.getCorrespondingPropertyCard(position);
-                        if (checkIfPlayerCanAffordCost(handleStartOfTurnChoice, player, propertyCards, FieldModel.getFieldPrice(position))) {
+                        if (checkIfPlayerCanAffordCost(handleStartOfTurnChoice, player, propertyCards, propertyCards.getRent(card))) {
                             Bank.transferMoney(activePlayer, player, propertyCards.getRent(card) * activePlayer.getRaffleCup().getEyes());
                         }
                     }
