@@ -1,4 +1,7 @@
 import gui_codebehind.GUI_Center;
+import gui_main.GUI;
+
+import java.awt.*;
 
 public class GameBoard {
     private final FieldController fieldController;
@@ -22,17 +25,24 @@ public class GameBoard {
         cards = new ChanceCardCreator();
         chanceCardsPile = new ChanceCardsPileController(cards.getChanceCards());
         GUI_Center.chanceCardText = "Chance";
+
     }
 
     public void play() {
-        while (players.length > 1) {
+        int numberOfActivePlayers = players.length;
+        while (numberOfActivePlayers
+                > 1) {
+            numberOfActivePlayers = 0;
+            for (int i = 0; i < players.length; i++) {
+                if (players[i].getIsActive()){numberOfActivePlayers++;}
+            }
             handleInJail();
             if (playerController.getActivePlayer().getIsActive()) {
                 if (!playerController.getActivePlayer().getCar().isInJail()) {
 
                     String playerChoice = GUIInstance.getInstance().getUserSelection(playerController.getActivePlayer().getName() + ", it is your turn. Choose what to do.", "Roll", "Trade Properties", "Buy houses", "Sell houses", "Mortgage property", "Unmortgage Property");
                     switch (playerChoice) {
-                        case "Roll": //it's not pretty but i didn't wanna mess with it just to cram it all in the HandleStartOfTurnChoice.roll method so it's staying liek this for now
+                        case "Roll": //it's not pretty but i didn't wanna mess with it just to cram it all in the HandleStartOfTurnChoice.roll method so it's staying like this for now
                             do {
                                 playerController.getActivePlayer().getCar().moveCar(rollDie());
                                 handleStartOfTurnChoice.roll(playerController);
@@ -44,7 +54,7 @@ public class GameBoard {
                             while (playerController.getActivePlayer().getRaffleCup().isDouble() && !playerController.getActivePlayer().getCar().isInJail());
                             playerController.getActivePlayer().resetRollCount();
                             if (playerController.getActivePlayer().getCar().hasPassedStart()) {
-                                Bank.payPlayer(playerController.getActivePlayer(), 2);
+                                Bank.payPlayer(playerController.getActivePlayer(), 4000);
                             }
                             playerController.nextPlayerTurn();
                             break;
@@ -104,6 +114,9 @@ public class GameBoard {
                         playerController.getActivePlayer().IncrementRollCount();
                         playerController.nextPlayerTurn();
                     } else {
+                        if (playerController.getActivePlayer().getAccount().getBalance()<1000){
+                            handleStartOfTurnChoice.mortgageProperty(playerController.getActivePlayer(),propertyCardController);
+                        }
                         Bank.payBank(playerController.getActivePlayer(), 1000);
                         playerController.getActivePlayer().resetRollCount();
                         playerController.getActivePlayer().getCar().setInJail(false);
@@ -114,7 +127,11 @@ public class GameBoard {
     }
 
     private int rollDie() {
-        GUIInstance.getInstance().getUserButtonPressed(playerController.getActivePlayer().getName() + ", it is your turn.","Roll dice");
+        String rollDiceText = ", it is your turn. roll the dice";
+        if (playerController.getActivePlayer().getRollCount()>=1) {
+            rollDiceText = ", it is your turn. roll the dice \n you have rolled doubles "+playerController.getActivePlayer().getRollCount()+" times this round";
+        }
+        GUIInstance.getInstance().getUserButtonPressed(playerController.getActivePlayer().getName() + rollDiceText, "Roll dice");
         int roll = playerController.getActivePlayer().getRaffleCup().shake();
         int[] eyes = playerController.getActivePlayer().getRaffleCup().getIndividualEyes();
         GUIInstance.getInstance().setDice(eyes[0], eyes[1]);

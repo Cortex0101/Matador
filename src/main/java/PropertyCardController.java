@@ -3,6 +3,7 @@ import gui_fields.GUI_Ownable;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -84,7 +85,7 @@ public class PropertyCardController {
 
     public PropertyCard[] getPropertyCards(){return propertyCards;}
 
-    public void mortgageProperty(PropertyCard propertyCard) {
+    public void mortgageProperty(PropertyCard propertyCard, int position) {
         if (propertyCard.isMortgaged()) return;
         if (propertyCard.getOwner() == null) return;
 
@@ -93,11 +94,13 @@ public class PropertyCardController {
         }
 
         Bank.payPlayer(propertyCard.getOwner(), propertyCard.getMortgageValue());
+        GUIInstance.getInstance().getFields()[position].setSubText("Mortgaged");
         propertyCard.setMortgaged(true);
     }
 
-    public void unmortgageProperty(PropertyCard propertyCard){
+    public void unmortgageProperty(PropertyCard propertyCard, int position, String ownerName){
         Bank.payBank(propertyCard.getOwner(), propertyCard.getMortgageValue());
+        GUIInstance.getInstance().getFields()[position].setSubText(ownerName);
         propertyCard.setMortgaged(false);
     }
 
