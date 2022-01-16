@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class ChanceCardsPileController {
-    private Deque<ChanceCard> chanceCards;
+    private final Deque<ChanceCard> chanceCards;
 
     public ChanceCardsPileController(ChanceCard[] chanceCards) {
         shufflePile(chanceCards);

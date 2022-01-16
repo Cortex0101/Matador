@@ -1,14 +1,17 @@
-import gui_main.GUI;
-
 public class PlayerCreator {
     private final Player[] players;
 
     public PlayerCreator(){
         final int PLAYER_COUNT = getPlayerCountFromUser();
+        final int INITIAL_CAPITAL = 30000;
 
         players = new Player[PLAYER_COUNT];
         for (int i = 0; i < PLAYER_COUNT; i++) {
-            players[i] = new Player(GUIInstance.getInstance().getUserString("What shall player " + (i + 1) + " be called?"), 50000);
+            if (Debugger.getInstance().enabled()) {
+                players[i] = new Player("Player" + i, INITIAL_CAPITAL);
+            } else {
+                players[i] = new Player(GUIInstance.getInstance().getUserString("What shall player " + (i + 1) + " be called?"), INITIAL_CAPITAL);
+            }
             GUIInstance.getInstance().addPlayer(players[i].gui_player);
         }
     }

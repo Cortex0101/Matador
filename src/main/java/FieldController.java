@@ -12,7 +12,7 @@ public class FieldController {
             case 1, 3, 6, 8, 9, 11, 13, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29, 31, 32, 34, 37, 39 -> landOnProperty(position, player, players, "Property", propertyCards, handleStartOfTurnChoice);
             case 5, 15, 25, 35 -> landOnProperty(position, player, players, "Shipping", propertyCards, handleStartOfTurnChoice);
             case 12, 28 -> landOnProperty(position, player, players, "Brewery", propertyCards, handleStartOfTurnChoice);
-            case 2, 7, 17, 22, 33, 36 -> landOnChance();
+            case 2, 7, 17, 22, 33, 36 -> landOnChance(chanceCardsPileController, player);
             case 30 -> landOnGoToJail(player);
             case 4 -> landOnIncomeTax(player);
             case 38 -> landOnStateTax(player);
@@ -42,6 +42,7 @@ public class FieldController {
             propertyCards.getCorrespondingPropertyCard(position).setOwner(handleAuction.getHighestBidder());
             GUI_Ownable gui_ownable = (GUI_Ownable) GUIInstance.getInstance().getFields()[position];
             gui_ownable.setBorder(handleAuction.getHighestBidder().getCar().getCarColor());
+            gui_ownable.setOwnableLabel(activePlayer.getName());
             gui_ownable.setOwnerName(activePlayer.getName());
         }
         else {
@@ -50,6 +51,7 @@ public class FieldController {
                 propertyCards.getCorrespondingPropertyCard(position).setOwner(activePlayer);
                 GUI_Ownable gui_ownable = (GUI_Ownable) GUIInstance.getInstance().getFields()[position];
                 gui_ownable.setBorder(activePlayer.getCar().getCarColor());
+                gui_ownable.setOwnableLabel(activePlayer.getName());
                 gui_ownable.setOwnerName(activePlayer.getName());
             }
         }
@@ -58,27 +60,29 @@ public class FieldController {
                 for (Player player : players) {
                     if (propertyType.equals("Property") && propertyCards.getCorrespondingPropertyCard(position).getOwner().equals(player)) {
                         StreetCard card = (StreetCard) propertyCards.getCorrespondingPropertyCard(position);
-                        if (checkIfPlayerCanAffordCost(handleStartOfTurnChoice, player, propertyCards, FieldModel.getFieldPrice(position))) {
+                        if (checkIfPlayerCanAffordCost(handleStartOfTurnChoice, player, propertyCards, propertyCards.getRent(card))) {
                             Bank.transferMoney(activePlayer, player, propertyCards.getRent(card));
                         }
                     }
                     if (propertyType.equals("Shipping") && propertyCards.getCorrespondingPropertyCard(position).getOwner().equals(player)) {
                         ShippingCard card = (ShippingCard) propertyCards.getCorrespondingPropertyCard(position);
-                        if (checkIfPlayerCanAffordCost(handleStartOfTurnChoice, player, propertyCards, FieldModel.getFieldPrice(position))) {
+                        if (checkIfPlayerCanAffordCost(handleStartOfTurnChoice, player, propertyCards, propertyCards.getRent(card))) {
                             Bank.transferMoney(activePlayer, player, propertyCards.getRent(card));
                         }
                     }
                     if (propertyType.equals("Brewery") && propertyCards.getCorrespondingPropertyCard(position).getOwner().equals(player)) {
                         BreweryCard card = (BreweryCard) propertyCards.getCorrespondingPropertyCard(position);
-                        if (checkIfPlayerCanAffordCost(handleStartOfTurnChoice, player, propertyCards, FieldModel.getFieldPrice(position))) {
+                        if (checkIfPlayerCanAffordCost(handleStartOfTurnChoice, player, propertyCards, propertyCards.getRent(card))) {
                             Bank.transferMoney(activePlayer, player, propertyCards.getRent(card) * activePlayer.getRaffleCup().getEyes());
                         }
                     }
                 }
     }
 
-    public void landOnChance(){
-        //TODO can't make this part before seing the implementation of the individual cards
+    public void landOnChance(ChanceCardsPileController chanceCardsPileController, Player player){
+        ChanceCard chanceCard = chanceCardsPileController.drawCard();
+        chanceCard.action(player);
+        chanceCard.display();
     }
 
     public void landOnGoToJail(Player player){
@@ -87,12 +91,11 @@ public class FieldController {
     }
 
     public void landOnIncomeTax(Player player){
-        boolean option1 = true; //TODO
-        boolean option2 = false; //TODO
-        if(option1)
+        String incomeTaxText = GUIInstance.getInstance().getUserSelection("Choose how to pay for income tax","Pay 4000$","Pay 10% of currently owned money");
+        if(incomeTaxText.equals(""))
             Bank.payBank(player, 4000);
-        else if(option2){
-            Bank.payBank(player, player.getAccount().getBalance()/10); //TODO total worth of all owned properties
+        else{
+            Bank.payBank(player, player.getAccount().getBalance()/10);
         }
     }
 
@@ -115,7 +118,4 @@ public class FieldController {
         }
         return true;
     }
-}//TODO replace propertycard casting with instanceof
-//TODO condense ownedproperty
-//TODO split checkifplayercanafford
-//TODO rename isActive in player to something more fitting
+}

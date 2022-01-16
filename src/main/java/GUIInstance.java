@@ -1,6 +1,6 @@
 import gui_main.GUI;
 
-import java.security.Guard;
+import java.awt.*;
 
 public final class GUIInstance {
     private static GUIInstance instance;
@@ -12,7 +12,7 @@ public final class GUIInstance {
     }
 
     public static void setFields(FieldModel fieldModel) {
-        gui = new GUI(fieldModel.FieldInfo());
+        gui = new GUI(fieldModel.FieldInfo(), Color.decode("#169c02"));
     }
 
     public static GUI getInstance() {

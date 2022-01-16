@@ -3,4 +3,9 @@ public class OutOfJailChanceCard extends ChanceCard {
         super(text);
     }
 
+    public void action (Player player){
+        player.hasGetOutOfJailCard();
+
+    }
+
 }

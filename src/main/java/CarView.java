@@ -27,4 +27,8 @@ public class CarView {
         Color[] colors = new Color[]{Color.blue, Color.red, Color.yellow, Color.green, Color.cyan, Color.white};
         return colors[i];
     }
+
+    public void removeCarFromGame(int position){
+        GUIInstance.getInstance().getFields()[position].setCar(player,false);
+    }
 }

@@ -1,16 +1,15 @@
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Ownable;
 import gui_fields.GUI_Street;
-import gui_main.GUI;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PropertyCardController {
-    private PropertyCard[] propertyCards; // 0 - 21 are streets 22 - 26 are shipping, 27 - 28 are brewery
-    private Map<Integer, PropertyCard> propertyCardMap = new HashMap<Integer, PropertyCard>();
-    private Map<PropertyCard, GUI_Ownable> ownableMap = new HashMap<PropertyCard, GUI_Ownable>();
+    private final PropertyCard[] propertyCards; // 0 - 21 are streets 22 - 26 are shipping, 27 - 28 are brewery
+    private final Map<Integer, PropertyCard> propertyCardMap = new HashMap<>();
+    private final Map<PropertyCard, GUI_Ownable> ownableMap = new HashMap<>();
 
     public PropertyCardController(PropertyCard[] propertyCards, GUI_Field[] fields) {
         this.propertyCards = propertyCards;
@@ -84,20 +83,22 @@ public class PropertyCardController {
 
     public PropertyCard[] getPropertyCards(){return propertyCards;}
 
-    public void mortgageProperty(PropertyCard propertyCard) {
+    public void mortgageProperty(PropertyCard propertyCard, int position) {
         if (propertyCard.isMortgaged()) return;
         if (propertyCard.getOwner() == null) return;
 
         if (isStreet(propertyCard)) {
-            // TODO: check if there are houses.
+            Bank.payPlayer(propertyCard.getOwner(), ((StreetCard) propertyCard).getHouses()*((StreetCard) propertyCard).getHousePrice());
         }
 
         Bank.payPlayer(propertyCard.getOwner(), propertyCard.getMortgageValue());
+        GUIInstance.getInstance().getFields()[position].setSubText("Mortgaged");
         propertyCard.setMortgaged(true);
     }
 
-    public void unmortgageProperty(PropertyCard propertyCard){
+    public void unmortgageProperty(PropertyCard propertyCard, int position, String ownerName){
         Bank.payBank(propertyCard.getOwner(), propertyCard.getMortgageValue());
+        GUIInstance.getInstance().getFields()[position].setSubText(ownerName);
         propertyCard.setMortgaged(false);
     }
 
@@ -128,7 +129,7 @@ public class PropertyCardController {
         return Arrays.copyOfRange(propertyCards, indexOfFirstCardInGroup, indexOfFirstCardInGroup + amountOfFieldsInGroup);
     }
 
-    boolean allStreetsInGroupOwnedBy(StreetCard streetCard, Player player) {
+    public boolean allStreetsInGroupOwnedBy(StreetCard streetCard, Player player) {
         Player owner = streetCard.getOwner();
         if (owner == null) return false;
         if (!streetCard.getOwner().equals(player)) return false;
@@ -143,7 +144,7 @@ public class PropertyCardController {
         return true;
     }
 
-    private boolean housesWouldBeEvenlyPlacedInGroup(StreetCard streetCard, boolean purchase) {
+    public boolean housesWouldBeEvenlyPlacedInGroup(StreetCard streetCard, boolean purchase) {
         PropertyCard[] streetCards = getStreetsInSameGroup(streetCard);
         for (PropertyCard card : streetCards) {
             if (purchase) {
@@ -235,7 +236,6 @@ public class PropertyCardController {
         return 0;
      }
 
-     // Multiplication by the dice roll will be done elsewhere (where the dice is... maybe in game board?)
     public int getRent(BreweryCard breweryCard) {
         if (ownsBothBreweries(breweryCard.getOwner())) {
             return breweryCard.getRents(1);
