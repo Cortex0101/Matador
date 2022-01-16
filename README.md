@@ -2,7 +2,7 @@
 
 ## About The Project
 
-A simple implementation of the classic danish game, [Matador](https://da.wikipedia.org/wiki/Matador_(br%C3%A6tspil)) game. 
+A simple implementation of the classic danish game [Matador](https://da.wikipedia.org/wiki/Matador_(br%C3%A6tspil)). 
 
 ### Built With
 
