@@ -40,7 +40,7 @@ public class GameBoard {
             if (playerController.getActivePlayer().getIsActive()) {
                 if (!playerController.getActivePlayer().getCar().isInJail()) {
 
-                    String playerChoice = GUIInstance.getInstance().getUserSelection(playerController.getActivePlayer().getName() + ", it is your turn. Choose what to do.", "Roll", "Trade Properties", "Buy houses", "Sell houses", "Mortgage property", "Unmortgage Property");
+                    String playerChoice = GUIInstance.getInstance().getUserSelection(playerController.getActivePlayer().getName() + ", it is your turn. Choose what to do.", "Roll", "Buy houses", "Sell houses", "Mortgage property", "Unmortgage Property");
                     switch (playerChoice) {
                         case "Roll": //it's not pretty but i didn't wanna mess with it just to cram it all in the HandleStartOfTurnChoice.roll method so it's staying like this for now
                             do {
@@ -57,9 +57,6 @@ public class GameBoard {
                                 Bank.payPlayer(playerController.getActivePlayer(), 4000);
                             }
                             playerController.nextPlayerTurn();
-                            break;
-                        case "Trade Properties":
-                            //TODO
                             break;
                         case "Buy houses":
                             handleStartOfTurnChoice.buyHouse(playerController.getActivePlayer(), propertyCardController);
