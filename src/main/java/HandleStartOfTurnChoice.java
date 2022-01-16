@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class HandleStartOfTurnChoice {
     PlayerLostController playerLostController;
@@ -170,10 +169,5 @@ public class HandleStartOfTurnChoice {
                 }
             }
         }
-
-    }
-
-    public void tradeProperty(){
-        //TODO
     }
 }

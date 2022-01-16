@@ -1,7 +1,4 @@
 import gui_codebehind.GUI_Center;
-import gui_main.GUI;
-
-import java.awt.*;
 
 public class GameBoard {
     private final FieldController fieldController;
