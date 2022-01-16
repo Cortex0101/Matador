@@ -2,24 +2,22 @@ import gui_codebehind.GUI_Center;
 
 public class GameBoard {
     private final FieldController fieldController;
-    private final FieldModel fieldModel;
     private final Player[] players;
     private final PlayerController playerController;
-    private final ChanceCardCreator cards;
-    private ChanceCardsPileController chanceCardsPile;
+    private final ChanceCardsPileController chanceCardsPile;
     PropertyCard[] propertyCards = PropertyCardCreator.createPropertyCards();
-    private PropertyCardController propertyCardController;
-    private HandleStartOfTurnChoice handleStartOfTurnChoice;
+    private final PropertyCardController propertyCardController;
+    private final HandleStartOfTurnChoice handleStartOfTurnChoice;
 
     public GameBoard() {
-        this.fieldModel = new FieldModel();
-        GUIInstance.setFields(this.fieldModel);
+        FieldModel fieldModel = new FieldModel();
+        GUIInstance.setFields(fieldModel);
         this.players = new PlayerCreator().getPlayers();
         this.propertyCardController = new PropertyCardController(propertyCards, fieldModel.FieldInfo());
         this.fieldController = new FieldController();
         this.handleStartOfTurnChoice = new HandleStartOfTurnChoice();
         playerController = new PlayerController(players);
-        cards = new ChanceCardCreator();
+        ChanceCardCreator cards = new ChanceCardCreator();
         chanceCardsPile = new ChanceCardsPileController(cards.getChanceCards());
         GUI_Center.chanceCardText = "Chance";
 
@@ -30,8 +28,10 @@ public class GameBoard {
         while (numberOfActivePlayers
                 > 1) {
             numberOfActivePlayers = 0;
-            for (int i = 0; i < players.length; i++) {
-                if (players[i].getIsActive()){numberOfActivePlayers++;}
+            for (Player player : players) {
+                if (player.getIsActive()) {
+                    numberOfActivePlayers++;
+                }
             }
             handleInJail();
             if (playerController.getActivePlayer().getIsActive()) {
@@ -39,7 +39,7 @@ public class GameBoard {
 
                     String playerChoice = GUIInstance.getInstance().getUserSelection(playerController.getActivePlayer().getName() + ", it is your turn. Choose what to do.", "Roll", "Buy houses", "Sell houses", "Mortgage property", "Unmortgage Property");
                     switch (playerChoice) {
-                        case "Roll": //it's not pretty but i didn't wanna mess with it just to cram it all in the HandleStartOfTurnChoice.roll method so it's staying like this for now
+                        case "Roll" -> {
                             do {
                                 playerController.getActivePlayer().getCar().moveCar(rollDie());
                                 handleStartOfTurnChoice.roll(playerController);
@@ -54,19 +54,11 @@ public class GameBoard {
                                 Bank.payPlayer(playerController.getActivePlayer(), 4000);
                             }
                             playerController.nextPlayerTurn();
-                            break;
-                        case "Buy houses":
-                            handleStartOfTurnChoice.buyHouse(playerController.getActivePlayer(), propertyCardController);
-                            break;
-                        case "Sell houses":
-                            handleStartOfTurnChoice.sellHouse(playerController.getActivePlayer(), propertyCardController);
-                            break;
-                        case "Mortgage property":
-                            handleStartOfTurnChoice.mortgageProperty(playerController.getActivePlayer(), propertyCardController);
-                            break;
-                        case "Unmortgage Property":
-                            handleStartOfTurnChoice.unmortgageProperty(playerController.getActivePlayer(), propertyCardController);
-                            break;
+                        }
+                        case "Buy houses" -> handleStartOfTurnChoice.buyHouse(playerController.getActivePlayer(), propertyCardController);
+                        case "Sell houses" -> handleStartOfTurnChoice.sellHouse(playerController.getActivePlayer(), propertyCardController);
+                        case "Mortgage property" -> handleStartOfTurnChoice.mortgageProperty(playerController.getActivePlayer(), propertyCardController);
+                        case "Unmortgage Property" -> handleStartOfTurnChoice.unmortgageProperty(playerController.getActivePlayer(), propertyCardController);
                     }
                 }
             }

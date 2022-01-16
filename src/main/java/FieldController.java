@@ -1,7 +1,7 @@
 import gui_fields.*;
 
 public class FieldController {
-    private PlayerLostController playerLostController;
+    private final PlayerLostController playerLostController;
 
     public FieldController(){
         this.playerLostController = new PlayerLostController();
@@ -91,11 +91,10 @@ public class FieldController {
     }
 
     public void landOnIncomeTax(Player player){
-        boolean option1 = true; //TODO
-        boolean option2 = false; //TODO
-        if(option1)
+        String incomeTaxText = GUIInstance.getInstance().getUserSelection("Choose how to pay for income tax","Pay 4000$","Pay 10% of currently owned money");
+        if(incomeTaxText.equals(""))
             Bank.payBank(player, 4000);
-        else if(option2){
+        else{
             Bank.payBank(player, player.getAccount().getBalance()/10);
         }
     }

@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PropertyCardController {
-    private PropertyCard[] propertyCards; // 0 - 21 are streets 22 - 26 are shipping, 27 - 28 are brewery
-    private Map<Integer, PropertyCard> propertyCardMap = new HashMap<Integer, PropertyCard>();
-    private Map<PropertyCard, GUI_Ownable> ownableMap = new HashMap<PropertyCard, GUI_Ownable>();
+    private final PropertyCard[] propertyCards; // 0 - 21 are streets 22 - 26 are shipping, 27 - 28 are brewery
+    private final Map<Integer, PropertyCard> propertyCardMap = new HashMap<>();
+    private final Map<PropertyCard, GUI_Ownable> ownableMap = new HashMap<>();
 
     public PropertyCardController(PropertyCard[] propertyCards, GUI_Field[] fields) {
         this.propertyCards = propertyCards;
@@ -88,7 +88,7 @@ public class PropertyCardController {
         if (propertyCard.getOwner() == null) return;
 
         if (isStreet(propertyCard)) {
-            // TODO: check if there are houses.
+            Bank.payPlayer(propertyCard.getOwner(), ((StreetCard) propertyCard).getHouses()*((StreetCard) propertyCard).getHousePrice());
         }
 
         Bank.payPlayer(propertyCard.getOwner(), propertyCard.getMortgageValue());
@@ -236,7 +236,6 @@ public class PropertyCardController {
         return 0;
      }
 
-     // Multiplication by the dice roll will be done elsewhere (where the dice is... maybe in game board?)
     public int getRent(BreweryCard breweryCard) {
         if (ownsBothBreweries(breweryCard.getOwner())) {
             return breweryCard.getRents(1);
