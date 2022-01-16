@@ -1,6 +1,6 @@
 public class GetMoneyIfLowOnMoneyChanceCard extends ChanceCard{
-    private int amountOfMoneyOwnedMax;
-    private int amountGained;
+    private final int amountOfMoneyOwnedMax;
+    private final int amountGained;
 
     public GetMoneyIfLowOnMoneyChanceCard(String text, int amountOfMoneyOwnedMax, int amountGained){
         super(text);

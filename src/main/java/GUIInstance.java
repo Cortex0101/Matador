@@ -1,7 +1,6 @@
 import gui_main.GUI;
 
 import java.awt.*;
-import java.security.Guard;
 
 public final class GUIInstance {
     private static GUIInstance instance;

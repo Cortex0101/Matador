@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class PlayerController {
     private final Player[] players;
     private int activePlayerIndex;

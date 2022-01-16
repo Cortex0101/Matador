@@ -64,5 +64,3 @@ public class ChanceCardCreator {
         return chanceCards;
     }
 }
-
-//TODO translate chancecard text

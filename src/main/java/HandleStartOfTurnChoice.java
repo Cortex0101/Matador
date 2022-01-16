@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class HandleStartOfTurnChoice {
     PlayerLostController playerLostController;
@@ -157,11 +156,11 @@ public class HandleStartOfTurnChoice {
                 for (int i = 0; i < 40; i++) {
                     if (propertiesToUnmortgage.equals(propertyCards.getPropertyCards()[i].getName())) { unmortgageFieldPosition = i;}
                 }
-                for (int i = 0; i < propertyNames.length; i++) {
-                    if (propertiesToUnmortgage.equals(propertyNames[i])) {
+                for (String propertyName : propertyNames) {
+                    if (propertiesToUnmortgage.equals(propertyName)) {
                         for (int j = 0; j < player.getOwnedPropertyCards(propertyCards).length; j++) {
                             if (propertiesToUnmortgage.equals(player.getOwnedPropertyCards(propertyCards)[j].getName())) {
-                                propertyCards.unmortgageProperty(player.getOwnedPropertyCards(propertyCards)[j], unmortgageFieldPosition,player.getOwnedPropertyCards(propertyCards)[j].getOwner().getName());
+                                propertyCards.unmortgageProperty(player.getOwnedPropertyCards(propertyCards)[j], unmortgageFieldPosition, player.getOwnedPropertyCards(propertyCards)[j].getOwner().getName());
                             }
 
                         }
@@ -170,10 +169,5 @@ public class HandleStartOfTurnChoice {
                 }
             }
         }
-
-    }
-
-    public void tradeProperty(){
-        //TODO
     }
 }
