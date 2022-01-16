@@ -12,7 +12,7 @@ public class FieldController {
             case 1, 3, 6, 8, 9, 11, 13, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29, 31, 32, 34, 37, 39 -> landOnProperty(position, player, players, "Property", propertyCards, handleStartOfTurnChoice);
             case 5, 15, 25, 35 -> landOnProperty(position, player, players, "Shipping", propertyCards, handleStartOfTurnChoice);
             case 12, 28 -> landOnProperty(position, player, players, "Brewery", propertyCards, handleStartOfTurnChoice);
-            case 2, 7, 17, 22, 33, 36 -> landOnChance();
+            case 2, 7, 17, 22, 33, 36 -> landOnChance(chanceCardsPileController, player);
             case 30 -> landOnGoToJail(player);
             case 4 -> landOnIncomeTax(player);
             case 38 -> landOnStateTax(player);
@@ -79,8 +79,10 @@ public class FieldController {
                 }
     }
 
-    public void landOnChance(){
-        //TODO can't make this part before seing the implementation of the individual cards
+    public void landOnChance(ChanceCardsPileController chanceCardsPileController, Player player){
+        ChanceCard chanceCard = chanceCardsPileController.drawCard();
+        chanceCard.action(player);
+        chanceCard.display();
     }
 
     public void landOnGoToJail(Player player){
@@ -94,7 +96,7 @@ public class FieldController {
         if(option1)
             Bank.payBank(player, 4000);
         else if(option2){
-            Bank.payBank(player, player.getAccount().getBalance()/10); //TODO total worth of all owned properties
+            Bank.payBank(player, player.getAccount().getBalance()/10);
         }
     }
 
@@ -117,7 +119,4 @@ public class FieldController {
         }
         return true;
     }
-}//TODO replace propertycard casting with instanceof
-//TODO condense ownedproperty
-//TODO split checkifplayercanafford
-//TODO rename isActive in player to something more fitting
+}
