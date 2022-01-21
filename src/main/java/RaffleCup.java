@@ -24,6 +24,9 @@ public class RaffleCup {
     }
 
     public boolean isDouble() {
+        if (Debugger.getInstance().enabled()) {
+            return false; // Never allow double roles in debugging mode.
+        }
         return die1.getValue() == die2.getValue();
     }
 }
