@@ -15,7 +15,7 @@ public class RaffleCup {
 
     public int shake() {
         if (Debugger.getInstance().enabled()) {
-            return Debugger.getInstance().getIntegerFromConsole();
+            return GUIInstance.getInstance().getUserInteger("How many fields would you like to move?");
         }
 
         die1.roll();
