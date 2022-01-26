@@ -8,6 +8,7 @@ public class GameBoard {
     PropertyCard[] propertyCards = PropertyCardCreator.createPropertyCards();
     private final PropertyCardController propertyCardController;
     private final HandleStartOfTurnChoice handleStartOfTurnChoice;
+    private final TurnOptions turnOptions = new TurnOptions();
 
     public GameBoard() {
         FieldModel fieldModel = new FieldModel();
@@ -37,8 +38,8 @@ public class GameBoard {
             if (playerController.getActivePlayer().getIsActive()) {
                 if (!playerController.getActivePlayer().getCar().isInJail()) {
 
-                    String playerChoice = GUIInstance.getInstance().getUserSelection(playerController.getActivePlayer().getName() + ", it is your turn. Choose what to do.", "Roll", "Buy houses", "Sell houses", "Mortgage property", "Unmortgage Property");
-                    switch (playerChoice) {
+                    // String playerChoice = GUIInstance.getInstance().getUserSelection(playerController.getActivePlayer().getName() + ", it is your turn. Choose what to do.", "Roll", "Buy houses", "Sell houses", "Mortgage property", "Unmortgage Property");
+                    switch (turnOptions.getPlayerChoice(playerController.getActivePlayer().getName())) {
                         case "Roll" -> {
                             do {
                                 playerController.getActivePlayer().getCar().moveCar(rollDie());
@@ -53,8 +54,8 @@ public class GameBoard {
                             if (playerController.getActivePlayer().getCar().hasPassedStart()) {
                                 Bank.payPlayer(playerController.getActivePlayer(), 4000);
                             }
-                            playerController.nextPlayerTurn();
                         }
+                        case "Done" -> playerController.nextPlayerTurn();
                         case "Buy houses" -> handleStartOfTurnChoice.buyHouse(playerController.getActivePlayer(), propertyCardController);
                         case "Sell houses" -> handleStartOfTurnChoice.sellHouse(playerController.getActivePlayer(), propertyCardController);
                         case "Mortgage property" -> handleStartOfTurnChoice.mortgageProperty(playerController.getActivePlayer(), propertyCardController);
