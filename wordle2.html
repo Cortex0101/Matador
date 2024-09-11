@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+
+<html lang="da-DK">
+
+<head>
+    <meta charset="utf-8" />
+
+    <title>Wordle 2 - En bedre version af wordle</title>
+
+    <meta name="description"
+        content="Prøv Wørdle 2 med avanceret statistik, streaks, dybdegående gætteanalyser og sammenlign dine løsninger med den optimale bot. En ny udfordring hver dag!" />
+    <meta name="author" content="DanskWordfeudSnyd" />
+    <meta name="keywords" content="wordle wørdle wordle2 bedre wordle" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <!--content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    <meta name="google-signin-client_id"
+        content="475599340724-c6adl52d7h4jv5ispod3g5jtusv57q3o.apps.googleusercontent.com">
+-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EBCLDFEQ4W"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-EBCLDFEQ4W');
+    </script>
+    <!--
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <div id="g_id_onload" data-client_id="475599340724-c6adl52d7h4jv5ispod3g5jtusv57q3o.apps.googleusercontent.com"
+        data-auto_prompt="false" data-callback="handleCredentialResponse">
+    </div>
+    
+
+    <script>
+        function decodeJwtResponse(jwtToken) {
+            // Split the token into header, payload, and signature
+            const tokenParts = jwtToken.split('.');
+
+            // Decode the payload (second part of the token)
+            const payload = JSON.parse(atob(tokenParts[1]));
+
+            return payload;
+        }
+
+        function renderSignInButton() {
+            google.accounts.id.renderButton(
+                document.getElementById('signindiv'), // Replace 'buttonDiv' with your button container ID
+                {
+                    theme: 'outline', // can be 'outline' or 'filled_blue'
+                    size: 'large', // can be 'large', 'medium', or 'small'
+                    // Other button customization options
+                }
+            );
+        }
+
+        function handleCredentialResponse(response) {
+            // decodeJwtResponse() is a custom function defined by you
+            // to decode the credential response.
+            const responsePayload = decodeJwtResponse(response.credential);
+
+            console.log("ID: " + responsePayload.sub);
+            console.log('Full Name: ' + responsePayload.name);
+            console.log('Given Name: ' + responsePayload.given_name);
+            console.log('Family Name: ' + responsePayload.family_name);
+            console.log("Image URL: " + responsePayload.picture);
+            console.log("Email: " + responsePayload.email);
+
+            google.accounts.id.disableAutoSelect();
+        }
+
+        function signOut() {
+            google.accounts.id.disableAutoSelect();
+
+            // Callback function after successful sign-out
+            console.log('User signed out.');
+            // Additional logic or redirection can be added here
+        }
+    </script>
+    -->
+</head>
+
+<body>
+    <header id="head">
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand flex-shr" href="https://ordish.dk/">
+                    <img src="https://ordish.dk/img/logo-sm.webp" alt="Logo" width="30" height="28"
+                        class="d-inline-block align-text-top">
+                    <span class="d-none d-md-inline">Ordish</span>
+                </a>
+
+                <div class="middle-div">
+                    <h1 class="header-text-center text-center">
+                        Wordle 2.0
+                    </h1>
+                </div>
+
+                <menu class="my-0 px-0 btn-group flex-shr mr-rem menu-btn">
+                    <button type="button" id="help-button" class="btn btn-outline-secondary" aria-label="Help"
+                        aria-haspopup="dialog" aria-controls="help-dialog" data-bs-toggle="modal"
+                        data-bs-target="#help-modal">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="16" viewBox="4 4 24 24"
+                            width="16" class="game-icon" data-testid="icon-help">
+                            <path fill="#f8f8f8"
+                                d="M14.8333 23H17.1666V20.6667H14.8333V23ZM15.9999 4.33334C9.55992 4.33334 4.33325 9.56001 4.33325 16C4.33325 22.44 9.55992 27.6667 15.9999 27.6667C22.4399 27.6667 27.6666 22.44 27.6666 16C27.6666 9.56001 22.4399 4.33334 15.9999 4.33334ZM15.9999 25.3333C10.8549 25.3333 6.66659 21.145 6.66659 16C6.66659 10.855 10.8549 6.66668 15.9999 6.66668C21.1449 6.66668 25.3333 10.855 25.3333 16C25.3333 21.145 21.1449 25.3333 15.9999 25.3333ZM15.9999 9.00001C13.4216 9.00001 11.3333 11.0883 11.3333 13.6667H13.6666C13.6666 12.3833 14.7166 11.3333 15.9999 11.3333C17.2833 11.3333 18.3333 12.3833 18.3333 13.6667C18.3333 16 14.8333 15.7083 14.8333 19.5H17.1666C17.1666 16.875 20.6666 16.5833 20.6666 13.6667C20.6666 11.0883 18.5783 9.00001 15.9999 9.00001Z">
+                            </path>
+                        </svg>
+                    </button>
+                    <button type="button" id="statistics-button" class="btn btn-outline-secondary menu-btn"
+                        aria-label="Statistics" data-bs-toggle="offcanvas" data-bs-target="#stats-modal"
+                        aria-controls="stats-modal">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="16" viewBox="4 4 24 24"
+                            width="16" class="game-icon" data-testid="icon-statistics">
+                            <path fill="#f8f8f8"
+                                d="M20.6666 14.8333V5.5H11.3333V12.5H4.33325V26.5H27.6666V14.8333H20.6666ZM13.6666 7.83333H18.3333V24.1667H13.6666V7.83333ZM6.66659 14.8333H11.3333V24.1667H6.66659V14.8333ZM25.3333 24.1667H20.6666V17.1667H25.3333V24.1667Z">
+                            </path>
+                        </svg>
+                    </button>
+                    <button type="button" id="settings-button" class="btn btn-outline-secondary menu-btn"
+                        aria-label="Settings" aria-haspopup="dialog" aria-controls="settings-dialog"
+                        data-bs-toggle="modal" data-bs-target="#settings-modal">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="16" viewBox="4 4 24 24"
+                            width="16" class="game-icon" data-testid="icon-settings">
+                            <path fill="#f8f8f8"
+                                d="M25.52 17.2534C25.5733 16.8534 25.6 16.44 25.6 16C25.6 15.5734 25.5733 15.1467 25.5067 14.7467L28.2133 12.64C28.4533 12.4534 28.52 12.0934 28.3733 11.8267L25.8133 7.40004C25.6533 7.10671 25.32 7.01338 25.0267 7.10671L21.84 8.38671C21.1733 7.88004 20.4667 7.45338 19.68 7.13338L19.2 3.74671C19.1467 3.42671 18.88 3.20004 18.56 3.20004H13.44C13.12 3.20004 12.8666 3.42671 12.8133 3.74671L12.3333 7.13338C11.5467 7.45338 10.8267 7.89338 10.1733 8.38671L6.98665 7.10671C6.69332 7.00004 6.35998 7.10671 6.19998 7.40004L3.65332 11.8267C3.49332 12.1067 3.54665 12.4534 3.81332 12.64L6.51998 14.7467C6.45332 15.1467 6.39998 15.5867 6.39998 16C6.39998 16.4134 6.42665 16.8534 6.49332 17.2534L3.78665 19.36C3.54665 19.5467 3.47998 19.9067 3.62665 20.1734L6.18665 24.6C6.34665 24.8934 6.67998 24.9867 6.97332 24.8934L10.16 23.6134C10.8267 24.12 11.5333 24.5467 12.32 24.8667L12.8 28.2534C12.8667 28.5734 13.12 28.8 13.44 28.8H18.56C18.88 28.8 19.1467 28.5734 19.1867 28.2534L19.6667 24.8667C20.4533 24.5467 21.1733 24.12 21.8267 23.6134L25.0133 24.8934C25.3067 25 25.64 24.8934 25.8 24.6L28.36 20.1734C28.52 19.88 28.4533 19.5467 28.2 19.36L25.52 17.2534ZM16 20.8C13.36 20.8 11.2 18.64 11.2 16C11.2 13.36 13.36 11.2 16 11.2C18.64 11.2 20.8 13.36 20.8 16C20.8 18.64 18.64 20.8 16 20.8Z">
+                            </path>
+                        </svg>
+                    </button>
+                    <button class="btn btn-outline-primary menu-btn" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Navigation">
+                        <span class="navbar-toggler-icon" id="nav-slide-btn"></span>
+                    </button>
+                </menu>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <a class="navbar-brand" href="https://ordish.dk/">
+                            <img src="https://ordish.dk/img/logo-sm.webp" alt="Logo" width="80" height="75"
+                                class="d-inline-block align-text-top">
+                        </a>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <hr class="hr">
+
+
+                    <div class="offcanvas-body">
+                        <h2>
+                            Værktøjer
+                        </h2>
+                        <ul class="navbar-nav justify-content-end flex-grow pb-1 g-1 -1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="https://ordish.dk/">Forside</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://ordish.dk/krydsord-hjaelp">Find ord</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://ordish.dk/wordfeud-snyd">Løs bræt</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://ordish.dk/wordle">Løs wordle</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://ordish.dk/ordlister">Ordlister</a>
+                            </li>
+                        </ul>
+
+                        <h2>
+                            Spil
+                        </h2>
+
+                        <ul class="navbar-nav justify-content-end flex-grow pb-1 g-1 -1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://ordish.dk/woordle">Spil wordle</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="modal fade modal-dialog-scrollable" id="help-modal" tabindex="-1" aria-labelledby="help-modal-title"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="help-modal-title">Hvordan spiller man?</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3>Gæt ordet på 6 forsøg</h3>
+
+                    <ul>
+                        <li>
+                            Hvert gæt skal være et rigtigt ord.
+                        </li>
+                        <li>
+                            Felternes farver vil ændrer sig for at vise dig hvor tæt du var på at gætte ordet.
+                        </li>
+                    </ul>
+
+                    <h4>Eksempler</h4>
+
+                    <div class="examples">
+                        <div class="example">
+                            <div class="board-row" style="grid-template-columns: repeat(5, 1fr); width: 100%;">
+                                <div class="board-cell" id="example1">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">s</div>
+                                </div>
+                                <div class="board-cell" style="background-color: black;">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">a</div>
+                                </div>
+                                <div class="board-cell" style="background-color: black;">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">r</div>
+                                </div>
+                                <div class="board-cell" style="background-color: black;">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">t</div>
+                                </div>
+                                <div class="board-cell" style="background-color: black;">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">e</div>
+                                </div>
+                            </div>
+                            <p class="text-muted">S er med i ordet og på den rigtige plads.
+                            </p>
+                        </div>
+                        <div class="example">
+                            <div class="board-row" style="grid-template-columns: repeat(5, 1fr); width: 100%;">
+                                <div class="board-cell" style="background-color: black;">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">b</div>
+                                </div>
+                                <div class="board-cell" id="example2">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">a</div>
+                                </div>
+                                <div class="board-cell" style="background-color: black;">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">r</div>
+                                </div>
+                                <div class="board-cell" style="background-color: black;">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">e</div>
+                                </div>
+                                <div class="board-cell" style="background-color: black;">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">s</div>
+                                </div>
+                            </div>
+                            <p class="text-muted">A er med i ordet men på den forkerte plads.
+                            </p>
+                        </div>
+                        <div class="example">
+                            <div class="board-row" style="grid-template-columns: repeat(5, 1fr); width: 100%;">
+                                <div class="board-cell" style="background-color: black;">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">k</div>
+                                </div>
+                                <div class="board-cell" style="background-color: black;">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">æ</div>
+                                </div>
+                                <div class="board-cell" id="example3">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">r</div>
+                                </div>
+                                <div class="board-cell" style="background-color: black;">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">e</div>
+                                </div>
+                                <div class="board-cell" style="background-color: black;">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">s</div>
+                                </div>
+                            </div>
+                            <p class="text-muted">R er ikke med i ordet på nogle pladser.</p>
+                        </div>
+                        <div class="example">
+                            <div class="board-row" style="grid-template-columns: repeat(5, 1fr); width: 100%;"
+                                id="example4">
+                                <div class="board-cell" style="background-color: black;">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">s</div>
+                                </div>
+                                <div class="board-cell" style="background-color: black;">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">å</div>
+                                </div>
+                                <div class="board-cell" style="background-color: black;">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">d</div>
+                                </div>
+                                <div class="board-cell" style="background-color: black;">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">a</div>
+                                </div>
+                                <div class="board-cell" style="background-color: black;">
+                                    <div class="board-cell__content" style="font-size: 1rem; color: white;">n</div>
+                                </div>
+                            </div>
+                            <p class="text-muted">Sådan her kunne et helt gæt se ud.</p>
+                        </div>
+                    </div>
+
+                    <h4>Hvorfor en til wordle kopi?</h4>
+
+                    <ul>
+                        <li>
+                            <strong>Bedre statistik</strong> - Vi viser mere detaljeret statistik omkring dine spil.
+                        </li>
+                        <li>
+                            <strong>Spil mod computeren</strong> - Når du har gættet ordet, kan du se hvordan
+                            computeren ville have gættet.
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Luk</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="stats-modal" aria-labelledby="stats-header">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="stats-header">Din statistik</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body px-0">
+            <div class="accordion stats-accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item d-none" id="after-completion">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseFour">
+                            Dagens ord
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-headingFour">
+                        <div class="accordion-body">
+                            <div class="next-fot">
+                                <div class="todays-word-text">Dagens ord er
+                                    <div id="word">BUKET</div>
+                                </div>
+                                <div class="countdown">Nyt ord om
+                                    <div class="timer">06:34:00
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="solution-comp" id="comp-cont-after-completion" data-bs-theme="dark" style="background-color: rgb(33, 37, 41);">
+                                <h3 class="text-center h5 mt-2">
+                                    Sammenligning
+                                </h3>
+                                <div class="comp-headings">
+                                    <h5 class="comp-heading">Din løsning</h5>
+                                    <h5 class="comp-heading">Ord tilb.</h5>
+                                    <h5 class="comp-heading">Bot løsning</h5>
+                                </div>
+                                <div class="comp-tables">
+                                    <div class="comp-board" id="user-board-after-completion">
+                                    </div>
+                                    <table class="comp-stats" id="comp-stats-id-after-completion">
+                                        <tbody>
+                                            <tr class="comp-stats-row">
+                                                <td class="comp-stats-td">50</td>
+                                                <td class="comp-stats-td">50</td>
+                                            </tr>
+                                            <tr class="comp-stats-row">
+                                                <td class="comp-stats-td">7</td>
+                                                <td class="comp-stats-td">1</td>
+                                            </tr>
+                                            <tr class="comp-stats-row">
+                                                <td class="comp-stats-td">2</td>
+                                                <td class="comp-stats-td">1</td>
+                                            </tr>
+                                            <tr class="comp-stats-row">
+                                                <td class="comp-stats-td">1</td>
+                                                <td class="comp-stats-td">-</td>
+                                            </tr>
+                                            <tr class="comp-stats-row">
+                                                <td class="comp-stats-td">1</td>
+                                                <td class="comp-stats-td">-</td>
+                                            </tr>
+                                            <tr class="comp-stats-row">
+                                                <td class="comp-stats-td">-</td>
+                                                <td class="comp-stats-td">-</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="comp-board" id="computer-board-after-completion">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- share icon button -->
+                            <div class="d-flex justify-content-center" style="flex-direction: column;">
+                                <button type="button" class="btn btn-primary" id="shareButton">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-share-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5">
+                                        </path>
+                                    </svg>
+                                    Del din løsning
+                                </button>
+                                <div class="share-options">
+                                    <label class="switch">
+                                        <input type="checkbox" id="toggleLettersVisibility">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <span id="toggleLabel">Viser bogstaver i deling</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseOne">
+                            Statistik
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-headingOne">
+                        <div class="accordion-body">
+                            <div class="row mb-3">
+                                <h3 class="text-center h6">
+                                    Rating
+                                </h3>
+                                <div class="rating-bar" id="rating-b">
+                                    <div class="background-gradient"></div>
+                                    <div class="arrow" id="arrow"></div>
+                                </div>
+                            </div>
+                            <h3 class="text-center h6">
+                                Generelt
+                            </h3>
+                            <div class="row" style="margin-bottom: 24px;">
+                                <div class="col row-col">
+                                    <div class="statistic-card h-100">
+                                        <div class="statistic-card__content">
+                                            <span class="visually-hidden">Spil vundet, 0</span>
+                                            <div class="statistic-card__stat" aria-hidden="true" id="gamesPlayed">0
+                                            </div>
+                                            <div class="statistic-card__label" aria-hidden="true">Spil</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col row-col">
+                                    <div class="statistic-card h-100">
+                                        <div class="statistic-card__content">
+                                            <span class="visually-hidden">Spil vundet procent, 0%</span>
+                                            <div class="statistic-card__stat" aria-hidden="true" id="winPercentage">66
+                                            </div>
+                                            <div class="statistic-card__label" aria-hidden="true">Vundet%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col row-col">
+                                    <div class="statistic-card h-100">
+                                        <div class="statistic-card__content">
+                                            <span class="visually-hidden">Gennemsnitlige gæt, 0</span>
+                                            <div class="statistic-card__stat" aria-hidden="true" id="averageGuess">2.31
+                                            </div>
+                                            <div class="statistic-card__label" aria-hidden="true">Gnsit. gæt
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col row-col">
+                                    <div class="statistic-card h-100">
+                                        <div class="statistic-card__content">
+                                            <span class="visually-hidden">Nuværende streak, 0</span>
+                                            <div class="statistic-card__stat" aria-hidden="true" id="currentStreak">
+                                                0</div>
+                                            <div class="statistic-card__label" aria-hidden="true">Nuværende streak
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col row-col">
+                                    <div class="statistic-card h-100">
+                                        <div class="statistic-card__content">
+                                            <span class="visually-hidden">Bedste streak, 0</span>
+                                            <div class="statistic-card__stat" aria-hidden="true" id="bestStreak">2
+                                            </div>
+                                            <div class="statistic-card__label" aria-hidden="true">Bedste streak
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col row-col">
+                                    <div class="statistic-card h-100">
+                                        <div class="statistic-card__content">
+                                            <span class="visually-hidden">Dage i træk, 0</span>
+                                            <div class="statistic-card__stat" aria-hidden="true" id="daysRow">0
+                                            </div>
+                                            <div class="statistic-card__label" aria-hidden="true">Dage i træk</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h3 class="text-center h6">
+                                    Gætte distribution
+                                </h3>
+                                <div class="chart">
+                                    <table id="bar-chart">
+                                        <tr>
+                                            <td class="number">#1</td>
+                                            <td>
+                                                <div class="percentage">0%</div>
+                                            </td>
+                                            <td class="amount">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="number">#2</td>
+                                            <td>
+                                                <div class="percentage">0%</div>
+                                            </td>
+                                            <td class="amount">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="number">#3</td>
+                                            <td>
+                                                <div class="percentage">0%</div>
+                                            </td>
+                                            <td class="amount">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="number">#4</td>
+                                            <td>
+                                                <div class="percentage">0%</div>
+                                            </td>
+                                            <td class="amount">1</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="number">#5</td>
+                                            <td>
+                                                <div class="percentage">0%</div>
+                                            </td>
+                                            <td class="amount">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="number">#6</td>
+                                            <td>
+                                                <div class="percentage">0%</div>
+                                            </td>
+                                            <td class="amount">0</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseThree">
+                            Historik
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-headingThree">
+                        <div class="accordion-body">
+                            <div class="solution-comp" id="comp-cont">
+                                <div class="comp-headings">
+                                    <h5 class="comp-heading">Din løsning</h5>
+                                    <h5 class="comp-heading">Ord tilb.</h5>
+                                    <h5 class="comp-heading">Bot løsning</h5>
+                                </div>
+                                <div class="comp-tables">
+                                    <div class="comp-board" id="user-board">
+                                    </div>
+                                    <table class="comp-stats" id="comp-stats-id">
+                                        <tbody>
+                                            <tr class="comp-stats-row">
+                                                <td class="comp-stats-td">50</td>
+                                                <td class="comp-stats-td">50</td>
+                                            </tr>
+                                            <tr class="comp-stats-row">
+                                                <td class="comp-stats-td">7</td>
+                                                <td class="comp-stats-td">1</td>
+                                            </tr>
+                                            <tr class="comp-stats-row">
+                                                <td class="comp-stats-td">2</td>
+                                                <td class="comp-stats-td">1</td>
+                                            </tr>
+                                            <tr class="comp-stats-row">
+                                                <td class="comp-stats-td">1</td>
+                                                <td class="comp-stats-td">-</td>
+                                            </tr>
+                                            <tr class="comp-stats-row">
+                                                <td class="comp-stats-td">1</td>
+                                                <td class="comp-stats-td">-</td>
+                                            </tr>
+                                            <tr class="comp-stats-row">
+                                                <td class="comp-stats-td">-</td>
+                                                <td class="comp-stats-td">-</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="comp-board" id="computer-board">
+                                    </div>
+                                </div>
+
+                                <nav aria-label="Naviger i tidligere løsninger" class="w-100 text-center">
+                                    <ul class="pagination">
+                                        <li class="page-item"><button class="page-link" href="#"
+                                                id="prev-date-btn">Previous</button></li>
+                                        <li class="page-item"><button class="page-link" href="#"
+                                                id="next-date-btn">Next</button>
+                                        </li>
+
+                                        <li class="page-item input-group">
+                                            <input type="text" class="form-control" placeholder="Recipient's username"
+                                                aria-label="Recipient's username" aria-describedby="basic-addon2"
+                                                id="date-picker" name="foo2" readonly>
+                                            <span class="input-group-text" id="basic-addon2"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M6.445 11.688V6.354h-.633A13 13 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23" />
+                                                    <path
+                                                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                                                </svg></span>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade modal-dialog-scrollable" id="settings-modal" tabindex="-1"
+        aria-labelledby="settings-modal-title" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="settings-modal-title">Indstillinger</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bolder">Lyst tema</div>
+                                <span class="fw-light">Skift mellem lyst og mørkt tema</span>
+                            </div>
+                            <div class="form-check form-switch form-switch-lg">
+                                <input class="form-check-input" type="checkbox" role="switch"
+                                    id="toggle-dark-theme-btn">
+                                <label class="form-check-label visually-hidden" for="toggle-dark-theme-btn">Default
+                                    switch checkbox input</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bolder">Farveblind</div>
+                                <span class="fw-light">Brug farver med højere kontrast</span>
+                            </div>
+                            <div class="form-check form-switch form-switch-lg">
+                                <input class="form-check-input" type="checkbox" role="switch" id="high-contrast-btn">
+                                <label class="form-check-label visually-hidden" for="high-contrast-btn">Default
+                                    switch checkbox input</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bolder">Byt knapper</div>
+                                <span class="fw-light">Byt om på "Enter" og "Backspace" knapperne</span>
+                            </div>
+                            <div class="form-check form-switch form-switch-lg">
+                                <input class="form-check-input" type="checkbox" role="switch" id="switch-btns-btn">
+                                <label class="form-check-label visually-hidden" for="switch-btns-btn">Default
+                                    switch checkbox input</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <!-- Display contact email -->
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bolder">Kontakt</div>
+                                <span class="fw-light">Har du fundet en fejl eller har du forslag til forbedringer?
+                                    Skriv meget gerne til mig på
+                                    <a href="mailto: ordish.dk@gmail.com">
+                                        ordish.dk@gmail.com
+                                    </a>
+                                </span>
+                            </div>
+                        </li>
+                        <!--
+                        <li class="list-group-item">
+                            <div id="signindiv">
+                                <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="g_id_signout" onclick="signOut();">Sign Out</div>
+                        </li>
+                        -->
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Luk</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="main-sections" id="mmain">
+        <div id="board-container-5" class="board-container"></div>
+        <div class="keyboard" id="keyboardID">
+            <div class="keyboard-row">
+                <button type="button" data-key="q" aria-label="Tilføj q" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    Q
+                </button>
+                <button type="button" data-key="w" aria-label="Tilføj w" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    W
+                </button>
+                <button type="button" data-key="e" aria-label="Tilføj e" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    E
+                </button>
+                <button type="button" data-key="r" aria-label="Tilføj r" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    R
+                </button>
+                <button type="button" data-key="t" aria-label="Tilføj t" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    T
+                </button>
+                <button type="button" data-key="y" aria-label="Tilføj y" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    Y
+                </button>
+                <button type="button" data-key="u" aria-label="Tilføj u" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    U
+                </button>
+                <button type="button" data-key="i" aria-label="Tilføj i" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    I
+                </button>
+                <button type="button" data-key="o" aria-label="Tilføj o" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    O
+                </button>
+                <button type="button" data-key="p" aria-label="Tilføj p" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    P
+                </button>
+                <button type="button" data-key="å" aria-label="Tilføj å" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    Å
+                </button>
+            </div>
+            <div class="keyboard-row">
+                <button type="button" data-key="a" aria-label="Tilføj a" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    A
+                </button>
+                <button type="button" data-key="s" aria-label="Tilføj s" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    S
+                </button>
+                <button type="button" data-key="d" aria-label="Tilføj d" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    D
+                </button>
+                <button type="button" data-key="f" aria-label="Tilføj f" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    F
+                </button>
+                <button type="button" data-key="g" aria-label="Tilføj g" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    G
+                </button>
+                <button type="button" data-key="h" aria-label="Tilføj h" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    H
+                </button>
+                <button type="button" data-key="j" aria-label="Tilføj j" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    J
+                </button>
+                <button type="button" data-key="k" aria-label="Tilføj k" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    K
+                </button>
+                <button type="button" data-key="l" aria-label="Tilføj l" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    L
+                </button>
+                <button type="button" data-key="æ" aria-label="Tilføj æ" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    Æ
+                </button>
+                <button type="button" data-key="ø" aria-label="Tilføj ø" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    Ø
+                </button>
+            </div>
+            <div class="keyboard-row">
+                <button type="button" data-key="Enter" aria-disabled="false" class="keyboard-key special-key-size"
+                    id="enter-check">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-check-lg" viewBox="0 0 16 16">
+                        <path
+                            d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z">
+                        </path>
+                    </svg>Enter
+                </button>
+                <button type="button" data-key="z" aria-label="Tilføj z" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    Z
+                </button>
+                <button type="button" data-key="x" aria-label="Tilføj x" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    X
+                </button>
+                <button type="button" data-key="c" aria-label="Tilføj c" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    C
+                </button>
+                <button type="button" data-key="v" aria-label="Tilføj v" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    V
+                </button>
+                <button type="button" data-key="b" aria-label="Tilføj b" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    B
+                </button>
+                <button type="button" data-key="n" aria-label="Tilføj n" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    N
+                </button>
+                <button type="button" data-key="m" aria-label="Tilføj m" aria-disabled="false"
+                    class="keyboard-key standard-key-size">
+                    M
+                </button>
+                <button type="button" data-key="Backspace" aria-disabled="false" class="keyboard-key special-key-size"
+                    id="backspace-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-backspace" viewBox="0 0 16 16">
+                        <path
+                            d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z">
+                        </path>
+                        <path
+                            d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z">
+                        </path>
+                    </svg>Backspace
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" />
+</body>
+
+</html>
