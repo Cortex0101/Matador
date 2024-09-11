@@ -1,0 +1,74 @@
+
+.keyboard {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 12px);
+    height: 200px;
+    margin: 0px 6px 6px 6px;
+    //padding-bottom: constant(safe-area-inset-bottom); /* For iOS 11.0 */
+  //padding-bottom: env(safe-area-inset-bottom); /* For iOS 11.2 and up */
+  touch-action: manipulation;
+}
+
+.keyboard-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 8px;
+    padding-top: 8px;
+    max-width: 484px;
+    touch-action: manipulation;
+}
+
+.keyboard-key {
+    font-size: 1.25em;
+    font-weight: bold;
+    border: 0;
+    padding: 0;
+    margin: 0px 3px;
+    border-radius: 4px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    background-color: #818384;
+    color: white;
+    touch-action: manipulation;
+}
+
+.keyboard__key--correct,
+.keyboard__key--incorrect,
+.keyboard__key--misplaced {
+  /*transition: all 0.2s linear 2s;*/
+  transition: all 0.2s linear 0s;
+}
+
+.keyboard__key--misplaced {
+    background-color: #b59f3b;
+}
+
+.keyboard__key--correct {
+    background-color: #538d4e;
+}
+
+.keyboard__key--incorrect {
+    background-color: #3a3a3c;
+}
+
+.standard-key-size {
+    aspect-ratio: 1 / 2;
+    width: calc(100% / 11);
+    max-width: 60px;
+}
+
+.special-key-size {
+    width: calc(100% / (11 - 4) + 6 * 2px);
+    aspect-ratio: 1 / 1.03;
+    max-width: 120px;
+    font-size: 0px;
+}

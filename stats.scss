@@ -1,0 +1,393 @@
+.stats-accordion {
+  .accordion-button {
+    background-color: var(--stats-accordion-bg-color);
+    color: var(--stats-accordion-text-color);
+    font-size: 1.2rem !important;
+    //border-top: 1px solid $gray-800;
+    padding-bottom: 0.25rem;
+    padding-top: 0.25rem;
+    box-shadow: none;
+  }
+
+  .accordion-button:not(.collapsed) {
+    background-color: var(--stats-accordion-bg-color);
+    color: var(--stats-accordion-text-color);
+    font-size: 1.2rem !important;
+    //border-top: 1px solid $gray-800;
+    box-shadow: none;
+  }
+
+  .accordion-item {
+    border: 0;
+  }
+}
+
+#stats-modal {
+  height: 100%;
+}
+
+
+.rating-bar {
+  position: relative;
+  width: 100%;
+  height: 20px;
+  background: #ccc;
+  /* Fallback color */
+}
+
+.background-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, red, yellow, green);
+}
+
+.arrow {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  // color #dee2e
+  border-bottom: 16px solid #dee2e6;
+}
+
+.chart {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    td {
+      font-size: 16px;
+      vertical-align: middle;
+
+      .number {
+        padding-right: 15px;
+      }
+
+      .percentage {
+        color: #c0c3d6;
+        font-size: 12px;
+        line-height: 22px;
+        font-weight: 700;
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 22px;
+        padding: 0 10px;
+        border-radius: 50px;
+        background: var(--chart-bar-bg-color);
+
+        span {
+          color: #fff;
+          font-size: 12px;
+          font-weight: 700;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 0;
+          height: 100%;
+          padding: 0 8px;
+          text-align: right;
+          border-radius: 50px;
+          background: #57ac57;
+          min-width: 30px;
+          transform: width 0.5s ease-in-out;
+        }
+      }
+
+      .amount {
+        font-weight: 700;
+        padding-left: 11px;
+      }
+    }
+
+    // td second child
+    td:nth-child(2) {
+      width: 100%;
+    }
+  }
+}
+
+.word-panel {
+  margin-bottom: 1.5rem;
+}
+
+#word {
+  font-weight: 700;
+  margin-top: 0.25rem;
+  font-size: 1.25rem;
+}
+
+.next-fot {
+  display: flex;
+  align-items: center;
+}
+
+.countdown {
+  width: 50%;
+  padding: 1rem;
+  border-left: 1px solid #ddd;
+  flex: none;
+}
+
+.timer {
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.25rem;
+  line-height: 2rem;
+}
+
+.todays-word-text {
+  width: 50%;
+  padding: 1rem;
+  flex: none;
+  text-align: center;
+}
+
+
+.solution-comp {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 20px);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.comp-headings {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 0px 0px;
+  max-width: 400px;
+  justify-content: space-evenly;
+}
+
+.comp-heading {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 0.0075em;
+  text-transform: uppercase;
+  color: $on-surface-color-high-emphasis;
+}
+
+.comp-tables {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 0px 0px;
+  max-width: 400px;
+}
+
+.comp-board {
+  width: 40%;
+
+  &.cell__content--hidden {
+
+    // Target all .board-cell__content--sm.board-cell__content--back within
+    .board-cell__content--sm.board-cell__content--back {
+      // Hide the elements
+      display: none;
+    }
+  }
+}
+
+.comp-stats {
+  width: 20%;
+}
+
+.comp-stats-row {
+  border-bottom: 1px solid $on-background-color;
+}
+
+.comp-stats-td {
+  color: #cccccc;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#share-button {
+  width: 75px;
+  height: 55px;
+}
+
+/*
+.statistic-card {
+  flex: 1;
+  margin: 12px;
+  padding: 20px; // Adjust padding as necessary
+  background: #464646; // or any color that fits the design
+  border-radius: 8px; // Rounded corners for the cards
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); // subtle shadow for depth
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+*/
+
+/*
+.statistic-card__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.statistic-card__stat {
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: .05em;
+  font-variant-numeric: proportional-nums;
+  line-height: 34px;
+  margin-bottom: 8px; // Space between the number and the label
+  color: white;
+}
+
+.statistic-card__label {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .1em;
+  line-height: 14px;
+  color: white;
+}
+*/
+
+.statistics-card {
+  flex: 1;
+  margin-left: 12px;
+}
+
+
+.statistic-card__stat {
+  font-size: 24px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  letter-spacing: .05em;
+  font-variant-numeric: proportional-nums;
+  line-height: 34px;
+}
+
+.statistic-card__label {
+  font-size: 12px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 14px;
+  letter-spacing: .1em;
+}
+
+.todays-word-info {
+  width: 50%;
+  border-right: 1px solid #ddd;
+  flex: none;
+  align-items: center;
+  text-align: center;
+}
+
+#todaysWord {
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.25rem;
+  line-height: 2rem;
+}
+
+.countdown {
+  width: 50%;
+  flex: none;
+  align-items: center;
+  text-align: center;
+}
+
+#timer {
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.25rem;
+  line-height: 2rem;
+}
+
+.row-col {
+  max-width: 33%;
+  padding: 0;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  display: none;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked+.slider {
+  background-color: rgb(103, 58, 183);
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px rgb(103, 58, 183);
+}
+
+input:checked+.slider:before {
+  transform: translateX(26px);
+}
+
+/* Added styles for label alignment and spacing */
+.share-options {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* Adjust based on your layout */
+  margin: 5px auto 10px auto;
+}
+
+#toggleLabel {
+  font-size: 16px;
+  /* Adjust based on your design */
+}
